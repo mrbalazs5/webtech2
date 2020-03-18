@@ -1,0 +1,37 @@
+{
+  "name": "webtech2",
+  "version": "1.0.0",
+  "description": "Webtech 2 assignment",
+  "scripts": {
+    "client": "cd client && npm run start",
+    "build": "cd client && npm run build",
+    "server": "nodemon --exec babel-node server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "test": "mocha -r esm --timeout 0 --require @babel/register --require @babel/polyfill --exit"
+  },
+  "author": "Megyeri Balázs, Pankotai Márk Sándor, Vass Dávid",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-function-bind": "^7.8.3",
+    "@babel/polyfill": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/register": "^7.8.6",
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "concurrently": "^5.1.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^7.1.1",
+    "multer": "^1.4.2",
+    "nodemon": "^2.0.2",
+    "path": "^0.12.7"
+  }
+}
