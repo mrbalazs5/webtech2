@@ -7,7 +7,7 @@ Created by Megyeri Balázs, Pankotai Márk Sándor, Vass Dávid
 
 ## Installation
 
-`npm run install`
+`npm run install-dev`
 
 ## Configuration
 
