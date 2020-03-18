@@ -12,4 +12,8 @@ app.get('/test', (req, res) => {
     res.json({test: 'test'});
 });
 
+app.get('/test2', (req, res) => {
+    res.json({test2: 'test2'});
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
