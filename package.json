@@ -8,7 +8,7 @@
     "server": "nodemon --exec babel-node server.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "test": "mocha -r esm --timeout 0 --require @babel/register --require @babel/polyfill --exit",
-    "install": "npm install && cd client && npm install"
+    "install": "npm install --verbose && cd client && npm install --verbose && cd .."
   },
   "author": "Megyeri Balázs, Pankotai Márk Sándor, Vass Dávid",
   "license": "ISC",
