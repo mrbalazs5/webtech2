@@ -7,7 +7,7 @@ import Header from './components/Header';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import AddVehicle from './components/pages/AddVehicle';
-import ManageVehicles from './components/pages/ManageVehicles';
+import ManageVehicle from './components/pages/ManageVehicle';
 import Error from './components/pages/Error';
 
 export default function App(){
@@ -20,7 +20,7 @@ export default function App(){
         <Route exact path="/" component={Home}/>
         <Route exact path="/about" component={About}/>
         <Route exact path="/addvehicle" component={AddVehicle}/>
-        <Route exact path="/managevehicles" component={ManageVehicles}/>
+        <Route exact path="/managevehicle" component={ManageVehicle}/>
         <Route component={Error}/>
       </Switch>
 
