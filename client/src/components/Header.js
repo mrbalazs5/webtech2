@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import vitara from '../images/vitara.png';
+import vitara from '../images/logo.png';
+import Login from './Login';
 
 export default class Header extends React.Component{
   state = {
@@ -24,7 +25,7 @@ export default class Header extends React.Component{
           <li><NavLink className="link" activeClassName="active" exact to="/addvehicle">Add Vehicle</NavLink></li>
           <li><NavLink className="link" activeClassName="active" exact to="/managevehicle">Manage Vehicle</NavLink></li>
         </ul>
-
+        <Login/>
       </header>
     );
   }
