@@ -14,7 +14,9 @@ export default class Login extends React.Component{
   render(){
     return(
       <div className="login">
-        <Icons name="user"/>
+        <div className="user-logo">
+          <Icons name="user"/>
+        </div>
       </div>
     );
   }

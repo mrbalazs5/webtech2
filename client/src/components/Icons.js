@@ -16,7 +16,7 @@ export default class Icon extends React.Component{
 
     return(
       <div>{selectedIcon.map((icon) =>
-        <svg key={icon.name} width={icon.width} height={icon.height} xmlns="http://www.w3.org/2000/svg">
+        <svg className={icon.name + "-svg"} key={icon.name} width={icon.width} height={icon.height} xmlns="http://www.w3.org/2000/svg">
           <path d={icon.path}/>
         </svg>
         )}
