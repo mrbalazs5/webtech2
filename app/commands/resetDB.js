@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import mongoose from 'mongoose';
+import fs from 'fs';
 
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.Promise = global.Promise;
@@ -9,12 +10,28 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 db.dropDatabase()
     .then((result) => {
-        console.log(result);
+        if(result){
+            db.close();
+            return true
+        }
+    })
+    .then(() => {
+        return new Promise((resolve, reject) => {
+            fs.rmdir('./client/public/uploads', { recursive: true }, (err) => {
 
-        db.close();
+                if(err){
+                    reject(err);
+                }else{
+                    resolve(true);
+                }
+
+            });
+        })
+    })
+    .then(() => {
+        console.log('Done');
     })
     .catch((err) => {
         console.log(err);
-
         db.close();
     });

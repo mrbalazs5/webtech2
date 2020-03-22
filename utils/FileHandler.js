@@ -3,13 +3,21 @@ import path from 'path';
 import multer from 'multer';
 import mkdirp from 'mkdirp';
 
-class FileUploader{
+//File uploader for general usage
+class FileHandler{
 
     constructor(req, res, uploadsPath){
         this.req = req;
         this.res = res;
         this.uploadsPath = uploadsPath;
         this.publicDir = 'client/public';
+        this.acceptedImageMimeTypes = [
+            'image/jpeg',
+            'image/jpg',
+            'image/png',
+            '',
+            'image/svg+xml'
+        ];
     }
 
     upload(){
@@ -25,7 +33,9 @@ class FileUploader{
             }
         });
 
-        let upload = multer({ storage : storage}).any();
+        let upload = multer({
+            storage : storage
+        }).any();
 
         return new Promise((resolve, reject) => {
 
@@ -34,6 +44,11 @@ class FileUploader{
                 if(err) {
                     reject(err);
                 } else {
+
+                    if(this.req.files.length < 1){
+                        reject(new Error('Required file missing'));
+                    }
+
                     resolve(this.req.files);
                 }
 
@@ -60,6 +75,10 @@ class FileUploader{
 
     }
 
+    revokeFileUpload(file){
+        fs.unlinkSync(this.publicDir + file.path);
+    }
+
     uploadMultiple(){
 
         return new Promise((resolve, reject) => {
@@ -83,4 +102,4 @@ class FileUploader{
 
 }
 
-export default FileUploader;
+export default FileHandler;
