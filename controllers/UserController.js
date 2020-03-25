@@ -15,7 +15,7 @@ const UserController = {
 
             const fileHandler = new FileHandler(req, res, uploadsPath('image'));
 
-            fileHandler.uploadSingle()
+            fileHandler.uploadSingle({type: 'image'})
                 //validate user data after file upload
                 .then((file) => {
 
@@ -43,7 +43,7 @@ const UserController = {
                             body.file = file;
 
                             return body;
-                        })
+                        });
                 })
                 //persist user data
                 .then((body) => {

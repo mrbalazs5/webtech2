@@ -20,9 +20,9 @@ db.dropDatabase()
             fs.rmdir('./client/public/uploads', { recursive: true }, (err) => {
 
                 if(err){
-                    reject(err);
+                    return reject(err);
                 }else{
-                    resolve(true);
+                    return resolve(true);
                 }
 
             });

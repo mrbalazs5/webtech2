@@ -58,13 +58,28 @@ class FileHandler{
 
     }
 
-    uploadSingle(){
+    uploadSingle(options){
 
         return new Promise((resolve, reject) => {
 
             this.upload()
                 .then((files) => {
-                    files[0]['path'] =  this.uploadsPath + '/' + files[0].filename;
+
+                    let file = files[0];
+
+                    file['path'] =  this.uploadsPath + '/' + files[0].filename;
+
+                    switch (options.type) {
+                        case 'image':
+
+                            if(!this.acceptedImageMimeTypes.includes(file.mimetype)){
+                                this.revokeFileUpload(file);
+                                throw new Error('You can upload an image only');
+                            }
+
+                            break
+                    }
+
                     return resolve(files[0]);
                 })
                 .catch((err) =>{
@@ -75,11 +90,7 @@ class FileHandler{
 
     }
 
-    revokeFileUpload(file){
-        fs.unlinkSync(this.publicDir + file.path);
-    }
-
-    uploadMultiple(){
+    uploadMultiple(options){
 
         return new Promise((resolve, reject) => {
 
@@ -87,8 +98,27 @@ class FileHandler{
                 .then((files) => {
 
                     files.forEach((file) => {
-                        file.path = this.uploadsPath + '/' + file.filename
+                        file.path = this.uploadsPath + '/' + file.filename;
                     });
+
+                    if(options.type){
+
+                        files.forEach((file) => {
+
+                            switch (options.type) {
+                                case 'image':
+
+                                    if(!this.acceptedImageMimeTypes.includes(file.mimetype)){
+                                        this.revokeMultipleFileUploads(files);
+                                        throw new Error('You can upload images only');
+                                    }
+
+                                    break
+                            }
+
+                        })
+
+                    }
 
                     return resolve(files);
                 })
@@ -96,6 +126,35 @@ class FileHandler{
                     return reject(err);
                 })
 
+        });
+
+    }
+
+    revokeFileUpload(file){
+
+        return new Promise((resolve, reject) => {
+            fs.unlink(this.publicDir + file.path, (err) => {
+
+                if(err){
+                    return reject(err);
+                }else{
+                    return resolve(true);
+                }
+
+            });
+        });
+
+    }
+
+    revokeMultipleFileUploads(files){
+
+        return new Promise(() => {
+
+            const filePromises = files.map((file) => {
+                return this.revokeFileUpload(file);
+            });
+
+            return Promise.all(filePromises);
         });
 
     }
