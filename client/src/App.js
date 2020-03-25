@@ -4,26 +4,28 @@ import {Switch, Route} from 'react-router-dom';
 import './scss/styles.scss';
 
 import Header from './components/Header';
-import Home from './components/pages/Home';
-import About from './components/pages/About';
+import MainPage from './components/pages/MainPage';
+import AboutUs from './components/pages/AboutUs';
 import AddVehicle from './components/pages/AddVehicle';
-import ManageVehicle from './components/pages/ManageVehicle';
+import ManageVehicles from './components/pages/ManageVehicles';
 import Error from './components/pages/Error';
 
-export default function App(){
+function App(){
   return(
     <div className="app">
 
       <Header/>
 
       <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/about" component={About}/>
+        <Route exact path="/" component={MainPage}/>
+        <Route exact path="/aboutus" component={AboutUs}/>
         <Route exact path="/addvehicle" component={AddVehicle}/>
-        <Route exact path="/managevehicle" component={ManageVehicle}/>
+        <Route exact path="/managevehicles" component={ManageVehicles}/>
         <Route component={Error}/>
       </Switch>
 
-    </div> //app
+    </div>
   );
 }
+
+export default App;
