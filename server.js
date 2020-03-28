@@ -26,7 +26,7 @@ app.post('/api/sign-up', UserController.signUp.controller);
 
 app.post('/api/sign-in', UserController.signIn.controller);
 
-app.post('/api/check-token', authenticateUser(), (req, res) => {
+app.post('/api/check-token', authenticateUser, (req, res) => {
     res.status(200).json(req.user);
 });
 
