@@ -1,23 +1,46 @@
 body {
   padding: 0;
   margin: 0;
-  width: 100%;
+  overflow-x: hidden;
   font-family: 'Roboto', sans-serif;
 }//body
 
+.page {
+  display: block;
+  width: 100%;
+  float: left;
+}
+
 header {
-  height: 30px;
+  height: 50px;
   width: 100%;
   border-bottom: 1px solid $border;
+  display: inline-block;
+
+  .logo {
+    display: inline-block;
+    float: left;
+    max-height: 46px;
+    padding: 2px;
+  }//header .logo
 
   ul {
     padding: 0;
     margin: 0;
-    background-color: red;
+    max-height: 0;
+    clear: both;
+    display: block;
+    overflow: hidden;
+    transition: $trans-glob;
+    border-bottom: 0px solid transparent;
+    list-style: none;
+
+    &.show {
+      max-height: 120px;
+      border-bottom: 1px solid $border;
+    }//header ul .show
 
     li {
-      display: block;
-      float: left;
       width: 100%;
       line-height: 30px;
       text-align: center;
@@ -37,4 +60,88 @@ header {
       }//header ul li .navlink
     }//header ul li
   }//header ul
+
+  .mobile-nav {
+    display: inline-block;
+    float: right;
+    position: relative;
+    padding: 24px 12px;
+    cursor: pointer;
+
+    .nav-icon {
+      background: black;
+      display: block;
+      height: 2px;
+      position: relative;
+      width: 18px;
+      transition: $trans-glob;
+
+      &:before, &:after {
+        background: black;
+        content: '';
+        display: block;
+        height: 100%;
+        position: absolute;
+        transition: $trans-glob;
+        width: 100%;
+      }//header .mobile-nav .nav-icon:before:after
+
+      &:before {
+        top: 5px;
+      }//header .mobile-nav .nav-icon:before
+
+      &:after {
+        top: -5px;
+      }//header .mobile-nav .nav-icon:after
+
+      &.open {
+        background: transparent;
+
+        &:before {
+          top: 0;
+          transform: rotate(135deg);
+          background: $font-act;
+        }//header .mobile-nav .nav-icon .open:before
+
+        &:after {
+          top: 0;
+          transform: rotate(45deg);
+          background: $font-act;
+        }//header .mobile-nav .nav-icon .open:after
+      }//header .mobile-nav .nav-icon .open
+    }//header .mobile-nav .nav-icon
+  }//header .mobile-nav
+
+  .login-btn {
+    display: inline-block;
+    float: right;
+    line-height: 50px;
+  }
 }//header
+
+@media screen and (min-width: 768px) {
+  header {
+    .mobile-nav {
+      display: none;
+    }//header .mobile-nav
+
+    ul {
+      clear: none;
+      display: inline-block;
+      float: left;
+      max-height: none;
+      padding: 0 20px 0 20px;
+
+      li {
+        width: auto;
+        line-height: 50px;
+        display: inline-block;
+        float: left;
+
+        .navlink {
+          margin-right: 20px;
+        }
+      }//header ul li
+    }//header ul
+  }//header
+}//@media

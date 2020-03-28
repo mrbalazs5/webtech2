@@ -1,8 +1,12 @@
 import React from 'react';
+import Page from '../Page';
+import Login from '../forms/Login';
 
 const MainPage = () => {
   return(
-    <div>MainPage</div>
+    <Page>
+      <Login/>
+    </Page>
   );
 }
 
