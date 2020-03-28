@@ -9,6 +9,8 @@ import AboutUs from './components/pages/AboutUs';
 import AddVehicle from './components/pages/AddVehicle';
 import ManageVehicles from './components/pages/ManageVehicles';
 import Error from './components/pages/Error';
+import withAuth from './utils/withAuth';
+import roles from './utils/roles';
 
 function App(){
   return(
@@ -22,6 +24,7 @@ function App(){
         <Route exact path="/addvehicle" component={AddVehicle}/>
         <Route exact path="/managevehicles" component={ManageVehicles}/>
         <Route component={Error}/>
+      {/*<Route exact path='/profile' component={withAuth(ProfilePage, roles['dealer'])}/>*/}
       </Switch>
 
     </div>
