@@ -1,73 +1,28 @@
 body {
-  margin: 0;
   padding: 0;
+  margin: 0;
+  overflow-x: hidden;
   font-family: 'Roboto', sans-serif;
+}//body
+
+.page {
+  display: block;
+  width: 100%;
+  float: left;
 }
 
 header {
-  display: inline-block;
+  height: 50px;
   width: 100%;
-  height: 60px;
-  border-bottom: 1px solid  $secundary-bg;
-  font-weight: bold;
+  border-bottom: 1px solid $border;
+  display: inline-block;
 
   .logo {
     display: inline-block;
     float: left;
-    max-height: 50px;
-    padding: 5px;
-  }
-
-  .menu-btn {
-    display: inline-block;
-    float: right;
-    position: relative;
-    padding: 29px 12px;
-    cursor: pointer;
-
-    .menu-burger {
-      background: black;
-      display: block;
-      height: 2px;
-      position: relative;
-      width: 18px;
-      transition: $global-trans;
-
-      &:before, &:after {
-        background: black;
-        content: '';
-        display: block;
-        height: 100%;
-        position: absolute;
-        transition: $global-trans;
-        width: 100%;
-      }
-
-      &:before {
-        top: 5px;
-      }
-
-      &:after {
-        top: -5px;
-      }
-
-      &.active {
-        background: transparent;
-
-        &:before {
-          top: 0;
-          transform: rotate(135deg);
-          background: $active-nav-color;
-        }
-
-        &:after {
-          top: 0;
-          transform: rotate(45deg);
-          background: $active-nav-color;
-        }
-      }
-    }
-  }
+    max-height: 46px;
+    padding: 2px;
+  }//header .logo
 
   ul {
     padding: 0;
@@ -75,49 +30,100 @@ header {
     max-height: 0;
     clear: both;
     display: block;
-    transition: $global-trans;
     overflow: hidden;
-    list-style: none;
+    transition: $trans-glob;
     border-bottom: 0px solid transparent;
+    list-style: none;
 
     &.show {
-      max-height: 250px;
-      border-bottom: 1px solid $secundary-bg;
-    }
+      max-height: 120px;
+      border-bottom: 1px solid $border;
+    }//header ul .show
 
     li {
       width: 100%;
-      line-height: 40px;
-      vertical-align: middle;
+      line-height: 30px;
       text-align: center;
 
-      .link {
-        color: black;
+      .navlink {
+        color: $font-def;
         text-decoration: none;
-        position: relative;
-        transition: $global-trans;
 
         &:hover {
-          color: $active-nav-color;
-        }
+          color: $font-act;
+          transition: $trans-glob;
+        }//header ul li .navlink:hover
 
         &.active {
-          color: $active-nav-color;
-        }
-      }
-    }
+          color: $font-act;
+        }//header ul li .navlink .active
+      }//header ul li .navlink
+    }//header ul li
+  }//header ul
+
+  .mobile-nav {
+    display: inline-block;
+    float: right;
+    position: relative;
+    padding: 24px 12px;
+    cursor: pointer;
+
+    .nav-icon {
+      background: black;
+      display: block;
+      height: 2px;
+      position: relative;
+      width: 18px;
+      transition: $trans-glob;
+
+      &:before, &:after {
+        background: black;
+        content: '';
+        display: block;
+        height: 100%;
+        position: absolute;
+        transition: $trans-glob;
+        width: 100%;
+      }//header .mobile-nav .nav-icon:before:after
+
+      &:before {
+        top: 5px;
+      }//header .mobile-nav .nav-icon:before
+
+      &:after {
+        top: -5px;
+      }//header .mobile-nav .nav-icon:after
+
+      &.open {
+        background: transparent;
+
+        &:before {
+          top: 0;
+          transform: rotate(135deg);
+          background: $font-act;
+        }//header .mobile-nav .nav-icon .open:before
+
+        &:after {
+          top: 0;
+          transform: rotate(45deg);
+          background: $font-act;
+        }//header .mobile-nav .nav-icon .open:after
+      }//header .mobile-nav .nav-icon .open
+    }//header .mobile-nav .nav-icon
+  }//header .mobile-nav
+
+  .login-btn {
+    display: inline-block;
+    float: right;
+    line-height: 50px;
   }
-}
+}//header
 
 @media screen and (min-width: 768px) {
   header {
-    .logo {
-      display: inline-block;
-    }
-
-    .menu-btn{
+    .mobile-nav {
       display: none;
-    }
+    }//header .mobile-nav
 
     ul {
       clear: none;
@@ -128,16 +134,14 @@ header {
 
       li {
         width: auto;
-        line-height: 60px;
+        line-height: 50px;
         display: inline-block;
         float: left;
-        transform: skewX(-20deg);
-        border-right: 1px solid $secundary-bg;
 
-        .link {
-          padding: 0 20px 0 20px;
+        .navlink {
+          margin-right: 20px;
         }
-      }
-    }
-  }
-}
+      }//header ul li
+    }//header ul
+  }//header
+}//@media
