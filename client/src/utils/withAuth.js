@@ -24,7 +24,7 @@ export default function withAuth(ComponentToProtect, role) {
                         }
                     })
                     .then(res => {
-                        if(!res.user || (role && ((res.user.role === roles.admin) || res.user.role === roles[role]))){
+                        if(!res.user || (role && res.user.role !== roles[role])){
                             throw new Error('Invalid user');
                         }
 
@@ -42,7 +42,7 @@ export default function withAuth(ComponentToProtect, role) {
                 }
                 if (redirect) {
                     return <Redirect to={{
-                        pathname : '/api/sign-in',
+                        pathname : '/sign-in',
                         state : {flashMessage: {warning: ['Please sign in to access this page']}}
                     }} />;
                 }
