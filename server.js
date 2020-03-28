@@ -5,10 +5,12 @@ import bodyParser from 'body-parser';
 const cookieParser = require('cookie-parser');
 import mongoose from 'mongoose';
 import UserController from './controllers/UserController';
+import authenticateUser from './middlewares/authenticateUser';
 
 const app = express();
 const port = process.env.PORT || 5000;
 
+//config parsers
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -23,5 +25,9 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.post('/api/sign-up', UserController.signUp.controller);
 
 app.post('/api/sign-in', UserController.signIn.controller);
+
+app.post('/api/check-token', authenticateUser(), (req, res) => {
+    res.status(200).json(req.user);
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
