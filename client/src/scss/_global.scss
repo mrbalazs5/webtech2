@@ -3,19 +3,21 @@ body {
   margin: 0;
   overflow-x: hidden;
   font-family: 'Roboto', sans-serif;
+  background: $grey;
 }//body
 
 .page {
-  display: block;
-  width: 100%;
-  float: left;
+
 }
 
 header {
-  height: 50px;
   width: 100%;
-  border-bottom: 1px solid $border;
+  box-shadow: 0px 0px 10px 0px $darkgrey;
+  background: $grey;
   display: inline-block;
+  float: left;
+  position: relative;
+  z-index: 1;
 
   .logo {
     display: inline-block;
@@ -31,13 +33,12 @@ header {
     clear: both;
     display: block;
     overflow: hidden;
-    transition: $trans-glob;
-    border-bottom: 0px solid transparent;
+    transition: $trans;
     list-style: none;
+    background: $grey;
 
     &.show {
       max-height: 120px;
-      border-bottom: 1px solid $border;
     }//header ul .show
 
     li {
@@ -46,16 +47,16 @@ header {
       text-align: center;
 
       .navlink {
-        color: $font-def;
+        color: $black;
         text-decoration: none;
 
         &:hover {
-          color: $font-act;
-          transition: $trans-glob;
+          color: $red;
+          transition: $trans;
         }//header ul li .navlink:hover
 
         &.active {
-          color: $font-act;
+          color: $red;
         }//header ul li .navlink .active
       }//header ul li .navlink
     }//header ul li
@@ -69,20 +70,20 @@ header {
     cursor: pointer;
 
     .nav-icon {
-      background: black;
+      background: $red;
       display: block;
       height: 2px;
       position: relative;
       width: 18px;
-      transition: $trans-glob;
+      transition: $trans;
 
       &:before, &:after {
-        background: black;
+        background: $red;
         content: '';
         display: block;
         height: 100%;
         position: absolute;
-        transition: $trans-glob;
+        transition: $trans;
         width: 100%;
       }//header .mobile-nav .nav-icon:before:after
 
@@ -100,13 +101,11 @@ header {
         &:before {
           top: 0;
           transform: rotate(135deg);
-          background: $font-act;
         }//header .mobile-nav .nav-icon .open:before
 
         &:after {
           top: 0;
           transform: rotate(45deg);
-          background: $font-act;
         }//header .mobile-nav .nav-icon .open:after
       }//header .mobile-nav .nav-icon .open
     }//header .mobile-nav .nav-icon
@@ -131,6 +130,7 @@ header {
       float: left;
       max-height: none;
       padding: 0 20px 0 20px;
+      border-bottom: none;
 
       li {
         width: auto;

@@ -1,8 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import Vitara from '../images/vitara.png';
-
-import Icon from './svg/Icon';
+import carlogo from '../images/carlogo3.png';
 
 class Header extends React.Component{
   //contains mobile navbar open state
@@ -18,7 +16,7 @@ class Header extends React.Component{
   render(){
     return(
       <header>
-        <NavLink exact to="/"><img className="logo" src={Vitara}/></NavLink>
+        <NavLink exact to="/"><img className="logo" src={carlogo}/></NavLink>
         <div className="mobile-nav" onClick={this.handleIsOpen}>
           <span className={this.state.isOpen ? "nav-icon open" : "nav-icon"}/>
         </div>
@@ -28,7 +26,6 @@ class Header extends React.Component{
           <li><NavLink className="navlink" activeClassName="active" exact to="/addvehicle">Add vehicle</NavLink></li>
           <li><NavLink className="navlink" activeClassName="active" exact to="/managevehicles">Manage vehicles</NavLink></li>
         </ul>
-        <div className="login-btn">Log in</div>
       </header>
     );
   }
