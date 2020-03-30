@@ -1,23 +1,22 @@
 @import '../../scss/variables';
 
-.form-bg {
-  position: relative;
-  height: 100%;
-  width: 100%;
+.forms {
 
-  .skewed-bg {
+  .forms-bg-skewed {
+
     position: fixed;
-    width: 50%;
     right: 0;
-    background: $green;
+    width: 50%;
     height: 100%;
-    display: block;
     transform: skewX(-10deg);
     padding-right: 300px;
     margin-right: -300px;
-  }
+    background: $green;
 
-  .form-holder {
+  }// .forms .skewed-forms-bg
+
+  .forms-holder {
+
     position: relative;
     width: 100%;
     min-height: calc(100vh - 50px);
@@ -26,107 +25,172 @@
     justify-content: center;
     align-items: center;
 
-    .loginregister-form {
+    form {
+
       background: $grey;
       box-shadow: 0px 0px 20px 0px $darkgrey;
-      padding: 30px;
       box-sizing: border-box;
+      padding: 15px;
 
-      &.login {
+      &.one_col {
+
         width: 300px;
-      }
 
-      &.register {
+      }// form &.login
+
+      &.two_col {
+
         width: 600px;
-      }
 
-      .form-title-text {
-        font-size: 25px;
-        padding: 0 0 10px 0;
-        border-bottom: 1px solid $darkgrey;
-        margin-bottom: 10px;
-      }
+      }// form &.register
 
-      .link {
-        padding-top: 10px;
-        display: block;
+      .form-field-holder {
+
+        display: inline-block;
         float: left;
-        width: 100%;
-        text-align: center;
-
-        .nav-link {
-          color: $green;
-          text-decoration: none;
-        }
-      }
-
-      .input-area {
-        border: 1px solid $darkgrey;
-        height: auto;
-        padding: 10px;
         box-sizing: border-box;
-        margin: 10px 0 10px 0;
 
-        &.login {
+        &.fullwidth {
+
           width: 100%;
-          display: block;
-          float: left;
-        }
+          padding: 10px;
 
-        &.register {
-          width: 48%;
-          display: inline-block;
+          &.button {
 
-          &.left {
-            float: left;
-          }
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
 
-          &.right {
-            float: right;
-          }
-        }
+          }// form .form-field-holder &.fullwidth &.button
 
-        label {
+        }// form .form-field-holder &.fullwidth
+
+        &.halfwidth {
+
+          width: 50%;
+          padding: 10px;
+
+        }// form .form-field-holder &.halfwidth
+
+        &.text {
+
+          text-align: center;
+          padding: 0 10px 10px 10px;
+
+        }// form .form-field-holder &.text
+
+        .navlink {
+
+          text-decoration: none;
           color: $green;
-          font-size: 20px;
+
+        }// form .form-field-holder .navlink
+
+        .form-field-border {
+
           display: block;
           float: left;
           width: 100%;
-          padding-bottom: 10px;
-        }
+          box-sizing: border-box;
 
-        input {
+          &.title {
+
+            padding-bottom: 10px;
+            border-bottom: 1px solid $darkgrey;
+
+          }// form .form-field-holder .form-field-border &.title
+
+          &.field {
+
+            padding: 10px;
+            border: 1px solid $darkgrey;
+
+          }// form .form-field-holder .form-field-border &.title
+
+          .form-title {
+
+            font-size: 20px;
+
+          }// form .form-field-holder .form-field-border .form-title
+
+          .form-label {
+
+            display: block;
+            width: 100%;
+            float: left;
+            font-size: 20px;
+            color: $green;
+            margin-bottom: 10px;
+
+          }// form .form-field-holder .form-field-border label
+
+          input[type="text"], input[type="email"], input[type="password"] {
+
+            display: block;
+            width: 100%;
+            float: left;
+            outline: none;
+            background: none;
+            border: none;
+
+          }// form .form-field-holder .form-field-border input[type="text"], input[type="email"], input[type="password"]
+
+          input[type="file"] {
+
+            height: 0;
+            overflow: hidden;
+            width: 0;
+
+          }// form .form-field-holder .form-field-border input[type="file"]
+
+          .upload-label {
+
+            display: block;
+            float: left;
+            width: 100px;
+            text-align: center;
+            padding: 5px;
+            background: $green;
+            border: none;
+            color: $white;
+            cursor: pointer;
+            outline: none;
+
+          }// form .form-field-holder .form-field-border .upload-label
+
+        }// form .form-field-holder .form-field-border
+
+        button {
+
+          display: inline-block;
+          float: left;
+          padding: 5px 0 5px 0;
           border: none;
-          outline: none;
-          background: none;
-          display: block;
-          width: 100%;
-          float: left;
-        }
-      }
+          background: $green;
+          color: $white;
+          font-size: 20px;
 
-      button {
-        display: block;
-        float: left;
-        border: none;
-        background: $green;
-        font-size: 20px;
-        padding: 5px;
-        color: $white;
-        margin: 10px 0 0 0;
-        cursor: pointer;
+          &.signin {
 
-        &.login {
-          width: 100%;
-        }
+            width: 100%;
 
-        &.register {
-          width: 45%;
-          position: relative;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-      }
-    }
-  }
-}
+          }// form .form-field-holder button &.signin
+
+          &.signup {
+
+            width: calc(50% - 25px);
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+
+          }// form .form-field-holder button &.signin
+
+        }// form .form-field-holder button
+
+      }// form .form-field-holder
+
+    }// form
+
+  }// .forms .forms-container
+
+}// .forms

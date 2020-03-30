@@ -38,7 +38,7 @@ header {
     background: $grey;
 
     &.show {
-      max-height: 120px;
+      max-height: 180px;
     }//header ul .show
 
     li {
@@ -116,10 +116,26 @@ header {
     float: right;
     line-height: 50px;
   }
+
+  .avatar {
+
+    display: none;
+    float: right;
+
+    .avatar-img {
+
+      max-height: 35px;
+      padding: 5px;
+    }
+  }
 }//header
 
 @media screen and (min-width: 768px) {
   header {
+    .avatar {
+      display: inline-block;
+    }
+
     .mobile-nav {
       display: none;
     }//header .mobile-nav

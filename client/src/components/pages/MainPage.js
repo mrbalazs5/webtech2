@@ -4,7 +4,7 @@ import Page from '../Page';
 const MainPage = () => {
   return(
     <Page>
-
+      MainPage
     </Page>
   );
 }

@@ -1,16 +1,22 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import carlogo from '../images/car_green.png';
+import avatar from '../images/avatar.png';
 
 class Header extends React.Component{
   //contains mobile navbar open state
   state = {
-    isOpen: false //mobile navbar
+    isOpen: false, //mobile navbar
+    isOpenForms: false
   }
 
   // change the state of the mobile nav
   handleIsOpen = () => {
     this.setState({isOpen: !this.state.isOpen})
+  }
+
+  handleIsOpenForms = () => {
+    this.setState({isOpenForms: !this.state.isOpen})
   }
 
   render(){
@@ -28,6 +34,10 @@ class Header extends React.Component{
           <li><NavLink className="navlink" activeClassName="active" exact to="/login">Sign in</NavLink></li>
           <li><NavLink className="navlink" activeClassName="active" exact to="/register">Sign up</NavLink></li>
         </ul>
+        <div className="avatar">
+          <img className="avatar-img" src={avatar} onClick={this.handleIsOpenForms}/>
+        </div>
+
       </header>
     );
   }
