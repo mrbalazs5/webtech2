@@ -1,5 +1,6 @@
 import React from 'react';
 import './forms.scss';
+import {NavLink} from 'react-router-dom';
 
 class Login extends React.Component{
   render(){
@@ -18,6 +19,10 @@ class Login extends React.Component{
               <input type="password" id="password" name="password" placeholder="Your password.."/>
             </div>
             <button type="submit">Sign in</button>
+            <div className="link">
+              Dont have an account?
+              <NavLink className="nav-link" exact to="/"> Click here</NavLink>
+            </div>
           </form>
         </div>
       </div>

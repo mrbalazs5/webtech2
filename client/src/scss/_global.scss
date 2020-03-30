@@ -51,12 +51,12 @@ header {
         text-decoration: none;
 
         &:hover {
-          color: $red;
+          color: $green;
           transition: $trans;
         }//header ul li .navlink:hover
 
         &.active {
-          color: $red;
+          color: $green;
         }//header ul li .navlink .active
       }//header ul li .navlink
     }//header ul li
@@ -70,7 +70,7 @@ header {
     cursor: pointer;
 
     .nav-icon {
-      background: $red;
+      background: $green;
       display: block;
       height: 2px;
       position: relative;
@@ -78,7 +78,7 @@ header {
       transition: $trans;
 
       &:before, &:after {
-        background: $red;
+        background: $green;
         content: '';
         display: block;
         height: 100%;

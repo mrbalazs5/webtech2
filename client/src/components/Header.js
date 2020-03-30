@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import carlogo from '../images/carlogo3.png';
+import carlogo from '../images/car_green.png';
 
 class Header extends React.Component{
   //contains mobile navbar open state
