@@ -25,6 +25,8 @@ class Header extends React.Component{
           <li><NavLink className="navlink" activeClassName="active" exact to="/aboutus">About Us</NavLink></li>
           <li><NavLink className="navlink" activeClassName="active" exact to="/addvehicle">Add vehicle</NavLink></li>
           <li><NavLink className="navlink" activeClassName="active" exact to="/managevehicles">Manage vehicles</NavLink></li>
+          <li><NavLink className="navlink" activeClassName="active" exact to="/login">Sign in</NavLink></li>
+          <li><NavLink className="navlink" activeClassName="active" exact to="/register">Sign up</NavLink></li>
         </ul>
       </header>
     );

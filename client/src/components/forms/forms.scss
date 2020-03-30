@@ -26,12 +26,19 @@
     justify-content: center;
     align-items: center;
 
-    .login-form {
-      width: 300px;
+    .loginregister-form {
       background: $grey;
       box-shadow: 0px 0px 20px 0px $darkgrey;
       padding: 30px;
       box-sizing: border-box;
+
+      &.login {
+        width: 300px;
+      }
+
+      &.register {
+        width: 600px;
+      }
 
       .form-title-text {
         font-size: 25px;
@@ -45,6 +52,7 @@
         display: block;
         float: left;
         width: 100%;
+        text-align: center;
 
         .nav-link {
           color: $green;
@@ -54,13 +62,29 @@
 
       .input-area {
         border: 1px solid $darkgrey;
-        width: 100%;
         height: auto;
-        display: block;
-        float: left;
         padding: 10px;
         box-sizing: border-box;
         margin: 10px 0 10px 0;
+
+        &.login {
+          width: 100%;
+          display: block;
+          float: left;
+        }
+
+        &.register {
+          width: 48%;
+          display: inline-block;
+
+          &.left {
+            float: left;
+          }
+
+          &.right {
+            float: right;
+          }
+        }
 
         label {
           color: $green;
@@ -84,7 +108,6 @@
       button {
         display: block;
         float: left;
-        width: 100%;
         border: none;
         background: $green;
         font-size: 20px;
@@ -92,6 +115,17 @@
         color: $white;
         margin: 10px 0 0 0;
         cursor: pointer;
+
+        &.login {
+          width: 100%;
+        }
+
+        &.register {
+          width: 45%;
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
+        }
       }
     }
   }

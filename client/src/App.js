@@ -11,6 +11,8 @@ import ManageVehicles from './components/pages/ManageVehicles';
 import Error from './components/pages/Error';
 import withAuth from './utils/withAuth';
 import roles from './utils/roles';
+import Login from './components/forms/Login';
+import Register from './components/forms/Register';
 
 function App(){
   return(
@@ -23,6 +25,8 @@ function App(){
         <Route exact path="/aboutus" component={AboutUs}/>
         <Route exact path="/addvehicle" component={AddVehicle}/>
         <Route exact path="/managevehicles" component={ManageVehicles}/>
+        <Route exact path="/login" component={Login}/>
+        <Route exact path="/register" component={Register}/>
         <Route component={Error}/>
       {/*<Route exact path='/profile' component={withAuth(ProfilePage, roles['dealer'])}/>*/}
       </Switch>
