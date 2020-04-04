@@ -1,15 +1,15 @@
 import React from 'react';
-import './AboutUs.scss';
+import './ErrorPage.scss';
 import Page from '../Page';
 
-class AboutUs extends React.Component{
+class ErrorPage extends React.Component{
   render(){
     return(
       <Page>
-        About Us
+        404 Page not found
       </Page>
     );
   }
 }
 
-export default AboutUs;
+export default ErrorPage;

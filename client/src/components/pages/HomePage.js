@@ -1,15 +1,15 @@
 import React from 'react';
-import './AboutUs.scss';
+import './HomePage.scss';
 import Page from '../Page';
 
-class AboutUs extends React.Component{
+class HomePage extends React.Component{
   render(){
     return(
       <Page>
-        About Us
+        from HP
       </Page>
     );
   }
 }
 
-export default AboutUs;
+export default HomePage;
