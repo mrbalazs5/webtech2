@@ -1,0 +1,674 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Webtech 2 assignment app",
+    "description": "Webtech 2 assignment\n Created By: Megyeri Balázs, Pankotai Márk Sándor, Vass Dávid",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    },
+    {
+      "name": "Vehicles",
+      "description": "API for vehicles in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/sign-up": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "consumes": ["multipart/form-data"],
+        "summary": "Register a new user in the system",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request's body",
+            "schema": {
+              "$ref": "#/definitions/UserRegistration"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "User successfully created",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "422": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/api/sign-in": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "consumes": ["application/json"],
+        "summary": "Login a user in the system",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request's body",
+            "schema": {
+              "$ref": "#/definitions/UserLogin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User successfully logged in",
+            "headers": {
+              "Set-Cookie": {
+                "description": "Token for authentication",
+                "schema": {
+                  "type": "string",
+                  "example": "authToken=teststring; Path=/; HttpOnly"
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "422": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/api/check-token": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "authToken",
+            "type": "string",
+            "in": "cookie"
+          }
+        ],
+        "summary": "Checks if a user is logged in",
+        "responses": {
+          "200": {
+            "description": "User is logged in",
+            "schema": {
+              "$ref": "#/definitions/LoggedInUser"
+            }
+          },
+          "401": {
+            "description": "Unauthorized: Invalid token\n Unauthorized: No token provided\n Unauthorized: You don't have permission to see this resource",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/api/create-make": {
+      "post": {
+        "tags": [
+          "Vehicles"
+        ],
+        "consumes": ["application/json"],
+        "summary": "Creates a new make in the system",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request's body",
+            "schema": {
+              "$ref": "#/definitions/CreateMake"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make successfully created",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "422": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/api/get-makes": {
+      "get": {
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Get all makes in the system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Make"
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/api/create-model": {
+      "post": {
+        "tags": [
+          "Vehicles"
+        ],
+        "consumes": ["application/json"],
+        "summary": "Creates a new model in the system",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request's body",
+            "schema": {
+              "$ref": "#/definitions/CreateModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Model successfully created",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "422": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/api/get-models": {
+      "get": {
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Get all models in the system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Model"
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/api/get-vehicles": {
+      "get": {
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Get all vehicles in the system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Vehicle"
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": [
+        "email",
+        "password",
+        "name"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "uniqueItems": true,
+          "description": "The user's email address"
+        },
+        "password": {
+          "type": "string",
+          "minLength": 6,
+          "description": "The user's password"
+        },
+        "name": {
+          "type": "string"
+        },
+        "birthDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The user's birth date"
+        },
+        "avatar": {
+          "type": "string",
+          "description": "Path of the user's avatar"
+        },
+        "role": {
+          "type": "integer",
+          "default": 0,
+          "description": "The user's role. Can be 'dealer'(0) or 'admin'(1)"
+        },
+        "dealerships": {
+          "type": "array",
+          "description": "The user's dealerships.",
+          "items": {
+            "$ref": "#/definitions/Dealership"
+          }
+        }
+      }
+    },
+    "UserLogin": {
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": { "$ref": "#/definitions/User/properties/email" },
+        "password": { "$ref": "#/definitions/User/properties/password" }
+      }
+    },
+    "LoggedInUser": {
+      "properties": {
+        "email": { "$ref": "#/definitions/User/properties/email" },
+        "avatar": { "$ref": "#/definitions/User/properties/avatar" },
+        "role": { "$ref": "#/definitions/User/properties/role" }
+      }
+    },
+    "UserRegistration": {
+      "required": [
+        "email",
+        "password",
+        "name"
+      ],
+      "properties": {
+        "email": { "$ref": "#/definitions/User/properties/email" },
+        "password": { "$ref": "#/definitions/User/properties/password" },
+        "name": { "$ref": "#/definitions/User/properties/name" },
+        "birthDate": { "$ref": "#/definitions/User/properties/birthDate" },
+        "avatar": { "$ref": "#/definitions/User/properties/avatar" }
+      }
+    },
+    "Make": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": "The make's name.",
+          "type": "string",
+          "uniqueItems": true
+        },
+        "models": {
+          "type": "array",
+          "description": "The make's associated models.",
+          "items": {
+            "$ref": "#/definitions/Model"
+          }
+        }
+      }
+    },
+    "CreateMake": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": { "$ref": "#/definitions/Make/properties/name" }
+      }
+    },
+    "Model": {
+      "required": [
+        "name",
+        "make"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The model's name.",
+          "uniqueItems": true
+        },
+        "make": {
+          "description": "The model's make.",
+          "$ref": "#/definitions/Make"
+        },
+        "specification": {
+          "description": "The model's specification object.",
+          "$ref": "#/definitions/Specification"
+        },
+        "series": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Series"
+          }
+        },
+        "vehicles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Vehicle"
+          }
+        }
+      }
+    },
+    "CreateModel": {
+      "required": [
+        "name",
+        "make"
+      ],
+      "properties": {
+        "name": { "$ref": "#/definitions/Model/properties/name" },
+        "make": { "$ref": "#/definitions/CreateMake" },
+        "specification": { "$ref": "#/definitions/CreateSpecification" },
+        "series": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateSeries"
+          }
+        }
+      }
+    },
+    "Series": {
+      "required": [
+        "name",
+        "model"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "model": {
+          "$ref": "#/definitions/Model"
+        },
+        "generations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Generation"
+          }
+        }
+      }
+    },
+    "CreateSeries": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": { "$ref": "#/definitions/Specification/properties/engine" },
+        "generations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateGeneration"
+          }
+        }
+      }
+    },
+    "Specification": {
+      "required": [
+        "model"
+      ],
+      "properties": {
+        "engine": {
+          "type": "string"
+        },
+        "enginePower": {
+          "type": "number"
+        },
+        "gearType": {
+          "type": "number"
+        },
+        "numberOfGears": {
+          "type": "number"
+        },
+        "numberOfWheels": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        },
+        "length": {
+          "type": "number"
+        },
+        "seatingCapacity": {
+          "type": "number"
+        },
+        "maxSpeed": {
+          "type": "number"
+        },
+        "fullWeight": {
+          "type": "number"
+        },
+        "fuelCapacity": {
+          "type": "number"
+        },
+        "fuelConsumption": {
+          "type": "number"
+        },
+        "model": {
+          "$ref": "#/definitions/Model"
+        }
+      }
+    },
+    "CreateSpecification": {
+      "properties": {
+        "engine": { "$ref": "#/definitions/Specification/properties/engine" },
+        "enginePower": { "$ref": "#/definitions/Specification/properties/enginePower" },
+        "gearType": { "$ref": "#/definitions/Specification/properties/gearType" },
+        "numberOfGears": { "$ref": "#/definitions/Specification/properties/numberOfGears" },
+        "numberOfWheels": { "$ref": "#/definitions/Specification/properties/numberOfWheels" },
+        "width": { "$ref": "#/definitions/Specification/properties/width" },
+        "length": { "$ref": "#/definitions/Specification/properties/length" },
+        "seatingCapacity": { "$ref": "#/definitions/Specification/properties/seatingCapacity" },
+        "maxSpeed": { "$ref": "#/definitions/Specification/properties/maxSpeed" },
+        "fullWeight": { "$ref": "#/definitions/Specification/properties/fullWeight" },
+        "fuelCapacity": { "$ref": "#/definitions/Specification/properties/fuelCapacity" },
+        "fuelConsumption": { "$ref": "#/definitions/Specification/properties/fuelConsumption" }
+      }
+    },
+    "Generation": {
+      "required": [
+        "name",
+        "yearBegin",
+        "yearEnd"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "yearBegin": {
+          "type": "number"
+        },
+        "yearEnd": {
+          "type": "number"
+        },
+        "series": {
+          "$ref": "#/definitions/Series"
+        }
+      }
+    },
+    "CreateGeneration": {
+      "required": [
+        "name",
+        "yearBegin",
+        "yearEnd"
+      ],
+      "properties": {
+        "name": { "$ref": "#/definitions/Generation/properties/name" },
+        "yearBegin": { "$ref": "#/definitions/Generation/properties/yearBegin" },
+        "yearEnd": { "$ref": "#/definitions/Generation/properties/yearEnd" }
+      }
+    },
+    "City": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "integer"
+        }
+      }
+    },
+    "Country": {
+      "required": [
+        "isoCode",
+        "name"
+      ],
+      "properties": {
+        "isoCode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Address": {
+      "required": [
+        "country",
+        "city",
+        "street"
+      ],
+      "properties": {
+        "country": {
+          "$ref": "#/definitions/Country"
+        },
+        "city": {
+          "$ref": "#/definitions/City"
+        },
+        "street": {
+          "type": "string"
+        }
+      }
+    },
+    "Dealership": {
+      "required": [
+        "name",
+        "user",
+        "address"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "address": {
+          "$ref": "#/definitions/Address"
+        },
+        "vehicles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Vehicle"
+          }
+        }
+      }
+    },
+    "Vehicle": {
+      "required": [
+        "vehicleType",
+        "image",
+        "model"
+      ],
+      "properties": {
+        "vehicleType": {
+          "type": "integer"
+        },
+        "price": {
+          "type": "number"
+        },
+        "isServiced": {
+          "type": "boolean"
+        },
+        "image": {
+          "type": "string"
+        },
+        "model": {
+          "$ref": "#/definitions/Model"
+        },
+        "dealership": {
+          "$ref": "#/definitions/Dealership"
+        }
+      }
+    },
+    "Message": {
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

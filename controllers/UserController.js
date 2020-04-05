@@ -61,16 +61,17 @@ const UserController = {
                     return user.save()
                 })
                 .then(() => {
-                    return res.json(new Message(['User successfully created']).success());
+                    return res.status(200).json(new Message(['User successfully created']).success());
                 })
                 .catch((err) =>{
                     console.log(err);
 
-                    return res.json(new Message([err.toString()]).error());
+                    return res.status(422).json(new Message([err.toString()]).error());
                 });
 
         }
     },
+
     //login for users
     signIn: {
         controller: (req, res) => {
