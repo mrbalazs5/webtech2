@@ -7,7 +7,7 @@ class UserSeeder{
 
         const users = [{
             email: 'admin@admin.com',
-            password: 'admin',
+            password: 'admin123',
             name: 'Admin',
             role: roles.admin
         }];
