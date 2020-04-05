@@ -12,8 +12,8 @@ class SignInPage extends React.Component{
 
           <div className={'forms-holder'}>
 
-            <SignInForm/>
-            
+            <SignInForm history={this.props.history}/>
+
           </div>
         </div>
       </Page>

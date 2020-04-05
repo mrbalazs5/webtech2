@@ -12,7 +12,7 @@ class SignUpPage extends React.Component{
 
           <div className={'forms-holder'}>
 
-            <SignUpForm/>
+            <SignUpForm history={this.props.history}/>
 
           </div>
         </div>

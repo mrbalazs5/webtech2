@@ -13,6 +13,8 @@ class SignInForm extends React.Component{
     }
 
     this.validator = new SimpleReactValidator();
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   //set state by field value
@@ -36,15 +38,14 @@ class SignInForm extends React.Component{
         }),
         headers: {'Content-Type': 'application/json'}
       })
-      .then((result) => {
-        return result.json()
+      .then((response) => {
+        return response.json()
       })
-      .then((result) => {
-        console.log(result)
+      .then((response) => {
+        this.props.history.push('/profile');
       })
       .catch((error) => {
         console.log(error);
-
       });
 
     } else {

@@ -2,17 +2,16 @@
 
 .menu {
 
-  .logo-main {
+  font-weight: bold;
 
+  .logo-main {
     display: inline-block;
     float: left;
     max-height: 46px;
     padding: 2px;
-
   }
 
   .item-holder {
-
     padding: 0;
     margin: 0;
     max-height: 0;
@@ -24,40 +23,31 @@
     background: $background-color-default;
 
     &.show {
-
       max-height: 180px;
-
     }
 
     .item {
-
       width: 100%;
       line-height: 30px;
       text-align: center;
 
       .navlink {
-
         color: $font-color-default;
         text-decoration: none;
 
         &:hover {
-
           color: $font-color-hover;
           transition: $transition-default;
-
         }
 
         &.active {
-
           color: $font-color-active;
-
         }
       }
     }
   }
 
   .hamburger {
-
     display: inline-block;
     float: right;
     position: relative;
@@ -65,7 +55,6 @@
     cursor: pointer;
 
     .nav-icon {
-
       background: $hamburger-closed;
       display: block;
       height: 2px;
@@ -74,7 +63,6 @@
       transition: $transition-default;
 
       &:before, &:after {
-
         background: $hamburger-closed;
         content: '';
         display: block;
@@ -82,58 +70,45 @@
         position: absolute;
         transition: $transition-default;
         width: 100%;
-
       }
 
       &:before {
-
         top: 5px;
-
       }
 
       &:after {
-
         top: -5px;
-
       }
 
       &.open {
-
         background: transparent;
 
         &:before {
-
           top: 0;
           transform: rotate(135deg);
-
         }
 
         &:after {
-
           top: 0;
           transform: rotate(45deg);
-
         }
       }
     }
   }
 
   .user-avatar {
-
     display: inline-block;
     float: right;
     padding: 4px 4px 4px 0;
     max-height: 42px;
     max-width: 42px;
-
+    cursor: pointer;
 
     .avatar-img {
-
       max-height: 40px;
       max-width: 40px;
       border: 1px solid $border-color-default;
-      border-radius: 10px;
-
+      border-radius: 100%;
     }
   }
 }
@@ -142,18 +117,23 @@
   .menu {
 
     .hamburger {
-
       display: none;
-
     }
 
     .item-holder {
       clear: none;
       display: inline-block;
-      float: left;
       max-height: none;
-      padding: 0 20px 0 20px;
+      padding: 0 0 0 20px;
       border-bottom: none;
+
+      &.left {
+        float: left;
+      }
+
+      &.right {
+        float: right;
+      }
 
       .item {
         width: auto;
