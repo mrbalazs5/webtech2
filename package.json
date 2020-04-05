@@ -9,7 +9,8 @@
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "test": "mocha -r esm --timeout 0 --require @babel/register --require @babel/polyfill --exit",
     "install-dev": "npm install && cd client && npm install && cd ..",
-    "resetDB": "babel-node app/commands/resetDB"
+    "resetDB": "babel-node app/commands/resetDB",
+    "seed": "babel-node app/commands/seed"
   },
   "author": "Megyeri Balázs, Pankotai Márk Sándor, Vass Dávid",
   "license": "ISC",
@@ -36,6 +37,8 @@
     "multer": "^1.4.2",
     "nodemon": "^2.0.2",
     "path": "^0.12.7",
-    "validator": "^13.0.0"
+    "swagger-ui-express": "^4.1.4",
+    "validator": "^13.0.0",
+    "xlsx": "^0.15.6"
   }
 }
