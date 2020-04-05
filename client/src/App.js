@@ -1,38 +1,35 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
-
 import './scss/styles.scss';
-
-import Header from './components/Header';
-import MainPage from './components/pages/MainPage';
-import AboutUs from './components/pages/AboutUs';
-import AddVehicle from './components/pages/AddVehicle';
-import ManageVehicles from './components/pages/ManageVehicles';
-import Error from './components/pages/Error';
 import withAuth from './utils/withAuth';
 import roles from './utils/roles';
-import Login from './components/forms/Login';
-import Register from './components/forms/Register';
+import Header from './components/Header';
+import HomePage from './components/pages/HomePage';
+import AboutUs from './components/pages/AboutUs';
+import SignInPage from './components/pages/SignInPage';
+import SignUpPage from './components/pages/SignUpPage';
+import ProfilePage from './components/pages/ProfilePage';
+import ErrorPage from './components/pages/ErrorPage';
 
-function App(){
-  return(
-    <div className="app">
+class App extends React.Component {
+  render(){
+    return(
+      <div>
 
-      <Header/>
+        <Header/>
 
-      <Switch>
-        <Route exact path="/" component={MainPage}/>
-        <Route exact path="/aboutus" component={AboutUs}/>
-        <Route exact path="/addvehicle" component={AddVehicle}/>
-        <Route exact path="/managevehicles" component={ManageVehicles}/>
-        <Route exact path="/login" component={Login}/>
-        <Route exact path="/register" component={Register}/>
-        <Route component={Error}/>
-      {/*<Route exact path='/profile' component={withAuth(ProfilePage, roles['dealer'])}/>*/}
-      </Switch>
+        <Switch>
+          <Route exact path={'/'} component={HomePage}/>
+          <Route exact path={'/aboutus'} component={AboutUs}/>
+          <Route exact path={'/signin'} component={SignInPage}/>
+          <Route exact path={'/signup'} component={SignUpPage}/>
+          <Route exact path={'/profile'} component={withAuth(ProfilePage, roles['dealer'])}/>
+          <Route component={ErrorPage}/>
+        </Switch>
 
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
 export default App;

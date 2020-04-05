@@ -1,1 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: bold;
+  src: url('../fonts/Roboto-Bold.ttf') format('truetype');
+}

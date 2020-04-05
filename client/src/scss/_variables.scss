@@ -1,6 +1,21 @@
-$grey: #e8e8e8;
-$darkgrey: #616161;
-$black: #000000;
-$green: #00730b;
-$trans: 0.2s;
-$white: #ffffff;
+//fonts
+$roboto: 'Roboto', sans-serif;
+
+//colors
+$background-color-default: #e8e8e8;
+$background-color-secundary: #40002b;//#00730b;
+$border-color-default: #616161;
+$hamburger-closed: #000000;
+$hamburger-open: #000000;
+
+//font colors
+$font-color-default: #000000;
+$font-color-active: #00730b;
+$font-color-hover: #00730b;
+$font-color-label: #00730b;
+$font-color-button: #ffffff;
+$font-color-invalid: #ff3333;
+$font-color-valid: #32a852;
+
+//transitions
+$transition-default: 0.2s;

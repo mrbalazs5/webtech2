@@ -1,163 +1,26 @@
-body {
+body, html {
   padding: 0;
   margin: 0;
-  overflow-x: hidden;
-  font-family: 'Roboto', sans-serif;
-  background: $grey;
-}//body
+  width: 100%;
+  height: 100%;
+  font-family: $roboto;
+}
+
+body {
+  background: $background-color-default;
+}
 
 .page {
-
+  display: block;
+  float: left;
 }
 
 header {
   width: 100%;
-  box-shadow: 0px 0px 10px 0px $darkgrey;
-  background: $grey;
+  box-shadow: 0px 0px 10px 0px $border-color-default;
+  background: $background-color-default;
   display: inline-block;
   float: left;
   position: relative;
-  z-index: 1;
-
-  .logo {
-    display: inline-block;
-    float: left;
-    max-height: 46px;
-    padding: 2px;
-  }//header .logo
-
-  ul {
-    padding: 0;
-    margin: 0;
-    max-height: 0;
-    clear: both;
-    display: block;
-    overflow: hidden;
-    transition: $trans;
-    list-style: none;
-    background: $grey;
-
-    &.show {
-      max-height: 180px;
-    }//header ul .show
-
-    li {
-      width: 100%;
-      line-height: 30px;
-      text-align: center;
-
-      .navlink {
-        color: $black;
-        text-decoration: none;
-
-        &:hover {
-          color: $green;
-          transition: $trans;
-        }//header ul li .navlink:hover
-
-        &.active {
-          color: $green;
-        }//header ul li .navlink .active
-      }//header ul li .navlink
-    }//header ul li
-  }//header ul
-
-  .mobile-nav {
-    display: inline-block;
-    float: right;
-    position: relative;
-    padding: 24px 12px;
-    cursor: pointer;
-
-    .nav-icon {
-      background: $green;
-      display: block;
-      height: 2px;
-      position: relative;
-      width: 18px;
-      transition: $trans;
-
-      &:before, &:after {
-        background: $green;
-        content: '';
-        display: block;
-        height: 100%;
-        position: absolute;
-        transition: $trans;
-        width: 100%;
-      }//header .mobile-nav .nav-icon:before:after
-
-      &:before {
-        top: 5px;
-      }//header .mobile-nav .nav-icon:before
-
-      &:after {
-        top: -5px;
-      }//header .mobile-nav .nav-icon:after
-
-      &.open {
-        background: transparent;
-
-        &:before {
-          top: 0;
-          transform: rotate(135deg);
-        }//header .mobile-nav .nav-icon .open:before
-
-        &:after {
-          top: 0;
-          transform: rotate(45deg);
-        }//header .mobile-nav .nav-icon .open:after
-      }//header .mobile-nav .nav-icon .open
-    }//header .mobile-nav .nav-icon
-  }//header .mobile-nav
-
-  .login-btn {
-    display: inline-block;
-    float: right;
-    line-height: 50px;
-  }
-
-  .avatar {
-
-    display: none;
-    float: right;
-
-    .avatar-img {
-
-      max-height: 35px;
-      padding: 5px;
-    }
-  }
-}//header
-
-@media screen and (min-width: 768px) {
-  header {
-    .avatar {
-      display: inline-block;
-    }
-
-    .mobile-nav {
-      display: none;
-    }//header .mobile-nav
-
-    ul {
-      clear: none;
-      display: inline-block;
-      float: left;
-      max-height: none;
-      padding: 0 20px 0 20px;
-      border-bottom: none;
-
-      li {
-        width: auto;
-        line-height: 50px;
-        display: inline-block;
-        float: left;
-
-        .navlink {
-          margin-right: 20px;
-        }
-      }//header ul li
-    }//header ul
-  }//header
-}//@media
+  z-index: 2;
+}

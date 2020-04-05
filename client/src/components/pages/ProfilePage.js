@@ -1,15 +1,15 @@
 import React from 'react';
-import './AboutUs.scss';
+import './ProfilePage.scss';
 import Page from '../Page';
 
-class AboutUs extends React.Component{
+class ProfilePage extends React.Component{
   render(){
     return(
       <Page>
-        About Us
+        from PP
       </Page>
     );
   }
 }
 
-export default AboutUs;
+export default ProfilePage;

@@ -43,9 +43,9 @@ export default function withAuth(ComponentToProtect, role) {
                 if (redirect) {
                     return <Redirect to={{
 
-                        pathname : '/api/sign-in', // átírni a frontend route-ra
+                        pathname : '/api/sign-in',
 
-                        pathname : '/sign-in',
+                        pathname : '/signin',
 
                         state : {flashMessage: {warning: ['Please sign in to access this page']}}
                     }} />;
