@@ -19,11 +19,11 @@ export default function withAuth(ComponentToProtect, role) {
                         if (res.status === 200) {
                             return res.json()
                         } else {
-                            const error = new Error(res.error);
-                            throw error;
+                            throw new Error('Server error');
                         }
                     })
                     .then(res => {
+
                         if(!res.user || (role && res.user.role !== roles[role])){
                             throw new Error('Invalid user');
                         }
@@ -31,6 +31,7 @@ export default function withAuth(ComponentToProtect, role) {
                         this.setState({ loading: false });
                     })
                     .catch(err => {
+                        console.log(err);
                         this.setState({ loading: false, redirect: true });
                     });
             }
@@ -42,11 +43,7 @@ export default function withAuth(ComponentToProtect, role) {
                 }
                 if (redirect) {
                     return <Redirect to={{
-
-                        pathname : '/api/sign-in',
-
                         pathname : '/signin',
-
                         state : {flashMessage: {warning: ['Please sign in to access this page']}}
                     }} />;
                 }

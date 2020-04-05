@@ -2,34 +2,43 @@ import jwt from 'jsonwebtoken';
 import roles from '../utils/roles';
 import Message from '../utils/Message';
 
-const secret = process.env.JWT_SECRET;
-
 //checks if an authentication token is available, and checks for other privilegs
-const authenticateUser = (req, res, next, role) => {
+const authenticateUser = (role) => {
 
-    const token =
-        req.body.authToken ||
-        req.query.authToken ||
-        req.headers['x-access-token'] ||
-        req.cookies.authToken;
+    const secret = process.env.JWT_SECRET;
 
-    if (!token) {
-        res.status(401).json(new Message('Unauthorized: No token provided').error());
-    } else {
-        jwt.verify(token, secret, (err, decoded) => {
+    return (req, res, next) => {
 
-            if (err) {
-                res.status(401).json(new Message('Unauthorized: Invalid token'));
-            }else if(role === 'admin' && decoded.role !== roles.admin){
-                res.status(401).json(new Message('Unauthorized: You don\'t have permission to see this resource'));
+        try{
+
+            const token =
+                req.body.authToken ||
+                req.query.authToken ||
+                req.headers['x-access-token'] ||
+                req.cookies.authToken;
+
+            if (!token) {
+                return res.status(401).json(new Message(['Unauthorized: No token provided']).error());
+            } else {
+                jwt.verify(token, secret, (err, decoded) => {
+
+                    if (err) {
+                        console.log(err);
+                        throw new Error('Unauthorized: Invalid token');
+                    }
+                    else {
+                        req.user = decoded;
+                        next();
+                    }
+
+                });
             }
-            else {
-                req.user = decoded;
-                next();
-            }
 
-        });
-    }
+        }catch (err) {
+            return res.status(401).json(new Message([err]).error());
+        }
+
+    };
 
 };
 

@@ -23,7 +23,7 @@ class App extends React.Component {
           <Route exact path={'/aboutus'} component={AboutUs}/>
           <Route exact path={'/signin'} component={SignInPage}/>
           <Route exact path={'/signup'} component={SignUpPage}/>
-          <Route exact path={'/profile'} component={withAuth(ProfilePage, roles['dealer'])}/>
+          <Route exact path={'/profile'} component={withAuth(ProfilePage, roles.dealer)}/>
           <Route component={ErrorPage}/>
         </Switch>
 

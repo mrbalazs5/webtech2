@@ -110,7 +110,7 @@
       }
     },
     "/api/check-token": {
-      "post": {
+      "get": {
         "tags": [
           "Users"
         ],

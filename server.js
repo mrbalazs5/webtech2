@@ -29,7 +29,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
-//server routes
+//server routes/api/check-token
 app.post('/api/sign-up', UserController.signUp.controller);
 
 app.post('/api/sign-in', UserController.signIn.controller);
@@ -44,8 +44,8 @@ app.get('/api/get-models', VehicleController.getModels.controller);
 
 app.get('/api/get-vehicles', VehicleController.getVehicles.controller);
 
-app.post('/api/check-token', authenticateUser, (req, res) => {
-    res.status(200).json(req.user);
+app.get('/api/check-token', authenticateUser('dealer'), (req, res) => {
+    res.status(200).json({user: req.user});
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
