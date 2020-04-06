@@ -138,6 +138,22 @@
         }
       }
     },
+    "/api/log-out": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Logs out the user",
+        "responses": {
+          "200": {
+            "description": "You have successfully logged out",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
     "/api/create-make": {
       "post": {
         "tags": [
