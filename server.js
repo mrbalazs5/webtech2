@@ -9,6 +9,7 @@ import mongoose from 'mongoose';
 import UserController from './controllers/UserController';
 import VehicleController from './controllers/VehicleController';
 import authenticateUser from './middlewares/authenticateUser';
+import Message from "./utils/Message";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -46,6 +47,10 @@ app.get('/api/get-vehicles', VehicleController.getVehicles.controller);
 
 app.get('/api/check-token', authenticateUser('dealer'), (req, res) => {
     res.status(200).json({user: req.user});
+});
+
+app.post('/api/log-out', (req, res) => {
+    return res.clearCookie('authToken').status(200).json(new Message(['You have successfully logged out']).success());
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
