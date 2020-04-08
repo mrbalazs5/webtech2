@@ -7,15 +7,7 @@ class SignInPage extends React.Component{
   render(){
     return(
       <Page>
-        <div className={'forms'}>
-          <div className={'forms-bg-skewed'}/>
-
-          <div className={'forms-holder'}>
-
-            <SignInForm history={this.props.history}/>
-
-          </div>
-        </div>
+        <SignInForm history={this.props.history}/>
       </Page>
     );
   }

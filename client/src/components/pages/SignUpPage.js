@@ -7,15 +7,7 @@ class SignUpPage extends React.Component{
   render(){
     return(
       <Page>
-        <div className={'forms'}>
-          <div className={'forms-bg-skewed'}/>
-
-          <div className={'forms-holder'}>
-
-            <SignUpForm history={this.props.history}/>
-
-          </div>
-        </div>
+        <SignUpForm history={this.props.history}/>
       </Page>
     );
   }

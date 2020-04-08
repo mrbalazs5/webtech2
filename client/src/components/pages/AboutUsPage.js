@@ -1,8 +1,8 @@
 import React from 'react';
-import './AboutUs.scss';
+import './AboutUsPage.scss';
 import Page from '../Page';
 
-class AboutUs extends React.Component{
+class AboutUsPage extends React.Component{
   render(){
     return(
       <Page>
@@ -12,4 +12,4 @@ class AboutUs extends React.Component{
   }
 }
 
-export default AboutUs;
+export default AboutUsPage;

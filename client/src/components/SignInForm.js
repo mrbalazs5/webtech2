@@ -17,14 +17,12 @@ class SignInForm extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  //set state by field value
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value
     });
   }
 
-  //handle form submit
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -47,7 +45,6 @@ class SignInForm extends React.Component{
       .catch((error) => {
         console.log(error);
       });
-
     } else {
       this.validator.showMessages();
       this.forceUpdate();
@@ -56,60 +53,37 @@ class SignInForm extends React.Component{
 
   render(){
     return(
-      <form className={'one-col'} onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
 
-        <div className={'form-item fullwidth'}>
-          <div className={'item-border bottom'}>
-            <div className={'title'}>
-              Sign In
-            </div>
-          </div>
-        </div>
+        Sign In
 
-        <div className={'form-item fullwidth'}>
-          <div className={'validation'}>
-            {this.validator.message('email', this.state.email, 'required|email')}
-          </div>
-          <div className={'item-border full'}>
-            <label className={'label'} htmlFor={'email'}>Email</label>
-            <input
-              type={'email'}
-              id={'email'}
-              value={this.state.email}
-              onChange={this.handleChange}
-              autoComplete={'on'}
-              placeholder={'Your email address..'}
-            />
-          </div>
-        </div>
+        {this.validator.message('email', this.state.email, 'required|email')}
+        <label htmlFor={'email'}>Email</label>
+        <input
+          type={'email'}
+          id={'email'}
+          value={this.state.email}
+          onChange={this.handleChange}
+          autoComplete={'on'}
+          placeholder={'Your email address..'}
+        />
 
-        <div className={'form-item fullwidth'}>
-          <div className={'validation'}>
-            {this.validator.message('password', this.state.password, 'required|min:6')}
-          </div>
-          <div className={'item-border full'}>
-            <label className={'label'} htmlFor={'password'}>Password</label>
-            <input
-              type={'password'}
-              id={'password'}
-              value={this.state.password}
-              onChange={this.handleChange}
-              autoComplete={'off'}
-              placeholder={'Your password..'}
-            />
-          </div>
-        </div>
+        {this.validator.message('password', this.state.password, 'required|min:6')}
 
-        <div className={'server-message'}></div>
+        <label htmlFor={'password'}>Password</label>
+        <input
+          type={'password'}
+          id={'password'}
+          value={this.state.password}
+          onChange={this.handleChange}
+          autoComplete={'off'}
+          placeholder={'Your password..'}
+        />
 
-        <div className={'form-item fullwidth'}>
-          <button type={'submit'}>Sign In</button>
-        </div>
+        <button type={'submit'}>Sign In</button>
 
-        <div className={'form-item fullwidth'}>
-          Don't have an account yet?
-          <NavLink exact to={'/signup'}>Click here!</NavLink>
-        </div>
+        Don't have an account yet?
+        <NavLink exact to={'/signup'}>Click here!</NavLink>
 
       </form>
     );

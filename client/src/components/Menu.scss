@@ -1,150 +1,265 @@
-@import '../scss/_variables';
+@import '../scss/variables';
 
-.menu {
-
-  font-weight: bold;
-
-  .logo-main {
-    display: inline-block;
-    float: left;
-    max-height: 46px;
-    padding: 2px;
+.navbar {
+  .nav-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-height: 40px;
+    padding: 5px;
   }
 
-  .item-holder {
-    padding: 0;
-    margin: 0;
-    max-height: 0;
-    clear: both;
-    display: block;
-    overflow: hidden;
-    transition: $transition-default;
-    list-style: none;
-    background: $background-color-default;
+  .nav-avatar {
+    position: absolute;
+    top: 5px;
+    right: 5px;
 
-    &.show {
-      max-height: 180px;
-    }
-
-    .item {
-      width: 100%;
-      line-height: 30px;
-      text-align: center;
-
-      .navlink {
-        color: $font-color-default;
-        text-decoration: none;
-
-        &:hover {
-          color: $font-color-hover;
-          transition: $transition-default;
-        }
-
-        &.active {
-          color: $font-color-active;
-        }
-      }
+    .avatar {
+      max-height: 40px;
+      max-width: 40px;
+      border-radius: 100%;
+      box-shadow: 0px 0px 3px 0px $shadow-color-default;
     }
   }
 
   .hamburger {
-    display: inline-block;
-    float: right;
-    position: relative;
-    padding: 24px 12px;
-    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    left: 5px;
 
-    .nav-icon {
-      background: $hamburger-closed;
-      display: block;
-      height: 2px;
-      position: relative;
-      width: 18px;
-      transition: $transition-default;
+    .icon-bg {
+      height: 40px;
+      width: 40px;
+      border-radius: 100%;
+      box-shadow: 0px 0px 3px 0px $shadow-color-default;
+      background: $hamburger-background;
+      cursor: pointer;
 
-      &:before, &:after {
-        background: $hamburger-closed;
-        content: '';
+      .icon {
+        position: relative;
         display: block;
-        height: 100%;
-        position: absolute;
-        transition: $transition-default;
-        width: 100%;
-      }
-
-      &:before {
-        top: 5px;
-      }
-
-      &:after {
-        top: -5px;
-      }
-
-      &.open {
-        background: transparent;
-
-        &:before {
-          top: 0;
-          transform: rotate(135deg);
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        height: 2px;
+        width: 18px;
+        background: $hamburger;
+        transition-property: background;
+        transition-delay: 0.1s;
+    
+        &:before, &:after {
+          background: $hamburger;
+          content: '';
+          display: block;
+          height: 100%;
+          position: absolute;
+          width: 100%;
         }
-
+    
+        &:before {
+          top: 5px;
+          transform: rotate(0deg);
+          transition-property: transform, top;
+          transition-delay: 0.0s, 0.1s;
+          transition-duration: 0.1s, 0.1s;
+        }
+    
         &:after {
-          top: 0;
-          transform: rotate(45deg);
+          top: -5px;
+          transform: rotate(0deg);
+          transition-property: transform, top;
+          transition-delay: 0.0s, 0.1s;
+          transition-duration: 0.1s, 0.1s;
+        }
+    
+        &.open {
+          background: transparent;
+          transition-property: background;
+          transition-delay: 0.1s;
+    
+          &:before {
+            top: 0px;
+            transform: rotate(-45deg);
+            transition-property: top, transform;
+            transition-delay: 0.0s, 0.1s;
+            transition-duration: 0.1s, 0.1s;
+          }
+    
+          &:after {
+            top: 0px;
+            transform: rotate(45deg);
+            transition-property: top, transform;
+            transition-delay: 0.0s, 0.1s;
+            transition-duration: 0.1s, 0.1s;
+          }
         }
       }
     }
   }
 
-  .user-avatar {
-    display: inline-block;
-    float: right;
-    padding: 4px 4px 4px 0;
-    max-height: 42px;
-    max-width: 42px;
-    cursor: pointer;
+  .arrows {
+    position: absolute;
+    top: 5px;
+    right: 5px;
 
-    .avatar-img {
-      max-height: 40px;
-      max-width: 40px;
-      border: 1px solid $border-color-default;
+    .arrow-bg {
+      height: 40px;
+      width: 40px;
       border-radius: 100%;
+      box-shadow: 0px 0px 3px 0px $shadow-color-default;
+      cursor: pointer;
+
+      .arrow {
+        position: relative;
+        display: block;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        height: 2px;
+        width: 12px;
+        background: transparent;
+
+        &:before, &:after {
+          background: $arrow;
+          content: '';
+          display: block;
+          height: 100%;
+          position: absolute;
+          width: 100%;
+        }
+    
+        &:before {
+          left: 3px;
+          transform: rotate(-45deg);
+          transition: $transition-default;
+        }
+    
+        &:after {
+          right: 4px;
+          transform: rotate(45deg);
+          transition: $transition-default;
+        }
+    
+        &.openarrow {
+          &:before {
+            transform: rotate(45deg);
+            transition: $transition-default;
+          }
+    
+          &:after {
+            transform: rotate(-45deg);
+            transition: $transition-default;
+          }
+        }
+      }
+    }
+  }
+
+  .menu {
+    overflow: hidden;
+    max-height: 0;
+    padding: 0;
+    margin: 50px 0 0 0;
+    clear: both;
+    transition: $transition-default linear;
+
+    &.show {
+      max-height: 300px;
+    }
+
+    .user-panel,
+    .dealer-panel {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      line-height: 30px;
+
+      .item {
+        text-align: center;
+
+        .navlink {
+          text-decoration: none;
+          color: $font-color-default;
+          transition: $transition-default;
+
+          &:hover {
+            color: $font-color-hover;
+          }
+
+          &.active {
+            color: $font-color-active;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .navbar {
+    .nav-logo {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .arrows {
+      display: none;
     }
   }
 }
 
 @media screen and (min-width: 768px) {
-  .menu {
-
+  .navbar {
     .hamburger {
       display: none;
     }
 
-    .item-holder {
-      clear: none;
-      display: inline-block;
+    .nav-avatar {
+      right: 50px;
+    }
+
+    .menu {
+      overflow: auto;
+      overflow-x: hidden;
       max-height: none;
-      padding: 0 0 0 20px;
-      border-bottom: none;
+      margin: 0;
+      clear: none;
+      width: 100%;
+      display: block;
+      transition: none;
 
-      &.left {
-        float: left;
-      }
-
-      &.right {
-        float: right;
-      }
-
-      .item {
-        width: auto;
-        line-height: 50px;
+      .user-panel,
+      .dealer-panel {
         display: inline-block;
+        width: 100%;
         float: left;
+        line-height: 50px;
 
-        .navlink {
-          margin-right: 20px;
+        .item {
+          display: inline-block;
+          float: left;
+          padding: 0 10px 0 10px;
         }
-      }//header ul li
-    }//header ul
-  }//header
-}//@media
+      }
+
+      .user-panel {
+        margin-left: 150px;
+      }
+
+      .dealer-panel {
+        float: right;
+        overflow: hidden;
+        max-height: 0;
+        transition: $transition-default linear;
+
+        .item {
+          float: right;
+        }
+
+        &.show {
+          max-height: 50px;
+        }
+      }
+    }
+  }
+}

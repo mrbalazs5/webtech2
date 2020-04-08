@@ -12,16 +12,15 @@ body {
 }
 
 .page {
-  display: block;
-  float: left;
+  
 }
 
 header {
-  width: 100%;
-  box-shadow: 0px 0px 10px 0px $border-color-default;
-  background: $background-color-default;
-  display: inline-block;
-  float: left;
   position: relative;
   z-index: 1;
+  display: inline-block;
+  width: 100%;
+  min-height: 50px;
+  background: $background-color-default;
+  box-shadow: 0px 0px 3px 0px $shadow-color-default;
 }

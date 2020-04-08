@@ -65,9 +65,6 @@ class SignUpForm extends React.Component{
     }
   }
 
-  //handle form submit
-  //prevent page reload on button click
-  //check the validator errors
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -86,7 +83,8 @@ class SignUpForm extends React.Component{
         return result.json()
       })
       .then((result) => {
-        console.log(result)
+        console.log(result);
+        this.props.history.push('/sign-in');
       })
       .catch((error) => {
         console.log(error)
@@ -100,112 +98,72 @@ class SignUpForm extends React.Component{
 
   render(){
     return(
-      <form className={'two-col'} onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
 
-        <div className={'form-item fullwidth'}>
-          <div className={'item-border bottom'}>
-            <div className={'title'}>
-              Sign Up
-            </div>
-          </div>
-        </div>
+        Sign up
 
-        <div className={'form-item halfwidth'}>
-          <div className={'validation'}>
-            {this.validator.message('name', this.state.name, 'required|string')}
-          </div>
-          <div className={'item-border full'}>
-            <label className={'label'} htmlFor={'name'}>Name</label>
-            <input
-              type={'text'}
-              id={'name'}
-              value={this.state.name}
-              onChange={this.handleChange}
-              autoComplete={'on'}
-              placeholder={'Your full name..'}
-            />
-          </div>
-        </div>
+        {this.validator.message('name', this.state.name, 'required|string')}
+        <label htmlFor={'name'}>Name</label>
+        <input
+          type={'text'}
+          id={'name'}
+          value={this.state.name}
+          onChange={this.handleChange}
+          autoComplete={'on'}
+          placeholder={'Your full name..'}
+        />
 
-        <div className={'form-item halfwidth'}>
-          <div className={'validation'}>
-            {this.validator.message('email', this.state.email, 'required|email')}
-          </div>
-          <div className={'item-border full'}>
-            <label className={'label'} htmlFor={'email'}>Email</label>
-            <input
-              type={'email'}
-              id={'email'}
-              value={this.state.email}
-              onChange={this.handleChange}
-              autoComplete={'on'}
-              placeholder={'Your email address..'}
-            />
-          </div>
-        </div>
 
-        <div className={'form-item halfwidth'}>
-          <div className={'validation'}>
-            {this.validator.message('password', this.state.password, 'required|min:6')}
-          </div>
-          <div className={'item-border full'}>
-            <label className={'label'} htmlFor={'password'}>Password</label>
-            <input
-              type={'password'}
-              id={'password'}
-              value={this.state.password}
-              onChange={this.handleChange}
-              autoComplete={'off'}
-              placeholder={'Your password..'}
-            />
-          </div>
-        </div>
+        {this.validator.message('email', this.state.email, 'required|email')}
 
-        <div className={'form-item halfwidth'}>
-          <div className={'validation'}>
-            {this.validator.message('passwordVerify', this.state.passwordVerify, 'required|min:6|passwordMatch')}
-          </div>
-          <div className={'item-border full'}>
-            <label className={'label'} htmlFor={'passwordVerify'}>Password Verify</label>
-            <input
-              type={'password'}
-              id={'passwordVerify'}
-              value={this.state.passwordVerify}
-              onChange={this.handleChange}
-              autoComplete={'off'}
-              placeholder={'Verify Your password.. '}
-            />
-          </div>
-        </div>
+        <label htmlFor={'email'}>Email</label>
+        <input
+          type={'email'}
+          id={'email'}
+          value={this.state.email}
+          onChange={this.handleChange}
+          autoComplete={'on'}
+          placeholder={'Your email address..'}
+        />
 
-        <div className={'form-item halfwidth'}>
-          <div className={'validation'}>
-            {this.validator.message('avatar', this.state.avatar, 'required|imageIsValid')}
-          </div>
-          <div className={'item-border full'}>
-            <label className={'label'}>Avatar</label>
-            <input
-              type={'file'}
-              id={'avatar'}
-              onChange={this.handleImageChange}
-            />
-            <label className={'label-choose'} htmlFor={'avatar'}>Choose</label>
-            <div className={'avatar'}>
-              <img className={'avatar-preview'} src={this.state.avatarSrc ? this.state.avatarSrc : defaultAvatar} alt={'Avatar preview'}/>
-            </div>
-          </div>
-        </div>
+        {this.validator.message('password', this.state.password, 'required|min:6')}
+        <label htmlFor={'password'}>Password</label>
+        <input
+          type={'password'}
+          id={'password'}
+          value={this.state.password}
+          onChange={this.handleChange}
+          autoComplete={'off'}
+          placeholder={'Your password..'}
+        />
 
-        <div className={'server-message'}></div>
 
-        <div className={'form-item flex'}>
-          <button type={'submit'}>Signup</button>
-        </div>
+        {this.validator.message('passwordVerify', this.state.passwordVerify, 'required|min:6|passwordMatch')}
 
-        <div className={'form-item halfwidth'}>
-          Already have an account?
-          <NavLink exact to={'/signin'}>Click here!</NavLink>
-        </div>
+        <label htmlFor={'passwordVerify'}>Password Verify</label>
+        <input
+          type={'password'}
+          id={'passwordVerify'}
+          value={this.state.passwordVerify}
+          onChange={this.handleChange}
+          autoComplete={'off'}
+          placeholder={'Verify Your password.. '}
+        />
+
+        {this.validator.message('avatar', this.state.avatar, 'required|imageIsValid')}
+        <label>Avatar</label>
+        <input
+          type={'file'}
+          id={'avatar'}
+          onChange={this.handleImageChange}
+        />
+        <label htmlFor={'avatar'}>Choose</label>
+        <img src={this.state.avatarSrc ? this.state.avatarSrc : defaultAvatar} alt={'Avatar preview'}/>
+
+        <button type={'submit'}>Signup</button>
+
+        Already have an account?
+        <NavLink exact to={'/signin'}>Click here!</NavLink>
 
       </form>
     );
