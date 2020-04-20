@@ -7,7 +7,9 @@ Created by Megyeri Balázs, Pankotai Márk Sándor, Vass Dávid
 
 ## Installation
 
-`npm run install-dev`
+Install client and server dependencies: `npm run install-dev`
+
+Fill the database with some initial data: `npm run seed`
 
 ## Configuration
 
@@ -18,6 +20,10 @@ Rename the `.env.example` file to `.env` and fill the variables with your config
 `npm run dev`
 
 It will run both server(NodeJS) and client(ReactJS) in `dev` mode.
+
+`npm run resetDB`
+
+Resets database 
 
 ## Tests
 
