@@ -43,6 +43,12 @@ app.post('/api/create-model', VehicleController.createModel.controller);
 
 app.get('/api/get-models', VehicleController.getModels.controller);
 
+app.post('/api/create-dealership', VehicleController.createDealership.controller);
+
+app.get('/api/get-dealerships', VehicleController.getDealerships.controller);
+
+app.post('/api/create-vehicle', VehicleController.createVehicle.controller);
+
 app.get('/api/get-vehicles', VehicleController.getVehicles.controller);
 
 app.get('/api/check-token', authenticateUser('dealer'), (req, res) => {

@@ -15,7 +15,7 @@ const Specification = new Schema({
     fullWeight: { type: Number},
     fuelCapacity: { type: Number},
     fuelConsumption: { type: Number},
-    model: { type: Schema.Types.ObjectId, ref: 'Model', required: true }
+    series: { type: Schema.Types.ObjectId, ref: 'Series' }
 }, {
     timestamps: true
 });

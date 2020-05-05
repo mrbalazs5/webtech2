@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const Series = new Schema({
     name: { type: String, required: true },
-    model: { type: Schema.Types.ObjectId, ref: 'Model', required: true },
+    specification: { type: Schema.Types.ObjectId, ref: 'Specification' },
     generations: [{ type: Schema.Types.ObjectId, ref: 'Generation' }]
 }, {
     timestamps: true

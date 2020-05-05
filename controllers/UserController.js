@@ -107,10 +107,10 @@ const UserController = {
                     return user.validatePassword(password);
                 })
                 .then((user) =>{
-                    console.log(user);
+                    const id = user._id;
                     const role = user.role;
                     const avatar = user.avatar;
-                    const payload = { email, avatar, role};
+                    const payload = { id, email, avatar, role};
                     const token = jwt.sign(payload, process.env.JWT_SECRET);
 
                     return res.cookie('authToken', token, { httpOnly: true, maxAge: 900000})

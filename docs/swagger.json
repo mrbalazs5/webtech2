@@ -270,6 +270,83 @@
         }
       }
     },
+    "/api/create-dealership": {
+      "post": {
+        "tags": [
+          "Vehicles"
+        ],
+        "consumes": ["application/json"],
+        "summary": "Creates a new dealership in the system",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request's body",
+            "schema": {
+              "$ref": "#/definitions/CreateDealership"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dealership successfully created",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "422": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/api/get-dealerships": {
+      "get": {
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Get all dealerships in the system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Dealership"
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/api/create-vehicle": {
+      "post": {
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Creates a new vehicle in the system",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request's body",
+            "schema": {
+              "$ref": "#/definitions/CreateVehicle"
+            }
+          }
+        ]
+      }
+    },
     "/api/get-vehicles": {
       "get": {
         "tags": [
@@ -413,14 +490,10 @@
           "description": "The model's make.",
           "$ref": "#/definitions/Make"
         },
-        "specification": {
-          "description": "The model's specification object.",
-          "$ref": "#/definitions/Specification"
-        },
-        "series": {
+        "generations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Series"
+            "$ref": "#/definitions/Generation"
           }
         },
         "vehicles": {
@@ -438,8 +511,49 @@
       ],
       "properties": {
         "name": { "$ref": "#/definitions/Model/properties/name" },
-        "make": { "$ref": "#/definitions/CreateMake" },
-        "specification": { "$ref": "#/definitions/CreateSpecification" },
+        "make": { "type": "integer" },
+        "generations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateGeneration"
+          }
+        }
+      }
+    },
+    "Generation": {
+      "required": [
+        "name",
+        "yearBegin",
+        "yearEnd"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "yearBegin": {
+          "type": "number"
+        },
+        "yearEnd": {
+          "type": "number"
+        },
+        "series": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Series"
+          }
+        }
+      }
+    },
+    "CreateGeneration": {
+      "required": [
+        "name",
+        "yearBegin",
+        "yearEnd"
+      ],
+      "properties": {
+        "name": { "$ref": "#/definitions/Generation/properties/name" },
+        "yearBegin": { "$ref": "#/definitions/Generation/properties/yearBegin" },
+        "yearEnd": { "$ref": "#/definitions/Generation/properties/yearEnd" },
         "series": {
           "type": "array",
           "items": {
@@ -450,15 +564,15 @@
     },
     "Series": {
       "required": [
-        "name",
-        "model"
+        "name"
       ],
       "properties": {
         "name": {
           "type": "string"
         },
-        "model": {
-          "$ref": "#/definitions/Model"
+        "specification": {
+          "description": "The series's specification object.",
+          "$ref": "#/definitions/Specification"
         },
         "generations": {
           "type": "array",
@@ -474,17 +588,12 @@
       ],
       "properties": {
         "name": { "$ref": "#/definitions/Specification/properties/engine" },
-        "generations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CreateGeneration"
-          }
-        }
+        "specification": { "$ref": "#/definitions/CreateSpecification" }
       }
     },
     "Specification": {
       "required": [
-        "model"
+        "series"
       ],
       "properties": {
         "engine": {
@@ -523,8 +632,8 @@
         "fuelConsumption": {
           "type": "number"
         },
-        "model": {
-          "$ref": "#/definitions/Model"
+        "series": {
+          "$ref": "#/definitions/Series"
         }
       }
     },
@@ -542,39 +651,6 @@
         "fullWeight": { "$ref": "#/definitions/Specification/properties/fullWeight" },
         "fuelCapacity": { "$ref": "#/definitions/Specification/properties/fuelCapacity" },
         "fuelConsumption": { "$ref": "#/definitions/Specification/properties/fuelConsumption" }
-      }
-    },
-    "Generation": {
-      "required": [
-        "name",
-        "yearBegin",
-        "yearEnd"
-      ],
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "yearBegin": {
-          "type": "number"
-        },
-        "yearEnd": {
-          "type": "number"
-        },
-        "series": {
-          "$ref": "#/definitions/Series"
-        }
-      }
-    },
-    "CreateGeneration": {
-      "required": [
-        "name",
-        "yearBegin",
-        "yearEnd"
-      ],
-      "properties": {
-        "name": { "$ref": "#/definitions/Generation/properties/name" },
-        "yearBegin": { "$ref": "#/definitions/Generation/properties/yearBegin" },
-        "yearEnd": { "$ref": "#/definitions/Generation/properties/yearEnd" }
       }
     },
     "City": {
@@ -622,6 +698,24 @@
         }
       }
     },
+    "CreateAddress": {
+      "required": [
+        "country",
+        "city",
+        "street"
+      ],
+      "properties": {
+        "country": {
+          "type": "integer"
+        },
+        "city": {
+          "type": "integer"
+        },
+        "street": {
+          "type": "string"
+        }
+      }
+    },
     "Dealership": {
       "required": [
         "name",
@@ -646,6 +740,16 @@
         }
       }
     },
+    "CreateDealership": {
+      "required": [
+        "name",
+        "address"
+      ],
+      "properties": {
+        "name": { "$ref": "#/definitions/Dealership/properties/name" },
+        "address": { "$ref": "#/definitions/CreateAddress" }
+      }
+    },
     "Vehicle": {
       "required": [
         "vehicleType",
@@ -668,9 +772,32 @@
         "model": {
           "$ref": "#/definitions/Model"
         },
+        "generation": {
+          "$ref": "#/definitions/Generation"
+        },
+        "series": {
+          "$ref": "#/definitions/Series"
+        },
         "dealership": {
           "$ref": "#/definitions/Dealership"
         }
+      }
+    },
+    "CreateVehicle": {
+      "required": [
+        "vehicleType",
+        "image",
+        "generation",
+        "series"
+      ],
+      "properties": {
+        "vehicleType": { "$ref": "#/definitions/Vehicle/properties/vehicleType" },
+        "price": { "$ref": "#/definitions/Vehicle/properties/price" },
+        "isServiced": { "$ref": "#/definitions/Vehicle/properties/isServiced" },
+        "image": { "$ref": "#/definitions/Vehicle/properties/image" },
+        "generation": { "type": "integer" },
+        "series": { "type": "integer" },
+        "dealership": { "type": "integer" }
       }
     },
     "Message": {
