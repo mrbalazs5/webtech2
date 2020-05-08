@@ -43,6 +43,9 @@ const UserController = {
                             body.file = file;
 
                             return body;
+                        })
+                        .catch(() => {
+                            fileHandler.revokeFileUpload(file);
                         });
                 })
                 //persist user data
@@ -77,8 +80,6 @@ const UserController = {
         controller: (req, res) => {
 
             const {email, password} = req.body;
-
-            console.log(req.body);
 
             new Promise((resolve, reject) => {
                 if(

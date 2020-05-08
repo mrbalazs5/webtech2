@@ -133,6 +133,11 @@ class FileHandler{
     revokeFileUpload(file){
 
         return new Promise((resolve, reject) => {
+
+            if(!file){
+                return resolve(true);
+            }
+
             fs.unlink(this.publicDir + file.path, (err) => {
 
                 if(err){

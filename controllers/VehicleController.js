@@ -86,6 +86,63 @@ const VehicleController = {
                 return res.status(422).json(new Message(['Model name field constraint violation']).error());
             }
 
+            let make = bodyModel.make;
+
+            if(isEmpty(make)){
+                throw new Error('Model make field constraint violation');
+            }
+
+            if(bodyModel.generations && bodyModel.generations.length > 0){
+
+                bodyModel.generations.map((generation) => {
+
+                    if (
+                        isEmpty(generation.name) ||
+                        isEmpty(generation.yearBegin) ||
+                        isEmpty(generation.yearEnd)
+                    ) {
+                        throw new Error('Generation field constraint violation');
+                    }
+
+                    if(generation.series && generation.series.length > 0) {
+
+                        generation.series.map((series) => {
+
+                            if (
+                                isEmpty(series.name)
+                            ) {
+                                throw new Error('Series field constraint violation');
+                            }
+
+                            let specification = series.specification;
+
+                            if(specification){
+
+                                if(
+                                    specification.enginePower && !isNumeric(specification.enginePower) ||
+                                    specification.gearType && !isNumeric(specification.gearType) ||
+                                    specification.numberOfGears && !isNumeric(specification.numberOfGears) ||
+                                    specification.numberOfWheels && !isNumeric(specification.numberOfWheels) ||
+                                    specification.width && !isNumeric(specification.width) ||
+                                    specification.length && !isNumeric(specification.length) ||
+                                    specification.seatingCapacity && !isNumeric(specification.seatingCapacity) ||
+                                    specification.maxSpeed && !isNumeric(specification.maxSpeed) ||
+                                    specification.fullWeight && !isNumeric(specification.fullWeight) ||
+                                    specification.fuelCapacity && !isNumeric(specification.fuelCapacity) ||
+                                    specification.fuelConsumption && !isNumeric(specification.fuelConsumption)
+                                ){
+                                    throw new Error('Specification field constraint violation');
+                                }
+
+                            }
+
+                        });
+
+                    }
+
+                });
+            }
+
             trim(bodyModel.name);
 
             Model.find({name: bodyModel.name})
@@ -93,12 +150,6 @@ const VehicleController = {
 
                     if(models.length > 0){
                         throw new Error('Model already exists in the database');
-                    }
-
-                    let make = bodyModel.make;
-
-                    if(isEmpty(make)){
-                        throw new Error('Make field constraint violation');
                     }
 
                     return Make.findById(make)
@@ -127,14 +178,6 @@ const VehicleController = {
 
                         let generationPromises = bodyModel.generations.map((generation) => {
 
-                            if(
-                                isEmpty(generation.name) ||
-                                isEmpty(generation.yearBegin) ||
-                                isEmpty(generation.yearEnd)
-                            ){
-                                throw new Error('Generation field constraint violation');
-                            }
-
                             let generationObject = new Generation({
                                 name: generation.name,
                                 yearBegin: generation.yearBegin,
@@ -149,50 +192,28 @@ const VehicleController = {
 
                                         let seriesPromises = generation.series.map((series) => {
 
-                                            if(
-                                                isEmpty(series.name)
-                                            ){
-                                                throw new Error('Series field constraint violation');
-                                            }
-
-                                            let specification = series.specification;
-
-                                            if(specification){
-
-                                                if(
-                                                    specification.enginePower && !isNumeric(specification.enginePower) ||
-                                                    specification.gearType && !isNumeric(specification.gearType) ||
-                                                    specification.numberOfGears && !isNumeric(specification.numberOfGears) ||
-                                                    specification.numberOfWheels && !isNumeric(specification.numberOfWheels) ||
-                                                    specification.width && !isNumeric(specification.width) ||
-                                                    specification.length && !isNumeric(specification.length) ||
-                                                    specification.seatingCapacity && !isNumeric(specification.seatingCapacity) ||
-                                                    specification.maxSpeed && !isNumeric(specification.maxSpeed) ||
-                                                    specification.fullWeight && !isNumeric(specification.fullWeight) ||
-                                                    specification.fuelCapacity && !isNumeric(specification.fuelCapacity) ||
-                                                    specification.fuelConsumption && !isNumeric(specification.fuelConsumption)
-                                                ){
-                                                    throw new Error('Specification field constraint violation');
-                                                }
-
-                                            }
-
                                             let seriesObject = new Series({
                                                 name: series.name
                                             });
                                             seriesObject.generations.push(generationDB._id.toString());
 
+                                            let specification = series.specification;
+
                                             return seriesObject.save()
                                                 .then((seriesDB) => {
 
-                                                    let specificationObject = new Specification(specification);
-                                                    specificationObject.series = seriesDB._id.toString();
+                                                    if(specification){
 
-                                                    specificationObject.save()
-                                                        .then((specificationDB) => {
-                                                            seriesDB.specification = specificationDB._id.toString();
-                                                            seriesDB.save();
-                                                        });
+                                                        let specificationObject = new Specification(specification);
+                                                        specificationObject.series = seriesDB._id.toString();
+
+                                                        specificationObject.save()
+                                                            .then((specificationDB) => {
+                                                                seriesDB.specification = specificationDB._id.toString();
+                                                                seriesDB.save();
+                                                            });
+
+                                                    }
 
                                                     return seriesDB._id.toString();
                                                 });
@@ -272,6 +293,17 @@ const VehicleController = {
                 return res.status(422).json(new Message(['Dealership name field constraint violation']).error());
             }
 
+            const address = dealershipBody.address;
+
+            if(
+                !address ||
+                isEmpty(address.country) ||
+                isEmpty(address.city) ||
+                isEmpty(address.street)
+            ){
+                return res.status(422).json(new Message(['Dealership address field constraint violation']).error());
+            }
+
             trim(dealershipBody.name);
             escape(dealershipBody.name);
 
@@ -288,18 +320,8 @@ const VehicleController = {
                 })
                 .then((dealership) => {
 
-                    const address = dealershipBody.address;
-
-                    if(
-                        !address ||
-                        isEmpty(address.country) ||
-                        isEmpty(address.city) ||
-                        isEmpty(address.street)
-                    ){
-                        return res.status(422).json(new Message(['Dealership address field constraint violation']).error());
-                    }
-
                     let addressObject = new Address(address);
+
                     return addressObject.save()
                         .then((addressDB) => {
                             dealership.address = addressDB._id.toString();
