@@ -1,16 +1,18 @@
 import React from 'react';
-import '../Forms.scss';
 import Page from '../Page';
+import Forms from '../Forms';
 import SignUpForm from '../SignUpForm';
 
-class SignUpPage extends React.Component{
+class SignUnPage extends React.Component{
   render(){
     return(
       <Page>
-        <SignUpForm history={this.props.history}/>
+        <Forms>
+          <SignUpForm history={this.props.history}/>
+        </Forms>
       </Page>
     );
   }
 }
 
-export default SignUpPage;
+export default SignUnPage;

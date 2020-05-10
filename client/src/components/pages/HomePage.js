@@ -1,20 +1,16 @@
 import React from 'react';
-import './HomePage.scss';
 import Page from '../Page';
+import './HomePage.scss';
+import mainimage from '../../images/bmw.jpg';
 
 class HomePage extends React.Component{
   render(){
     return(
       <Page>
-        <div className={'homepage'}>
-          fisrt<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>
-          asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>
-          asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>
-          asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>
-          asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>
-          asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>asd<br/>last<br/>
+        <img className={'bmw'} src={mainimage} alt={'bmw'}/>
+        <div className={'title'}>
+          Nem találtam a képet a <br/> gogglén xd bhhhasszameg
         </div>
-        
       </Page>
     );
   }

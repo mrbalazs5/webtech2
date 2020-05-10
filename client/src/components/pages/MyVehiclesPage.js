@@ -1,14 +1,14 @@
 import React from 'react';
 import Page from '../Page';
 
-class VehiclesPage extends React.Component{
+class MyVehiclesPage extends React.Component{
   render(){
     return(
       <Page>
-        VehiclesPage
+        MyVehiclesPage
       </Page>
     );
   }
 }
 
-export default VehiclesPage;
+export default MyVehiclesPage;

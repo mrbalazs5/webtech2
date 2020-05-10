@@ -1,14 +1,14 @@
 import React from 'react';
 import Page from '../Page';
 
-class ContactPage extends React.Component{
+class SettingsPage extends React.Component{
   render(){
     return(
       <Page>
-        Contact
+        SettingsPage
       </Page>
     );
   }
 }
 
-export default ContactPage;
+export default SettingsPage;

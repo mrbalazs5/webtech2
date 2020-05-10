@@ -5,15 +5,18 @@ import './scss/styles.scss';
 import withAuth from './utils/withAuth';
 import roles from './utils/roles';
 import Header from './components/Header';
-import HomePage from './components/pages/HomePage';
-import VehiclesPage from './components/pages/VehiclesPage';
-import ContactPage from './components/pages/ContactPage';
-import AboutUsPage from './components/pages/AboutUsPage';
 import SignInPage from './components/pages/SignInPage';
+import UsersPage from './components/pages/UsersPage';
+import MakesPage from './components/pages/MakesPage';
+import ModelsPage from './components/pages/ModelsPage';
 import SignUpPage from './components/pages/SignUpPage';
-import ProfilePage from './components/pages/ProfilePage';
-import AddVehiclePage from './components/pages/AddVehiclePage';
-import ManageVehiclesPage from './components/pages/ManageVehiclesPage';
+import HomePage from './components/pages/HomePage';
+import AboutUsPage from './components/pages/AboutUsPage';
+import VehiclesPage from './components/pages/VehiclesPage';
+import MyProfilePage from './components/pages/MyProfilePage';
+import SettingsPage from './components/pages/SettingsPage';
+import MyVehiclesPage from './components/pages/MyVehiclesPage';
+import MyDealershipsPage from './components/pages/MyDealershipsPage';
 import ErrorPage from './components/pages/ErrorPage';
 
 class App extends React.Component {
@@ -36,13 +39,16 @@ class App extends React.Component {
         <Switch>
           <Route exact path={'/'} component={HomePage}/>
           <Route exact path={'/about-us'} component={AboutUsPage}/>
-          <Route exact path={'/vehicles'} component={VehiclesPage}/>
-          <Route exact path={'/contact'} component={ContactPage}/>
           <Route exact path={'/sign-in'} component={SignInPage}/>
           <Route exact path={'/sign-up'} component={SignUpPage}/>
-          <Route exact path={'/profile'} component={withAuth(ProfilePage, roles.dealer)}/>
-          <Route exact path={'/add-vehicle'} component={withAuth(AddVehiclePage, roles.dealer)}/>
-          <Route exact path={'/manage-vehicles'} component={withAuth(ManageVehiclesPage, roles.dealer)}/>
+          <Route exact path={'/vehicles'} component={VehiclesPage}/>
+          <Route exact path={'/my-profile'} component={withAuth(MyProfilePage, roles.dealer)}/>
+          <Route exact path={'/settings'} component={withAuth(SettingsPage, roles.dealer)}/>
+          <Route exact path={'/my-vehicles'} component={withAuth(MyVehiclesPage, roles.dealer)}/>
+          <Route exact path={'/my-dealerships'} component={withAuth(MyDealershipsPage, roles.dealer)}/>
+          <Route exact path={'/users'} component={withAuth(UsersPage, roles.dealer)}/>
+          <Route exact path={'/models'} component={withAuth(ModelsPage, roles.dealer)}/>
+          <Route exact path={'/makes'} component={withAuth(MakesPage, roles.dealer)}/>
           <Route component={ErrorPage}/>
         </Switch>
 

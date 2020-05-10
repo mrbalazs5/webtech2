@@ -1,0 +1,29 @@
+@import '../scss/variables';
+
+.popup {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0; bottom: 0; left: 0; right: 0;
+  overflow: auto;
+  z-index: 998;
+
+  .popup-bg {
+    position: fixed;
+    background: $bg-color-popup;
+    height: 100%;
+    width: 100%;
+    opacity: 0.3;
+  }
+
+  .popup-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    z-index: 999;
+    background: $bg-color-1;
+    padding: 15px;
+  }
+}
