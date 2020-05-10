@@ -1,13 +1,15 @@
 import React from 'react';
-import '../Forms.scss';
 import Page from '../Page';
+import Forms from '../Forms';
 import SignInForm from '../SignInForm';
 
 class SignInPage extends React.Component{
   render(){
     return(
       <Page>
-        <SignInForm history={this.props.history}/>
+        <Forms>
+          <SignInForm history={this.props.history}/>
+        </Forms>
       </Page>
     );
   }

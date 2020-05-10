@@ -1,41 +1,17 @@
 @import '../scss/variables';
 
-.navbar {
-  .nav-logo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    max-height: 40px;
-    padding: 5px;
-  }
-
-  .nav-avatar {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-
-    .avatar {
-      max-height: 40px;
-      max-width: 40px;
-      border-radius: 100%;
-      box-shadow: 0px 0px 3px 0px $shadow-color-default;
-    }
-  }
-
+.menu-wrapper {
   .hamburger {
     position: absolute;
     top: 5px;
     left: 5px;
 
-    .icon-bg {
+    .hamburger-bg {
       height: 40px;
       width: 40px;
-      border-radius: 100%;
-      box-shadow: 0px 0px 3px 0px $shadow-color-default;
-      background: $hamburger-background;
       cursor: pointer;
 
-      .icon {
+      .hamburger-icon {
         position: relative;
         display: block;
         left: 50%;
@@ -43,12 +19,12 @@
         transform: translate(-50%, -50%);
         height: 2px;
         width: 18px;
-        background: $hamburger;
+        background: $ham-close;
         transition-property: background;
         transition-delay: 0.1s;
     
         &:before, &:after {
-          background: $hamburger;
+          background: $ham-close;
           content: '';
           display: block;
           height: 100%;
@@ -79,6 +55,7 @@
     
           &:before {
             top: 0px;
+            background: $ham-open;
             transform: rotate(-45deg);
             transition-property: top, transform;
             transition-delay: 0.0s, 0.1s;
@@ -87,6 +64,7 @@
     
           &:after {
             top: 0px;
+            background: $ham-open;
             transform: rotate(45deg);
             transition-property: top, transform;
             transition-delay: 0.0s, 0.1s;
@@ -97,97 +75,107 @@
     }
   }
 
-  .arrows {
+  .avatar {
     position: absolute;
     top: 5px;
     right: 5px;
+    cursor: pointer;
 
-    .arrow-bg {
-      height: 40px;
-      width: 40px;
+    .avatar-img {
+      max-height: 40px;
+      max-width: 40px;
       border-radius: 100%;
-      box-shadow: 0px 0px 3px 0px $shadow-color-default;
-      cursor: pointer;
-
-      .arrow {
-        position: relative;
-        display: block;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        height: 2px;
-        width: 12px;
-        background: transparent;
-
-        &:before, &:after {
-          background: $arrow;
-          content: '';
-          display: block;
-          height: 100%;
-          position: absolute;
-          width: 100%;
-        }
-    
-        &:before {
-          left: 3px;
-          transform: rotate(-45deg);
-          transition: $transition-default;
-        }
-    
-        &:after {
-          right: 4px;
-          transform: rotate(45deg);
-          transition: $transition-default;
-        }
-    
-        &.openarrow {
-          &:before {
-            transform: rotate(45deg);
-            transition: $transition-default;
-          }
-    
-          &:after {
-            transform: rotate(-45deg);
-            transition: $transition-default;
-          }
-        }
-      }
     }
   }
 
   .menu {
-    overflow: hidden;
-    max-height: 0;
-    padding: 0;
-    margin: 50px 0 0 0;
-    clear: both;
-    transition: $transition-default linear;
-
-    &.show {
-      max-height: 300px;
-    }
-
-    .user-panel,
-    .dealer-panel {
-      padding: 0;
-      margin: 0;
-      list-style: none;
-      line-height: 30px;
-
+    .item-holder {
       .item {
-        text-align: center;
+        box-sizing: border-box;
+
+        &.admin {
+          display: block;
+          line-height: 30px;
+          background: $bg-color-1;
+        }
+
+        &.profile {
+          display: block;
+          line-height: 30px;
+          background: $bg-color-1;
+        }
 
         .navlink {
+          display: block;
           text-decoration: none;
-          color: $font-color-default;
+          color: $font-default;
           transition: $transition-default;
+          cursor: pointer;
+
+          .menu-icon {
+            display: inline-block;
+            
+            &.left {
+              margin-right: 5px;
+            }
+
+            &.right {
+              margin-left: 5px;
+            }
+
+            &.rotate {
+              svg {
+              transform: rotateX(180deg);}
+            }
+
+            svg {
+              transition: $transition-default;
+              height: 12px;
+              fill: $svg-default;
+            }
+          }
 
           &:hover {
-            color: $font-color-hover;
+            color: $font-hover;
+
+            .menu-icon {
+              svg {
+                fill: $svg-hover;
+              }
+            }
           }
 
           &.active {
-            color: $font-color-active;
+            color: $font-active;
+            background: $bg-color-active;
+
+            .menu-icon {
+              svg {
+                fill: $svg-active;
+              }
+            }
+          }
+        }
+
+        .admin-items {
+          max-height: 0;
+          overflow: hidden;
+          clear: both;
+          transition: $transition-default linear;
+
+          &.showadmin {
+            max-height: 160px;
+          }
+        }
+
+        .profile-items {
+          max-height: 0;
+          overflow: hidden;
+          clear: both;
+          transition: $transition-default linear;
+          
+          &.showprofile {
+            max-height: 160px;
           }
         }
       }
@@ -195,69 +183,92 @@
   }
 }
 
-@media screen and (max-width: 767px) {
-  .navbar {
-    .nav-logo {
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .arrows {
-      display: none;
-    }
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .navbar {
+@media screen and (min-width: 768px){
+  .menu-wrapper {
     .hamburger {
       display: none;
     }
 
-    .nav-avatar {
-      right: 50px;
-    }
-
     .menu {
-      overflow: auto;
-      overflow-x: hidden;
-      max-height: none;
-      margin: 0;
-      clear: none;
-      width: 100%;
-      display: block;
-      transition: none;
-
-      .user-panel,
-      .dealer-panel {
-        display: inline-block;
-        width: 100%;
-        float: left;
-        line-height: 50px;
-
+      .item-holder {
         .item {
           display: inline-block;
-          float: left;
-          padding: 0 10px 0 10px;
+          line-height: 50px;
+
+          .navlink {
+            padding: 0 15px 0 15px;
+          }
+  
+          .admin-items {
+            position: absolute;
+            top: 50px;
+            width: 120px;
+            box-sizing: border-box;
+
+            .admin-items-wrapper {
+              border: 1px solid $border-default;
+              border-top: none;
+            }
+          }
+  
+          .profile-items {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            width: 120px;
+            box-sizing: border-box;
+
+            .profile-items-wrapper {
+              border: 1px solid $border-default;
+              border-top: none;
+            }
+          }
         }
       }
+    }
+  }
+}
 
-      .user-panel {
-        margin-left: 150px;
+@media screen and (max-width: 767px){
+  .menu-wrapper {
+    
+    .menu {
+      position: fixed;
+      width: 0;
+      overflow: hidden;
+      left: 0;
+      top: 50px;
+      bottom: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background: $bg-color-1;
+      transition: $transition-default linear;
+      white-space: nowrap;
+
+      &.showmenu {
+        width: 200px;
+        border-right: 1px solid $border-default;
       }
 
-      .dealer-panel {
-        float: right;
-        overflow: hidden;
-        max-height: 0;
-        transition: $transition-default linear;
-
+      .item-holder {
         .item {
-          float: right;
-        }
+          display: block;
+          line-height: 30px;
 
-        &.show {
-          max-height: 50px;
+          .navlink {
+            padding: 0 0 0 18px;
+          }
+  
+          .admin-items {
+            .navlink {
+              padding: 0 0 0 36px;
+            }
+          }
+  
+          .profile-items {
+            max-height: none;
+            clear: none;
+          }
         }
       }
     }

@@ -27,7 +27,6 @@ class SignInForm extends React.Component{
     e.preventDefault();
 
     if (this.validator.allValid()) {
-
       fetch('/api/sign-in', {
         method: 'POST',
         body: JSON.stringify({
@@ -40,12 +39,17 @@ class SignInForm extends React.Component{
         return response.json()
       })
       .then((response) => {
-        this.props.history.push('/profile');
+        if(response.type === 'success'){
+          this.props.history.push('/my-profile');
+          window.location.reload();
+        }else{
+          console.log(response);
+        }
       })
       .catch((error) => {
         console.log(error);
       });
-    } else {
+    }else{
       this.validator.showMessages();
       this.forceUpdate();
     }
@@ -53,37 +57,56 @@ class SignInForm extends React.Component{
 
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form className={'form onecol'} onSubmit={this.handleSubmit}>
 
-        Sign In
+        <div className={'form-item onesize bottomborder'}>
+          Sign In
+        </div>
 
-        {this.validator.message('email', this.state.email, 'required|email')}
-        <label htmlFor={'email'}>Email</label>
-        <input
-          type={'email'}
-          id={'email'}
-          value={this.state.email}
-          onChange={this.handleChange}
-          autoComplete={'on'}
-          placeholder={'Your email address..'}
-        />
+        <div className={'validator'}>
+          {this.validator.message('email', this.state.email, 'required|email')}
+        </div>
 
-        {this.validator.message('password', this.state.password, 'required|min:6')}
+        <div className={'form-item onesize fullborder'}>
+          <label className={'form-label'} htmlFor={'email'}>Email</label>
+          <input
+            type={'email'}
+            id={'email'}
+            value={this.state.email}
+            onChange={this.handleChange}
+            autoComplete={'on'}
+            placeholder={'Your email address..'}
+            className={'form-input'}
+          />
+        </div>
 
-        <label htmlFor={'password'}>Password</label>
-        <input
-          type={'password'}
-          id={'password'}
-          value={this.state.password}
-          onChange={this.handleChange}
-          autoComplete={'off'}
-          placeholder={'Your password..'}
-        />
+        <div className={'validator'}>
+          {this.validator.message('password', this.state.password, 'required|min:6')}
+        </div>
+        
+        <div className={'form-item onesize fullborder'}>
+          <label className={'form-label'} htmlFor={'password'}>Password</label>
+          <input
+            type={'password'}
+            id={'password'}
+            value={this.state.password}
+            onChange={this.handleChange}
+            autoComplete={'off'}
+            placeholder={'Your password..'}
+            className={'form-input'}
+          />
+        </div>
 
-        <button type={'submit'}>Sign In</button>
-
-        Don't have an account yet?
-        <NavLink exact to={'/signup'}>Click here!</NavLink>
+        <div className={'form-item onesize'}>
+          <button className={'submit-button'} type={'submit'}>Sign In</button>
+        </div>
+        
+        <div className={'form-item onesize'}>
+          <div className={'href-text'}>
+            Don't have an account yet?
+            <NavLink className={'href-link'} exact to={'/sign-up'}> Click here!</NavLink>
+          </div>
+        </div>
 
       </form>
     );

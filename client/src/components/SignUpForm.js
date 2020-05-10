@@ -3,7 +3,7 @@ import './Forms.scss';
 import SimpleReactValidator from 'simple-react-validator';
 import {NavLink} from 'react-router-dom';
 import defaultAvatar from '../images/defaultAvatar.png';
-import {imageMimeTypes} from '../utils/imageMimeTypes';
+import CropImage from './CropImage';
 
 class SignUpForm extends React.Component{
   constructor(props){
@@ -15,54 +15,44 @@ class SignUpForm extends React.Component{
       password: '',
       passwordVerify: '',
       avatar: '',
-      avatarSrc: ''
+      avatarSrc: '',
+      cropping: false
     };
 
     this.validator = new SimpleReactValidator({
-    //custom validators for password match and image mime type
       validators: {
         passwordMatch: {
           message: 'Password does not match!',
           rule: (val, param, validator) => {
             return val === this.state.password;
           }
-        },
-        imageIsValid: {
-          message: 'Image must be png or jpeg',
-          rule: (val, param, validator) => {
-            return imageMimeTypes.includes(val.type);
-          }
         }
       }
     });
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleImageChange = this.handleImageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.setCropping = this.setCropping.bind(this);
   }
 
-  //handle input changes
-  //update state with the input field value by id
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value
     })
   }
 
-  //handle image change
-  //if we have file and the file type is correct then set avatarSrc state with the img src
-  //set the state of avatar for file upload
-  handleImageChange = (e) => {
-    if(e.target.files && e.target.files[0]){
-      if(imageMimeTypes.includes(e.target.files[0].type)){
-        this.setState({
-          avatarSrc: URL.createObjectURL(e.target.files[0])
-        });
-      }
-      this.setState({
-        avatar: e.target.files[0]
-      });
-    }
+  setCropping = () => {
+    this.setState({
+      cropping: !this.state.cropping
+    });
+  }
+
+  onSaveImage = (file, croppedImage) => {
+    this.setState({
+      cropping: false,
+      avatarSrc: croppedImage,
+      avatar: file
+    });
   }
 
   handleSubmit = (e) => {
@@ -79,12 +69,15 @@ class SignUpForm extends React.Component{
         method: 'POST',
         body: formData
       })
-      .then((result) => {
-        return result.json()
+      .then((response) => {
+        return response.json()
       })
-      .then((result) => {
-        console.log(result);
-        this.props.history.push('/sign-in');
+      .then((response) => {
+        if(response.type === 'success'){
+          this.props.history.push('/sign-in');
+        }else{
+          console.log(response);
+        }
       })
       .catch((error) => {
         console.log(error)
@@ -98,72 +91,99 @@ class SignUpForm extends React.Component{
 
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form className={'form twocol'} onSubmit={this.handleSubmit}>
 
-        Sign up
+        <div className={'form-item twosize bottomborder'}>
+          Sign Up
+        </div>
 
-        {this.validator.message('name', this.state.name, 'required|string')}
-        <label htmlFor={'name'}>Name</label>
-        <input
-          type={'text'}
-          id={'name'}
-          value={this.state.name}
-          onChange={this.handleChange}
-          autoComplete={'on'}
-          placeholder={'Your full name..'}
-        />
+        <div className={'validator'}>
+          {this.validator.message('name', this.state.name, 'required|string')}
+        </div>
 
+        <div className={'form-item onesize left fullborder'}>
+          <label className={'form-label'} htmlFor={'name'}>Name</label>
+          <input
+            type={'text'}
+            id={'name'}
+            value={this.state.name}
+            onChange={this.handleChange}
+            autoComplete={'on'}
+            placeholder={'Your full name..'}
+            className={'form-input'}
+          />
+        </div>
+        
+        <div className={'validator'}>
+          {this.validator.message('email', this.state.email, 'required|email')}
+        </div>
 
-        {this.validator.message('email', this.state.email, 'required|email')}
+        <div className={'form-item onesize right fullborder'}>
+          <label className={'form-label'} htmlFor={'email'}>Email</label>
+          <input
+            type={'email'}
+            id={'email'}
+            value={this.state.email}
+            onChange={this.handleChange}
+            autoComplete={'on'}
+            placeholder={'Your email address..'}
+            className={'form-input'}
+          />
+        </div>
 
-        <label htmlFor={'email'}>Email</label>
-        <input
-          type={'email'}
-          id={'email'}
-          value={this.state.email}
-          onChange={this.handleChange}
-          autoComplete={'on'}
-          placeholder={'Your email address..'}
-        />
+        <div className={'validator'}>
+          {this.validator.message('password', this.state.password, 'required|min:6')}
+        </div>
 
-        {this.validator.message('password', this.state.password, 'required|min:6')}
-        <label htmlFor={'password'}>Password</label>
-        <input
-          type={'password'}
-          id={'password'}
-          value={this.state.password}
-          onChange={this.handleChange}
-          autoComplete={'off'}
-          placeholder={'Your password..'}
-        />
+        <div className={'form-item onesize left fullborder'}>
+          <label className={'form-label'} htmlFor={'password'}>Password</label>
+          <input
+            type={'password'}
+            id={'password'}
+            value={this.state.password}
+            onChange={this.handleChange}
+            autoComplete={'off'}
+            placeholder={'Your password..'}
+            className={'form-input'}
+          />
+        </div>
 
+        <div className={'validator'}>
+          {this.validator.message('passwordVerify', this.state.passwordVerify, 'required|min:6|passwordMatch')}
+        </div>
 
-        {this.validator.message('passwordVerify', this.state.passwordVerify, 'required|min:6|passwordMatch')}
+        <div className={'form-item onesize right fullborder'}>
+          <label className={'form-label'} htmlFor={'passwordVerify'}>Password Verify</label>
+          <input
+            type={'password'}
+            id={'passwordVerify'}
+            value={this.state.passwordVerify}
+            onChange={this.handleChange}
+            autoComplete={'off'}
+            placeholder={'Verify Your password.. '}
+            className={'form-input'}
+          />
+        </div>
 
-        <label htmlFor={'passwordVerify'}>Password Verify</label>
-        <input
-          type={'password'}
-          id={'passwordVerify'}
-          value={this.state.passwordVerify}
-          onChange={this.handleChange}
-          autoComplete={'off'}
-          placeholder={'Verify Your password.. '}
-        />
+        <div className={'form-item onesize left fullborder'}>
+          <img onClick={this.setCropping} className={'avatar-preview'} src={this.state.avatarSrc ? this.state.avatarSrc : defaultAvatar} alt={'Avatar preview'}/>
+          <label className={'form-label'}>Avatar</label>
+        </div>
 
-        {this.validator.message('avatar', this.state.avatar, 'required|imageIsValid')}
-        <label>Avatar</label>
-        <input
-          type={'file'}
-          id={'avatar'}
-          onChange={this.handleImageChange}
-        />
-        <label htmlFor={'avatar'}>Choose</label>
-        <img src={this.state.avatarSrc ? this.state.avatarSrc : defaultAvatar} alt={'Avatar preview'}/>
+        {this.state.cropping && (
+          <CropImage onCancel={this.setCropping} onSave={this.onSaveImage}/>
+        )}
 
-        <button type={'submit'}>Signup</button>
+        <div className={'form-item onesize'}>
+          <button className={'submit-button'} type={'submit'}>Sign Up</button>
+        </div>
 
-        Already have an account?
-        <NavLink exact to={'/signin'}>Click here!</NavLink>
+        <div className={'form-item onesize'}>
+          <div className={'href-text'}>
+            Already have an account?
+            <NavLink className={'href-link'} exact to={'/sign-in'}> Click here!</NavLink>
+          </div>
+        </div>
 
       </form>
     );

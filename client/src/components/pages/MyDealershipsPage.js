@@ -1,15 +1,14 @@
 import React from 'react';
-import './ProfilePage.scss';
 import Page from '../Page';
 
-class ProfilePage extends React.Component{
+class MyDealershipsPage extends React.Component{
   render(){
     return(
       <Page>
-        from PP
+        MyDealershipsPage
       </Page>
     );
   }
 }
 
-export default ProfilePage;
+export default MyDealershipsPage;

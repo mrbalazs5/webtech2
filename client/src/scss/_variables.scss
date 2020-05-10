@@ -2,31 +2,36 @@
 $roboto: 'Roboto', sans-serif;
 
 //background color(s)
-$background-color-default: #e8e8e8;
-$background-color-secundary: #00730b;
-$background-color-light: #dedede;
-
-//border color(s)
-$border-color-default: #c4c4c4;
-
-//shadow color(s)
-$shadow-color-default: #616161;
+$bg-color-1: #ffffff;
+$bg-color-2: #008a09;
+$bg-color-hover: #e3e3e3;
+$bg-color-active: #e3e3e3;
+$bg-color-hover-submit: #007507;
+$bg-color-popup: #000000;
 
 //hamburger icon color(s)
-$hamburger: #ffffff;
-$hamburger-background: #00730b;
+$ham-close: #000000;
+$ham-open: #000000;
 
-//arrow color(s)
-$arrow: #000000;
+//transition time(s)
+$transition-default: 0.2s;
+
+//border color(s)
+$border-default: #e3e3e3;
+
+//shadow color(s)
+$shadow-1: #a8a8a8;
 
 //font color(s)
-$font-color-default: #000000;
-$font-color-active: #00730b;
-$font-color-hover: #00730b;
-$font-color-label: #00730b;
-$font-color-button: #ffffff;
-$font-color-invalid: #ff3333;
-$font-color-valid: #32a852;
+$font-default: #000000;
+$font-hover: #008a09;
+$font-active: #008a09;
+$font-label: #bf4900;
+$font-button: #ffffff;
+$font-link: #213f80;
+$font-alert: #ed4049;
 
-//transition(s)
-$transition-default: 0.2s;
+//svg icon color(s)
+$svg-default: #000000;
+$svg-hover: #008a09;
+$svg-active: #008a09;

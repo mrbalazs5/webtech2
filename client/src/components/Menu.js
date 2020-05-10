@@ -1,23 +1,30 @@
 import React from 'react';
 import './Menu.scss';
-import {NavLink} from 'react-router-dom';
 import classNames from 'classnames';
+import {NavLink, Link} from 'react-router-dom';
 import defaultAvatar from '../images/defaultAvatar.png';
-import carlogo from '../images/car_wt.png';
+import SVG from './SVG';
 
 class Menu extends React.Component{
   constructor(props){
     super(props);
 
     this.state = {
+      hamburgerMenu: false,
+      profileMenu: false,
+      adminMenu: false,
       user: null,
-      avatar: defaultAvatar,
-      hamburgerIsOpen: false,
-      dealerPanelIsOpen: false
-    }
+      avatar: defaultAvatar
+    };
+
+    this.handleHamburger = this.handleHamburger.bind(this);
+    this.handleProfileMenu = this.handleProfileMenu.bind(this);
+    this.handleAdminMenu = this.handleAdminMenu.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount(){
+    window.addEventListener("resize", this.handleResize);
 
     fetch('/api/check-token')
     .then((res) => {
@@ -38,65 +45,172 @@ class Menu extends React.Component{
       }
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
     });
   }
 
-  handleHamburgerIsOpen = () => {
-    this.setState({
-      hamburgerIsOpen: !this.state.hamburgerIsOpen
+  logout = (e) => {
+    e.preventDefault();
+    fetch('/api/log-out', {
+      method: 'POST'
+    })
+    .then(() => {
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.log(error);
     });
   }
 
-  handleDealerPanelIsOpen = () => {
+  handleResize = (e) => {
+    const windowWidth = window.innerWidth;
+
+    document.removeEventListener('click', this.handleProfileMenu);
+    document.removeEventListener('click', this.handleAdminMenu);
+
+    if(windowWidth >= 768){
+      this.setState({
+        hamburgerMenu: false,
+        profileMenu: false,
+        adminMenu: false
+      });
+    }
+  }
+
+  handleHamburger(){
     this.setState({
-      dealerPanelIsOpen: !this.state.dealerPanelIsOpen
+      hamburgerMenu: !this.state.hamburgerMenu
     });
+  }
+
+  handleProfileMenu(){
+    const windowWidth = window.innerWidth;
+
+    this.setState({
+      profileMenu: !this.state.profileMenu
+    }, () => {
+      if(windowWidth >= 768){
+        if(this.state.profileMenu){
+          document.addEventListener('click', this.handleProfileMenu);
+        }else{
+          document.removeEventListener('click', this.handleProfileMenu);
+        }
+      }
+    });
+  }
+
+  handleAdminMenu(){
+    const windowWidth = window.innerWidth;
+
+    this.setState({
+      adminMenu: !this.state.adminMenu
+    }, () => {
+      if(windowWidth >= 768){
+        if(this.state.adminMenu){
+          document.addEventListener('click', this.handleAdminMenu);
+        }else{
+          document.removeEventListener('click', this.handleAdminMenu);
+        }
+      }
+    });
+  }
+
+  componentWillUnmount(){
+    document.removeEventListener('click', this.handleProfileMenu);
+    document.removeEventListener('click', this.handleAdminMenu);
+    window.removeEventListener("resize", this.handleResize);
   }
 
   render(){
     return(
-      <nav className={'navbar'}>
-
-        <NavLink exact to={'/'}>
-          <img className={'nav-logo'} src={ carlogo } alt={'WT2 logo'}/>
-        </NavLink>
-
-        <div className={'nav-avatar'}>
-          <img className={'avatar'} src={ this.state.avatar ? this.state.avatar : this.state.avatar } alt={'avatar'}/>
-        </div>
+      <nav className={'menu-wrapper'}>
 
         <div className={'hamburger'}>
-          <div className={'icon-bg'} onClick={ this.handleHamburgerIsOpen }>
-           <span className={classNames('icon', this.state.hamburgerIsOpen ? 'open' : '' )}/>
+          <div className={'hamburger-bg'} onClick={this.handleHamburger}>
+            <span className={classNames('hamburger-icon', this.state.hamburgerMenu ? 'open' : '')}/>
           </div>
         </div>
 
-        <div className={'arrows'}>
-          <div className={'arrow-bg'} onClick={ this.handleDealerPanelIsOpen }>
-           <span className={classNames('arrow', this.state.dealerPanelIsOpen ? 'openarrow' : '' )}/>
-          </div>
+        <div className={'avatar'} >
+          <img className={'avatar-img'} onClick={this.handleProfileMenu} src={this.state.avatar} alt={'avatar'}/> 
         </div>
 
-        <div className={classNames('menu', this.state.hamburgerIsOpen ? 'show': '' )}>
-          <ul className={'user-panel'}>
-            <li className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/'}>Home</NavLink></li>
-            <li className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/about-us'}>About us</NavLink></li>
-            <li className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/vehicles'}>Vehicles</NavLink></li>
-            <li className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/contact'}>Contact</NavLink></li>
-          </ul>
-
-          <ul className={classNames('dealer-panel', this.state.dealerPanelIsOpen ? 'show' : '' )}>
+        <div className={classNames('menu', this.state.hamburgerMenu ? 'showmenu' : '')}>
+          <div className={'item-holder'}>
+            <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/'}>Home</NavLink></div>
+            <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/about-us'}>About Us</NavLink></div>
+            <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/vehicles'}>Vehicles</NavLink></div>
             { this.state.user ? 
-             <li className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/add-vehicle'}>Add vehicle</NavLink></li>
-            : '' }
+              <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/my-dealerships'}>My dealerships</NavLink></div>
+            : ''}
+            { this.state.user ? 
+            <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/my-vehicles'}>My vehicles</NavLink></div>
+            : ''}
+
             {this.state.user ?
-              <li className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/manage-vehicles'}>Manage vehicles</NavLink></li>
-            : '' }
+            <div className={'item'}>
+              <div className={'navlink'} onClick={this.handleAdminMenu}>
+                Admin
+                <SVG name={'ARROW_DOWN_ICON'} className={classNames('menu-icon right', this.state.adminMenu ? 'rotate' : '')}></SVG>
+              </div>
+              <div className={classNames('admin-items', this.state.adminMenu ? 'showadmin' : '')}>
+                <div className={'admin-items-wrapper'}>
+                  <div className={'item admin'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/makes'}>Makes</NavLink></div>
+                  <div className={'item admin'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/models'}>Models</NavLink></div>
+                  <div className={'item admin'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/users'}>Users</NavLink></div>
+                </div>
+              </div>
+            </div>
+            : ''}
             
-            <li className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/sign-in'}>Sign In</NavLink></li>
-            <li className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/sign-up'}>Sign Up</NavLink></li>
-          </ul>
+            <div className={'item'}>
+              <div className={classNames('profile-items', this.state.profileMenu ? 'showprofile' : '')}>
+                <div className={'profile-items-wrapper'}>
+                  {!this.state.user ? 
+                    <div className={'item profile'}>
+                      <NavLink className={'navlink'} activeClassName={'active'} exact to={'/sign-in'}>
+                        <SVG name={'SIGN_IN_ICON'} className={'menu-icon left'}></SVG>
+                        Sign In
+                      </NavLink>
+                    </div>
+                  : ''}
+                  {!this.state.user ? 
+                    <div className={'item profile'}>
+                      <NavLink className={'navlink'} activeClassName={'active'} exact to={'/sign-up'}>
+                        <SVG name={'SIGN_UP_ICON'} className={'menu-icon left'}></SVG>
+                        Sign Up
+                      </NavLink>
+                    </div>
+                  : ''}
+                  {this.state.user ?
+                    <div className={'item profile'}>
+                      <NavLink className={'navlink'} activeClassName={'active'} exact to={'/my-profile'}>
+                        <SVG name={'PROFILE_ICON'} className={'menu-icon left'}></SVG>
+                        My profile
+                      </NavLink>
+                    </div>
+                  : ''}
+                  {this.state.user ?
+                    <div className={'item profile'}>
+                      <NavLink className={'navlink'} activeClassName={'active'} exact to={'/settings'}>
+                        <SVG name={'SETTINGS_ICON'} className={'menu-icon left'}></SVG>
+                        Settings
+                      </NavLink>
+                    </div>
+                  : ''}
+                  {this.state.user ?
+                    <div className={'item profile'}>
+                      <div className={'navlink'} onClick={this.logout}>
+                        <SVG name={'SIGN_OUT_ICON'} className={'menu-icon left'}></SVG>
+                        Sign Out
+                      </div>
+                    </div>
+                  : ''}
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
 
       </nav>
