@@ -10,11 +10,13 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 import CountrySeeder from '../../seeders/CountrySeeder';
 import CitySeeder from '../../seeders/CitySeeder';
 import UserSeeder from '../../seeders/UserSeeder';
+import ModelSeeder from '../../seeders/ModelSeeder';
 
 const seederList = [
     new CountrySeeder,
     new CitySeeder,
-    new UserSeeder
+    new UserSeeder,
+    new ModelSeeder
 ];
 
 let seederPromises = seederList.map((seeder) => {

@@ -389,34 +389,20 @@ const VehicleController = {
                 })
                 .then((body) => {
 
-                    const {vehicleType, price, isServiced, dealership, file, generation, series} = body;
+                    const {vehicleType, price, isServiced, dealership, file, generation, series, model} = body;
 
                     let vehicle = new Vehicle({
                         vehicleType: vehicleType,
                         price: price,
                         isServiced: isServiced,
                         image: file.path,
+                        model: model,
                         generation: generation,
                         series: series,
                         dealership: dealership
                     });
 
                     return vehicle.save()
-                })
-                .then((vehicle) => {
-
-                    return Generation.findById(vehicle.generation).populate('model')
-                        .then((generation) => {
-
-                            let model = generation.model;
-
-                            vehicle.model = model._id.toString();
-                            model.vehicles.push(vehicle._id.toString());
-                            model.save();
-
-                            return vehicle.save();
-                        });
-
                 })
                 .then(() => {
                     return res.status(200).json(new Message(['Vehicle successfully created']).success());

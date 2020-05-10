@@ -787,6 +787,7 @@
       "required": [
         "vehicleType",
         "image",
+        "model",
         "generation",
         "series"
       ],
@@ -795,6 +796,7 @@
         "price": { "$ref": "#/definitions/Vehicle/properties/price" },
         "isServiced": { "$ref": "#/definitions/Vehicle/properties/isServiced" },
         "image": { "$ref": "#/definitions/Vehicle/properties/image" },
+        "model": { "type": "integer" },
         "generation": { "type": "integer" },
         "series": { "type": "integer" },
         "dealership": { "type": "integer" }
