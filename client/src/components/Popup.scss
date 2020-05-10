@@ -11,10 +11,9 @@
 
   .popup-bg {
     position: fixed;
-    background: $bg-color-popup;
+    background: $background-popup;
     height: 100%;
     width: 100%;
-    opacity: 0.3;
   }
 
   .popup-content {
@@ -23,7 +22,7 @@
     justify-content: center;
     margin: auto;
     z-index: 999;
-    background: $bg-color-1;
+    background: $background-default;
     padding: 15px;
   }
 }

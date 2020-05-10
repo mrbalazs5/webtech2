@@ -155,9 +155,9 @@ class Menu extends React.Component{
               </div>
               <div className={classNames('admin-items', this.state.adminMenu ? 'showadmin' : '')}>
                 <div className={'admin-items-wrapper'}>
-                  <div className={'item admin'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/makes'}>Makes</NavLink></div>
-                  <div className={'item admin'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/models'}>Models</NavLink></div>
-                  <div className={'item admin'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/users'}>Users</NavLink></div>
+                  <div className={'item admin'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/admin/makes'}>Makes</NavLink></div>
+                  <div className={'item admin'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/admin/models'}>Models</NavLink></div>
+                  <div className={'item admin'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/admin/users'}>Users</NavLink></div>
                 </div>
               </div>
             </div>

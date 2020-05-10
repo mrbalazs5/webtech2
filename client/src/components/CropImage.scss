@@ -22,7 +22,7 @@
     display: block;
     margin: auto;
     width: 110px;
-    background: $bg-color-2;
+    background: $background-secundary;
     color: $font-button;
     text-align: center;
     padding: 5px 0 5px 0;
@@ -30,7 +30,7 @@
     transition: $transition-default;
 
     &:hover {
-      background: $bg-color-hover-submit;
+      background: $background-button-hover;
     }
   }
 
@@ -47,7 +47,7 @@
 
     .crop-button{
       border: none;
-      background: $bg-color-2;
+      background: $background-secundary;
       color: $font-button;
       padding: 5px 0 5px 0;
       width: 110px;
@@ -58,9 +58,8 @@
       outline: none;
 
       &:hover {
-        background: $bg-color-hover-submit;
+        background: $background-button-hover;
       }
     }
-    
   }
 }

@@ -19,12 +19,12 @@
         transform: translate(-50%, -50%);
         height: 2px;
         width: 18px;
-        background: $ham-close;
+        background: $hamburger-closed;
         transition-property: background;
         transition-delay: 0.1s;
     
         &:before, &:after {
-          background: $ham-close;
+          background: $hamburger-closed;
           content: '';
           display: block;
           height: 100%;
@@ -55,7 +55,7 @@
     
           &:before {
             top: 0px;
-            background: $ham-open;
+            background: $hamburger-opened;
             transform: rotate(-45deg);
             transition-property: top, transform;
             transition-delay: 0.0s, 0.1s;
@@ -64,7 +64,7 @@
     
           &:after {
             top: 0px;
-            background: $ham-open;
+            background: $hamburger-opened;
             transform: rotate(45deg);
             transition-property: top, transform;
             transition-delay: 0.0s, 0.1s;
@@ -93,16 +93,11 @@
       .item {
         box-sizing: border-box;
 
+        &.profile,
         &.admin {
           display: block;
           line-height: 30px;
-          background: $bg-color-1;
-        }
-
-        &.profile {
-          display: block;
-          line-height: 30px;
-          background: $bg-color-1;
+          background: $background-default;
         }
 
         .navlink {
@@ -147,7 +142,7 @@
 
           &.active {
             color: $font-active;
-            background: $bg-color-active;
+            background: $background-link-active;
 
             .menu-icon {
               svg {
@@ -161,7 +156,7 @@
           max-height: 0;
           overflow: hidden;
           clear: both;
-          transition: $transition-default linear;
+          transition: $transition-default;
 
           &.showadmin {
             max-height: 160px;
@@ -172,7 +167,7 @@
           max-height: 0;
           overflow: hidden;
           clear: both;
-          transition: $transition-default linear;
+          transition: $transition-default;
           
           &.showprofile {
             max-height: 160px;
@@ -202,11 +197,11 @@
           .admin-items {
             position: absolute;
             top: 50px;
-            width: 120px;
+            width: 130px;
             box-sizing: border-box;
 
             .admin-items-wrapper {
-              border: 1px solid $border-default;
+              border: $border-default;
               border-top: none;
             }
           }
@@ -215,11 +210,11 @@
             position: absolute;
             top: 50px;
             right: 0;
-            width: 120px;
+            width: 130px;
             box-sizing: border-box;
 
             .profile-items-wrapper {
-              border: 1px solid $border-default;
+              border: $border-default;
               border-top: none;
             }
           }
@@ -241,13 +236,13 @@
       bottom: 0;
       overflow-x: hidden;
       overflow-y: auto;
-      background: $bg-color-1;
-      transition: $transition-default linear;
+      background: $background-default;
+      transition: $transition-default;
       white-space: nowrap;
 
       &.showmenu {
         width: 200px;
-        border-right: 1px solid $border-default;
+        border-right: $border-default;
       }
 
       .item-holder {

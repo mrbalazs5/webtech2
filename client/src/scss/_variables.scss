@@ -2,36 +2,35 @@
 $roboto: 'Roboto', sans-serif;
 
 //background color(s)
-$bg-color-1: #ffffff;
-$bg-color-2: #008a09;
-$bg-color-hover: #e3e3e3;
-$bg-color-active: #e3e3e3;
-$bg-color-hover-submit: #007507;
-$bg-color-popup: #000000;
+$background-default: rgba(255, 255, 255, 1.0);
+$background-secundary: rgba(22, 181, 99, 1.0);
+$background-button-hover: rgba(18, 148, 81, 1.0);
+$background-popup: rgba(0, 0, 0, 0.3);
+$background-link-active: rgba(235, 235, 235, 1.0);
 
-//hamburger icon color(s)
-$ham-close: #000000;
-$ham-open: #000000;
-
-//transition time(s)
-$transition-default: 0.2s;
-
-//border color(s)
-$border-default: #e3e3e3;
-
-//shadow color(s)
-$shadow-1: #a8a8a8;
+//hamburger color(s)
+$hamburger-closed: rgba(0, 0, 0, 1.0);
+$hamburger-opened: rgba(0, 0, 0, 1.0);
 
 //font color(s)
-$font-default: #000000;
-$font-hover: #008a09;
-$font-active: #008a09;
-$font-label: #bf4900;
-$font-button: #ffffff;
-$font-link: #213f80;
-$font-alert: #ed4049;
+$font-default: rgba(0, 0, 0, 1.0);
+$font-hover: rgba(22, 181, 99, 1.0);
+$font-active: rgba(22, 181, 99, 1.0);
+$font-label: rgba(255, 170, 0, 1.0);
+$font-button: rgba(255, 255, 255, 1.0);
+$font-link: rgba(33, 63, 128, 1.0);
+$font-alert: rgba(237, 64, 73, 1.0);
+
+//transition(s)
+$transition-default: 0.2s linear;
 
 //svg icon color(s)
-$svg-default: #000000;
-$svg-hover: #008a09;
-$svg-active: #008a09;
+$svg-default: rgba(0, 0, 0, 1.0);
+$svg-hover: rgba(22, 181, 99, 1.0);
+$svg-active: rgba(22, 181, 99, 1.0);
+
+//border(s)
+$border-default: 2px solid rgba(235, 235, 235, 1.0);
+
+//shadow(s)
+$shadow-default: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);

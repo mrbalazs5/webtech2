@@ -11,7 +11,7 @@
   .forms-bg {
     position: fixed;
     right: 0;
-    background: $bg-color-2;
+    background: $background-secundary;
     height: 100%;
     width: 50%;
     padding-right: 300px;
@@ -29,8 +29,8 @@
 }
 
 .form {
-  background: $bg-color-1;
-  box-shadow: 0px 0px 3px 0px $shadow-1;
+  background: $background-default;
+  box-shadow: $shadow-default;
   box-sizing: border-box;
   font-size: 20px;
   padding: 15px 15px 0 15px;
@@ -55,12 +55,12 @@
 
     &.fullborder {
       padding: 10px;
-      border: 2px solid $border-default;
+      border: $border-default;
     }
 
     &.bottomborder {
       padding-bottom: 10px;
-      border-bottom: 2px solid $border-default;
+      border-bottom: $border-default;
     }
 
     &.onesize {
@@ -88,7 +88,7 @@
       margin-bottom: 10px;
 
       &.file {
-        background: $bg-color-2;
+        background: $background-secundary;
         color: $font-button;
         margin-bottom: 0;
         font-size: 14px;
@@ -118,12 +118,12 @@
       font-size: 20px;
       border: none;
       color: $font-button;
-      background: $bg-color-2;
+      background: $background-secundary;
       transition: $transition-default;
       cursor: pointer;
 
       &:hover {
-        background: $bg-color-hover-submit;
+        background: $background-button-hover;
       }
     }
 

@@ -129,7 +129,7 @@ class CropImage extends React.Component {
           </div>
 
           <div className={'crop-validator'}>
-            {this.validator.message('imagecrop', this.state.avatar, 'required|imageIsValid')}
+            {this.validator.message('imagecrop', this.state.src, 'required|imageIsValid')}
           </div>
 
           <input
