@@ -47,12 +47,21 @@ class SignUpForm extends React.Component{
     });
   }
 
-  onSaveImage = (file, croppedImage) => {
-    this.setState({
-      cropping: false,
-      avatarSrc: croppedImage,
-      avatar: file
-    });
+  onSaveImage = (file, croppedImageUrl) => {
+
+      fetch(croppedImageUrl).then(r => {
+          return r.blob();
+      })
+      .then((blob) => {
+          const croppedImage = new File([blob], file.name, {type: file.type, lastModified: file.lastModified});
+
+          this.setState({
+              cropping: false,
+              avatarSrc: croppedImageUrl,
+              avatar: croppedImage
+          });
+      });
+
   }
 
   handleSubmit = (e) => {
