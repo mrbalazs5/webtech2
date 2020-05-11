@@ -4,6 +4,8 @@ import SimpleReactValidator from 'simple-react-validator';
 import {NavLink} from 'react-router-dom';
 import defaultAvatar from '../images/defaultAvatar.png';
 import CropImage from './CropImage';
+import SVG from './SVG';
+import classNames from 'classnames';
 
 class SignUpForm extends React.Component{
   constructor(props){
@@ -105,11 +107,14 @@ class SignUpForm extends React.Component{
           Sign Up
         </div>
 
-        <div className={'validator'}>
-          {this.validator.message('name', this.state.name, 'required|string')}
-        </div>
-
         <div className={'form-item onesize left fullborder'}>
+
+          <div className={'validator'}>
+            <div className={'validator-text'}>
+              {this.validator.message('name', this.state.name, 'required|string')}
+            </div>
+          </div>
+
           <label className={'form-label'} htmlFor={'name'}>Name</label>
           <input
             type={'text'}
@@ -121,12 +126,15 @@ class SignUpForm extends React.Component{
             className={'form-input'}
           />
         </div>
-        
-        <div className={'validator'}>
-          {this.validator.message('email', this.state.email, 'required|email')}
-        </div>
 
         <div className={'form-item onesize right fullborder'}>
+
+          <div className={'validator'}>
+            <div className={'validator-text'}>
+              {this.validator.message('email', this.state.email, 'required|email')}
+            </div>
+          </div>
+
           <label className={'form-label'} htmlFor={'email'}>Email</label>
           <input
             type={'email'}
@@ -139,11 +147,14 @@ class SignUpForm extends React.Component{
           />
         </div>
 
-        <div className={'validator'}>
-          {this.validator.message('password', this.state.password, 'required|min:6')}
-        </div>
-
         <div className={'form-item onesize left fullborder'}>
+
+          <div className={'validator'}>
+            <div className={'validator-text'}>
+              {this.validator.message('password', this.state.password, 'required|min:6')}
+            </div>
+          </div>
+
           <label className={'form-label'} htmlFor={'password'}>Password</label>
           <input
             type={'password'}
@@ -156,11 +167,14 @@ class SignUpForm extends React.Component{
           />
         </div>
 
-        <div className={'validator'}>
-          {this.validator.message('passwordVerify', this.state.passwordVerify, 'required|min:6|passwordMatch')}
-        </div>
-
         <div className={'form-item onesize right fullborder'}>
+
+          <div className={'validator'}>
+            <div className={'validator-text'}>
+              {this.validator.message('passwordVerify', this.state.passwordVerify, 'required|min:6|passwordMatch')}
+            </div>
+          </div>
+
           <label className={'form-label'} htmlFor={'passwordVerify'}>Password Verify</label>
           <input
             type={'password'}
@@ -178,7 +192,10 @@ class SignUpForm extends React.Component{
         </div>
 
         <div className={'form-item onesize left fullborder'}>
-          <img id={'avatarSet'} onClick={this.setCropping} className={'avatar-preview'} src={this.state.avatarSrc ? this.state.avatarSrc : defaultAvatar} alt={'Avatar preview'}/>
+          <div className={classNames('avatar-upload', this.state.cropping ? 'cropping' : '')} onClick={this.setCropping}>
+            <SVG name={'UPLOAD_ICON'} className={'upload-label'}/>
+            <img id={'avatarSet'} className={'avatar-preview'} src={this.state.avatarSrc ? this.state.avatarSrc : defaultAvatar} alt={'Avatar preview'}/>
+          </div>
           <label className={'form-label'}>Avatar</label>
         </div>
 

@@ -10,9 +10,13 @@ body, html {
 header {
   position: relative;
   z-index: 1;
-  display: inline-block;
-  width: 100%;
-  min-height: 70px;
+  display: block;
+  height: 60px;
   background: $background-default;
   border-bottom: $border-default;
+}
+
+.page {
+  padding: 0;
+  margin: 0;
 }

@@ -132,7 +132,7 @@ class Menu extends React.Component{
         </div>
 
         <div className={'avatar'} >
-          <img className={'avatar-img'} onClick={this.handleProfileMenu} src={this.state.avatar} alt={'avatar'}/> 
+          <img className={classNames('avatar-img', this.state.profileMenu ? 'scaled' : '')} onClick={this.handleProfileMenu} src={this.state.avatar} alt={'avatar'}/> 
         </div>
 
         <div className={classNames('menu', this.state.hamburgerMenu ? 'showmenu' : '')}>

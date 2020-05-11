@@ -4,7 +4,7 @@ $roboto: 'Roboto', sans-serif;
 //background color(s)
 $background-default: rgba(255, 255, 255, 1.0);
 $background-secundary: rgba(15, 125, 7, 1.0);
-$background-button-hover: rgba(15, 125, 7, 1.0);
+$background-button-hover: rgba(15, 105, 7, 1.0);
 $background-popup: rgba(0, 0, 0, 0.3);
 $background-link-hover: rgba(235, 235, 235, 1.0);
 $background-link-active: rgba(235, 235, 235, 1.0);
@@ -27,6 +27,7 @@ $transition-default: 0.2s linear;
 
 //svg icon color(s)
 $svg-default: rgba(0, 0, 0, 1.0);
+$svg-secundary: rgba(255, 255, 255, 1.0);
 $svg-hover: rgba(15, 125, 7, 1.0);
 $svg-active: rgba(15, 125, 7, 1.0);
 
@@ -34,11 +35,11 @@ $svg-active: rgba(15, 125, 7, 1.0);
 $border-default: 2px solid rgba(235, 235, 235, 1.0);
 
 //shadow(s)
-$shadow-default: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+$shadow-default: 0px 0px 3px 0px rgba(0, 0, 0, 0.4);
 $shadow-forms: 15px 15px 10px 0px rgba(0, 0, 0, 0.4);
 
 
 //font size(s)
 $font-size-large: 24px;
 $font-size-medium: 20px;
-$font-size-small: 16px;
+$font-size-small: 14px;

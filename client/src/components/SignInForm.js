@@ -63,11 +63,14 @@ class SignInForm extends React.Component{
           Sign In
         </div>
 
-        <div className={'validator'}>
-          {this.validator.message('email', this.state.email, 'required|email')}
-        </div>
-
         <div className={'form-item onesize fullborder'}>
+
+          <div className={'validator'}>
+            <div className={'validator-text'}>
+              {this.validator.message('email', this.state.email, 'required|email')}
+            </div>
+          </div>
+
           <label className={'form-label'} htmlFor={'email'}>Email</label>
           <input
             type={'email'}
@@ -79,12 +82,15 @@ class SignInForm extends React.Component{
             className={'form-input'}
           />
         </div>
-
-        <div className={'validator'}>
-          {this.validator.message('password', this.state.password, 'required|min:6')}
-        </div>
         
         <div className={'form-item onesize fullborder'}>
+
+          <div className={'validator'}>
+            <div className={'validator-text'}>
+              {this.validator.message('password', this.state.password, 'required|min:6')}
+            </div>
+          </div>
+
           <label className={'form-label'} htmlFor={'password'}>Password</label>
           <input
             type={'password'}
