@@ -14,8 +14,8 @@ class SignUpForm extends React.Component{
       email: '',
       password: '',
       passwordVerify: '',
-      avatar: '',
-      avatarSrc: '',
+      avatar: null,
+      avatarSrc: null,
       cropping: false
     };
 
@@ -49,19 +49,18 @@ class SignUpForm extends React.Component{
 
   onSaveImage = (file, croppedImageUrl) => {
 
-      fetch(croppedImageUrl).then(r => {
-          return r.blob();
-      })
-      .then((blob) => {
-          const croppedImage = new File([blob], file.name, {type: file.type, lastModified: file.lastModified});
+    fetch(croppedImageUrl).then(r => {
+      return r.blob();
+    })
+    .then((blob) => {
+      const croppedImage = new File([blob], file.name, {type: file.type, lastModified: file.lastModified});
 
-          this.setState({
-              cropping: false,
-              avatarSrc: croppedImageUrl,
-              avatar: croppedImage
-          });
+      this.setState({
+        cropping: false,
+        avatarSrc: croppedImageUrl,
+        avatar: croppedImage
       });
-
+    });
   }
 
   handleSubmit = (e) => {
@@ -174,8 +173,12 @@ class SignUpForm extends React.Component{
           />
         </div>
 
+        <div className={'validator'}>
+          {this.validator.message('avatarSet', this.state.avatarSrc, 'avatarSet')}
+        </div>
+
         <div className={'form-item onesize left fullborder'}>
-          <img onClick={this.setCropping} className={'avatar-preview'} src={this.state.avatarSrc ? this.state.avatarSrc : defaultAvatar} alt={'Avatar preview'}/>
+          <img id={'avatarSet'} onClick={this.setCropping} className={'avatar-preview'} src={this.state.avatarSrc ? this.state.avatarSrc : defaultAvatar} alt={'Avatar preview'}/>
           <label className={'form-label'}>Avatar</label>
         </div>
 
