@@ -8,6 +8,7 @@ import swaggerDoc from './docs/swagger.json';
 import mongoose from 'mongoose';
 import UserController from './controllers/UserController';
 import VehicleController from './controllers/VehicleController';
+import SearchController from './controllers/SearchController';
 import authenticateUser from './middlewares/authenticateUser';
 import Message from "./utils/Message";
 
@@ -50,6 +51,14 @@ app.get('/api/get-dealerships', VehicleController.getDealerships.controller);
 app.post('/api/create-vehicle', VehicleController.createVehicle.controller);
 
 app.get('/api/get-vehicles', VehicleController.getVehicles.controller);
+
+app.get('/api/get-cities', SearchController.getCities.controller);
+
+app.get('/api/get-countries', SearchController.getCountries.controller);
+
+app.get('/api/get-generations', SearchController.getGenerations.controller);
+
+app.get('/api/get-series', SearchController.getSeries.controller);
 
 app.get('/api/check-token', authenticateUser('dealer'), (req, res) => {
     res.status(200).json({user: req.user});

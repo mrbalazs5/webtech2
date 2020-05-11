@@ -55,7 +55,15 @@ const VehicleController = {
     getMakes: {
         controller: (req, res) => {
 
-            Make.find().populate('models')
+            const { name } = req.query;
+
+            let query = {};
+
+            if(name){
+                query  = {name: { $regex: `.*${name}.*`, $options: 'i' } };
+            }
+
+            Make.find(query).populate('models')
                 .then((makes) => {
 
                     if(makes.length < 1){
@@ -261,15 +269,42 @@ const VehicleController = {
     getModels: {
         controller: (req, res) =>{
 
-            Model.find()
-                .populate('make')
-                .populate('generations')
-                .populate('vehicles')
-                .then((models) =>{
+            const { name, makeId } = req.query;
 
-                    if(models.length < 1){
-                        throw new Error('There are no models in the database');
-                    }
+            let query = {};
+
+            if(name){
+                query['name']  = { $regex: `.*${name}.*`, $options: 'i' };
+            }
+
+            let modelQuery = Model.find(query)
+                .populate('generations')
+                .populate('vehicles');
+
+            if(makeId && !makeId.match(/^[0-9a-fA-F]{24}$/)){
+                return res.status(422).json(new Message(['Invalid id provided.']).error())
+            }
+
+            if(makeId){
+                modelQuery.populate({
+                    path: 'make',
+                    match: { _id: makeId }
+                });
+            }else{
+                modelQuery.populate('make');
+            }
+
+            modelQuery.then((models) =>{
+
+                if(models.length < 1){
+                    throw new Error('There are no models in the database');
+                }
+
+                if(makeId){
+                    models = models.filter((model) => {
+                        return model.make !== null;
+                    })
+                }
 
                     return res.status(200).json(models);
                 })
@@ -345,7 +380,15 @@ const VehicleController = {
     getDealerships: {
         controller: (req, res) => {
 
-            Dealership.find().populate('user').populate('vehicles').populate('address')
+            const { name } = req.query;
+
+            let query = {};
+
+            if(name){
+                query  = {name: { $regex: `.*${name}.*`, $options: 'i' } };
+            }
+
+            Dealership.find(query).populate('user').populate('vehicles').populate('address')
                 .then((dealerships) =>{
 
                     if(dealerships.length < 1){
