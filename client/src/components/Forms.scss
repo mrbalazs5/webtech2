@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  top: 50px; bottom: 0; left: 0; right: 0;
+  top: 70px; bottom: 0; left: 0; right: 0;
   overflow: auto;
 
   .forms-bg {
@@ -30,7 +30,7 @@
 
 .form {
   background: $background-default;
-  box-shadow: $shadow-default;
+  box-shadow: $shadow-forms;
   box-sizing: border-box;
   font-size: $font-size-medium;
   padding: 15px 15px 0 15px;

@@ -3,8 +3,8 @@ $roboto: 'Roboto', sans-serif;
 
 //background color(s)
 $background-default: rgba(255, 255, 255, 1.0);
-$background-secundary: rgba(22, 181, 99, 1.0);
-$background-button-hover: rgba(18, 148, 81, 1.0);
+$background-secundary: rgba(15, 125, 7, 1.0);
+$background-button-hover: rgba(15, 125, 7, 1.0);
 $background-popup: rgba(0, 0, 0, 0.3);
 $background-link-hover: rgba(235, 235, 235, 1.0);
 $background-link-active: rgba(235, 235, 235, 1.0);
@@ -15,9 +15,9 @@ $hamburger-opened: rgba(0, 0, 0, 1.0);
 
 //font color(s)
 $font-default: rgba(0, 0, 0, 1.0);
-$font-hover: rgba(22, 181, 99, 1.0);
-$font-active: rgba(22, 181, 99, 1.0);
-$font-label: rgba(255, 170, 0, 1.0);
+$font-hover: rgba(15, 125, 7, 1.0);
+$font-active: rgba(15, 125, 7, 1.0);
+$font-label: rgba(204, 65, 37, 1.0);
 $font-button: rgba(255, 255, 255, 1.0);
 $font-link: rgba(33, 63, 128, 1.0);
 $font-alert: rgba(237, 64, 73, 1.0);
@@ -27,16 +27,18 @@ $transition-default: 0.2s linear;
 
 //svg icon color(s)
 $svg-default: rgba(0, 0, 0, 1.0);
-$svg-hover: rgba(22, 181, 99, 1.0);
-$svg-active: rgba(22, 181, 99, 1.0);
+$svg-hover: rgba(15, 125, 7, 1.0);
+$svg-active: rgba(15, 125, 7, 1.0);
 
 //border(s)
 $border-default: 2px solid rgba(235, 235, 235, 1.0);
 
 //shadow(s)
-$shadow-default: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+$shadow-default: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+$shadow-forms: 15px 15px 10px 0px rgba(0, 0, 0, 0.4);
+
 
 //font size(s)
-$font-size-large: 22px;
-$font-size-medium: 18px;
-$font-size-small: 14px;
+$font-size-large: 24px;
+$font-size-medium: 20px;
+$font-size-small: 16px;

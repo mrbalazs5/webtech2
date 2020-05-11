@@ -3,8 +3,8 @@
 .menu-wrapper {
   .hamburger {
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: 16px;
+    left: 8px;
 
     .hamburger-bg {
       height: 40px;
@@ -17,8 +17,8 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        height: 2px;
-        width: 18px;
+        height: 3px;
+        width: 24px;
         background: $hamburger-closed;
         transition-property: background;
         transition-delay: 0.1s;
@@ -33,7 +33,7 @@
         }
     
         &:before {
-          top: 5px;
+          top: 8px;
           transform: rotate(0deg);
           transition-property: transform, top;
           transition-delay: 0.0s, 0.1s;
@@ -41,7 +41,7 @@
         }
     
         &:after {
-          top: -5px;
+          top: -8px;
           transform: rotate(0deg);
           transition-property: transform, top;
           transition-delay: 0.0s, 0.1s;
@@ -77,14 +77,20 @@
 
   .avatar {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 8px;
+    right: 8px;
     cursor: pointer;
 
     .avatar-img {
-      max-height: 40px;
-      max-width: 40px;
+      max-height: 54px;
+      max-width: 54px;
       border-radius: 100%;
+      box-shadow: $shadow-default;
+      transition: $transition-default;
+
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
 
@@ -96,7 +102,7 @@
         &.profile,
         &.admin {
           display: block;
-          line-height: 30px;
+          line-height: 40px;
           background: $background-default;
         }
 
@@ -111,11 +117,11 @@
             display: inline-block;
             
             &.left {
-              margin-right: 5px;
+              margin-right: 8px;
             }
 
             &.right {
-              margin-left: 5px;
+              margin-left: 8px;
             }
 
             &.rotate {
@@ -125,7 +131,7 @@
 
             svg {
               transition: $transition-default;
-              height: 12px;
+              height: 16px;
               fill: $svg-default;
             }
           }
@@ -175,27 +181,33 @@
       .item-holder {
         .item {
           display: inline-block;
-          line-height: 50px;
+          line-height: 70px;
 
           .navlink {
-            padding: 0 15px 0 15px;
+            width: 130px;
+            text-align: center;
           }
   
           .admin-items {
             position: absolute;
-            top: 50px;
+            top: 70px;
             width: 130px;
             box-sizing: border-box;
 
             .admin-items-wrapper {
               border: $border-default;
               border-top: none;
+
+              .navlink {
+                text-align: left;
+                padding-left: 10px;
+              }
             }
           }
   
           .profile-items {
             position: absolute;
-            top: 50px;
+            top: 70px;
             right: 0;
             width: 130px;
             box-sizing: border-box;
@@ -203,6 +215,11 @@
             .profile-items-wrapper {
               border: $border-default;
               border-top: none;
+
+              .navlink {
+                text-align: left;
+                padding-left: 10px;
+              }
             }
           }
         }
@@ -219,7 +236,7 @@
       width: 0;
       overflow: hidden;
       left: 0;
-      top: 50px;
+      top: 70px;
       bottom: 0;
       overflow-x: hidden;
       overflow-y: auto;
@@ -235,7 +252,7 @@
       .item-holder {
         .item {
           display: block;
-          line-height: 30px;
+          line-height: 40px;
 
           .navlink {
             padding: 0 0 0 18px;
