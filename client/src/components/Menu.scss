@@ -131,24 +131,11 @@
           }
 
           &:hover {
-            color: $font-hover;
-
-            .menu-icon {
-              svg {
-                fill: $svg-hover;
-              }
-            }
+            background: $background-link-hover;
           }
 
           &.active {
-            color: $font-active;
             background: $background-link-active;
-
-            .menu-icon {
-              svg {
-                fill: $svg-active;
-              }
-            }
           }
         }
 

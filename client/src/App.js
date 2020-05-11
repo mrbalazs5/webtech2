@@ -46,9 +46,14 @@ class App extends React.Component {
           <Route exact path={'/settings'} component={withAuth(SettingsPage, roles.dealer)}/>
           <Route exact path={'/my-vehicles'} component={withAuth(MyVehiclesPage, roles.dealer)}/>
           <Route exact path={'/my-dealerships'} component={withAuth(MyDealershipsPage, roles.dealer)}/>
-          <Route exact path={'/admin/users'} component={withAuth(UsersPage, roles.dealer)}/>
+          {/*<Route exact path={'/admin/users'} component={withAuth(UsersPage, roles.dealer)}/>
           <Route exact path={'/admin/models'} component={withAuth(ModelsPage, roles.dealer)}/>
-          <Route exact path={'/admin/makes'} component={withAuth(MakesPage, roles.dealer)}/>
+          <Route exact path={'/admin/makes'} component={withAuth(MakesPage, roles.dealer)}/>*/}
+
+          <Route exact path={'/admin/users'} component={UsersPage}/>
+          <Route exact path={'/admin/models'} component={ModelsPage}/>
+          <Route exact path={'/admin/makes'} component={MakesPage}/>
+
           <Route component={ErrorPage}/>
         </Switch>
 

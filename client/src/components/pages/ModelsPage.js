@@ -3,6 +3,14 @@ import Page from '../Page';
 import './ModelsPage.scss';
 
 class ModelsPage extends React.Component{
+  constructor(props){
+    super(props);
+
+    this.state = {
+      
+    };
+  }
+
   render(){
     return(
       <Page>

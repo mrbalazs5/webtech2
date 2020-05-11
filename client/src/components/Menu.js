@@ -147,7 +147,7 @@ class Menu extends React.Component{
             <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/my-vehicles'}>My vehicles</NavLink></div>
             : ''}
 
-            {this.state.user ?
+            
             <div className={'item'}>
               <div className={'navlink'} onClick={this.handleAdminMenu}>
                 Admin
@@ -161,7 +161,7 @@ class Menu extends React.Component{
                 </div>
               </div>
             </div>
-            : ''}
+           
             
             <div className={'item'}>
               <div className={classNames('profile-items', this.state.profileMenu ? 'showprofile' : '')}>
