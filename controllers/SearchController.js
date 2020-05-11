@@ -96,11 +96,11 @@ const SearchController = {
                 seriesQuery.populate('generations');
             }
 
-            Series.find(query).sort({name: 'asc'}).then((series) => {
+            seriesQuery.sort({name: 'asc'}).then((series) => {
 
                 if(generationId){
                     series = series.filter((series) => {
-                        return series.generations !== null;
+                        return series.generations.length > 0;
                     })
                 }
 
