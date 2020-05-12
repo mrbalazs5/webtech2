@@ -19,6 +19,10 @@
     {
       "name": "Vehicles",
       "description": "API for vehicles in the system"
+    },
+    {
+      "name": "Search",
+      "description": "API for searches in the system"
     }
   ],
   "schemes": [
@@ -193,6 +197,14 @@
           "Vehicles"
         ],
         "summary": "Get all makes in the system",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The make's name",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -251,6 +263,20 @@
           "Vehicles"
         ],
         "summary": "Get all models in the system",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The model's name",
+            "type": "string"
+          },
+          {
+            "name": "makeId",
+            "in": "query",
+            "description": "The models's make",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -309,6 +335,14 @@
           "Vehicles"
         ],
         "summary": "Get all dealerships in the system",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The dealership's name",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -360,6 +394,150 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Vehicle"
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/api/get-cities": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "Get all cities in the system",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The city's name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/City"
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/api/get-countries": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "Get all countries in the system",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The country's name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Country"
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/api/get-generations": {
+      "get": {
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Get all generations in the system",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The generation's name",
+            "type": "string"
+          },
+          {
+            "name": "modelId",
+            "in": "query",
+            "description": "The generation's model",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Generation"
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/api/get-series": {
+      "get": {
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Get all series in the system",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The series's name",
+            "type": "string"
+          },
+          {
+            "name": "generationId",
+            "in": "query",
+            "description": "The series's generation",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Series"
               }
             }
           },

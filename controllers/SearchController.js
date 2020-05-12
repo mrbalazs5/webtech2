@@ -24,8 +24,15 @@ const SearchController = {
     },
     getCountries: {
         controller: (req, res) => {
+            const { name } = req.query;
 
-            Country.find().sort({name: 'asc'}).then((countries) => {
+            let query = {};
+
+            if(name){
+                query  = {name: { $regex: `.*${name}.*`, $options: 'i' } };
+            }
+
+            Country.find(query).sort({name: 'asc'}).then((countries) => {
                 res.send(countries);
             });
 
