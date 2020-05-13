@@ -1,22 +1,37 @@
 @import '../scss/variables';
 
 .table {
-  display: block;
-  max-width: 1000px;
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  background: yellow;
+
+  .item {
+    padding: 5px;
+    width: 100px;
+  }
 
   .row {
-    display: block;
-    float: left;
-    width: 100%;
+    display: flex;
+    align-items: flex-start;
 
-    .row-cell {
-      width: 100px;
-      display: inline-block;
+    .cell {
+      display: flex;
+      flex-direction: column;
+      margin: 2px;
       background: red;
 
-      .cell-item {
-        display: inline-block;
+      .cell-row {
+        display: flex;
+        flex-direction: row;
+        margin: 2px;
+        background: white;
+
+        .cell-cell-row {
+          display: flex;
+          flex-direction: column;
+          margin: 2px;
+          background: green;
+        }
       }
     }
   }
