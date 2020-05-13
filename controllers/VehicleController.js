@@ -63,7 +63,17 @@ const VehicleController = {
                 query  = {name: { $regex: `.*${name}.*`, $options: 'i' } };
             }
 
-            Make.find(query).populate('models')
+            Make.find(query).populate({
+                path: 'models',
+                populate: {
+                    path: 'generations',
+                    model: Generation,
+                    populate: {
+                        path: 'series',
+                        model: Series
+                    }
+                }
+            })
                 .then((makes) => {
 
                     if(makes.length < 1){
@@ -278,7 +288,13 @@ const VehicleController = {
             }
 
             let modelQuery = Model.find(query)
-                .populate('generations')
+                .populate({
+                    path: 'generations',
+                    populate: {
+                        path: 'series',
+                        model: Series
+                    }
+                })
                 .populate('vehicles');
 
             if(makeId && !makeId.match(/^[0-9a-fA-F]{24}$/)){
