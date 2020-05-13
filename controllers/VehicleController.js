@@ -6,6 +6,8 @@ import Make from '../models/make.model';
 import Specification from '../models/specification.model';
 import Generation from '../models/generation.model';
 import Series from '../models/series.model';
+import Country from '../models/country.model';
+import City from '../models/city.model';
 import Message from "../utils/Message";
 import {isEmpty} from '../utils/customValidator';
 import {trim, escape, normalizeEmail, isNumeric, isEmail, isLength} from 'validator';
@@ -292,7 +294,11 @@ const VehicleController = {
                     path: 'generations',
                     populate: {
                         path: 'series',
-                        model: Series
+                        model: Series,
+                        populate: {
+                            path: 'specification',
+                            model: Specification
+                        }
                     }
                 })
                 .populate('vehicles');
@@ -404,7 +410,17 @@ const VehicleController = {
                 query  = {name: { $regex: `.*${name}.*`, $options: 'i' } };
             }
 
-            Dealership.find(query).populate('user').populate('vehicles').populate('address')
+            Dealership.find(query).populate('user').populate('vehicles').populate({
+                path: 'address',
+                populate: [{
+                    path: 'country',
+                    model: Country
+                },
+                {
+                    path: 'city',
+                    model: City
+                }]
+            })
                 .then((dealerships) =>{
 
                     if(dealerships.length < 1){
@@ -476,7 +492,17 @@ const VehicleController = {
     getVehicles: {
         controller: (req, res) => {
 
-            Vehicle.find().populate('model').populate('dealership')
+            Vehicle.find()
+                .populate('model')
+                .populate('dealership')
+                .populate('generation')
+                .populate({
+                    path: 'series',
+                    populate: {
+                        path: 'specification',
+                        model: Specification
+                    }
+                })
                 .then((vehicles) =>{
 
                     if(vehicles.length < 1){

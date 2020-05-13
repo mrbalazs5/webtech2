@@ -1,6 +1,7 @@
 import City from '../models/city.model';
 import Country from '../models/city.model';
 import Generation from '../models/generation.model';
+import Specification from '../models/specification.model';
 import Series from '../models/series.model';
 import Message from "../utils/Message";
 
@@ -49,7 +50,13 @@ const SearchController = {
             }
 
             let generationQuery = Generation.find(query)
-                .populate('series');
+                .populate({
+                    path: 'series',
+                    populate: {
+                       path: 'specification',
+                       model: Specification
+                    }
+                });
 
             if(modelId && !modelId.match(/^[0-9a-fA-F]{24}$/)){
                 return res.status(422).json(new Message(['Invalid id provided.']).error())
