@@ -19,14 +19,16 @@
   }
 
   .crop-label {
+    cursor: pointer;
     display: block;
     margin: auto;
-    width: 110px;
+    width: 130px;
+    line-height: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+    height: 30px;
     background: $background-secundary;
     color: $font-button;
-    text-align: center;
-    padding: 5px 0 5px 0;
-    margin-bottom: 10px;
     transition: $transition-default;
 
     &:hover {
@@ -35,10 +37,10 @@
   }
 
   .crop-image {
-    max-width: 380px;
-    max-height: 380px;
-    margin: auto;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
   }
 
   .crop-buttons {
@@ -46,16 +48,17 @@
     justify-content: center;
 
     .crop-button{
+      cursor: pointer;
       border: none;
       background: $background-secundary;
       color: $font-button;
-      padding: 5px 0 5px 0;
-      width: 110px;
-      text-align: center;
       font-size: $font-size-medium;
-      margin: 0 5px 0 5px;
+      width: 130px;
+      line-height: 30px;
+      height: 30px;
       transition: $transition-default;
       outline: none;
+      margin: 0 5px 0 5px;
 
       &:hover {
         background: $background-button-hover;

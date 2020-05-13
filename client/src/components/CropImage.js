@@ -141,14 +141,16 @@ class CropImage extends React.Component {
           <label className={'crop-label'} htmlFor={'imagecrop'}>Choose</label>
 
           {src && (
-            <ReactCrop
-              src={src}
-              crop={crop}
-              ruleOfThirds
-              onImageLoaded={this.onImageLoaded}
-              onComplete={this.onCropComplete}
-              onChange={this.onCropChange}
-            />
+            <div className={'crop-image'}>
+              <ReactCrop
+                src={src}
+                crop={crop}
+                ruleOfThirds
+                onImageLoaded={this.onImageLoaded}
+                onComplete={this.onCropComplete}
+                onChange={this.onCropChange}
+              />
+            </div>
           )}
 
           <div className={'crop-buttons'}>

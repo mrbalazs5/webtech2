@@ -1,3 +1,5 @@
+@import '../../scss/variables';
+
 .bmw {
   width: 100%;
 }
@@ -6,8 +8,8 @@
   position: absolute;
   top: 50%;
   left: 50px;
-  font-size: 50px;
-  font-weight: bold;
+  font-size: 70px;
+  font-family: $lato-bold;
   color: white;
   transform: translateY(-50%);
 }
