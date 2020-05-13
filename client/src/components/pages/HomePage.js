@@ -9,7 +9,7 @@ class HomePage extends React.Component{
       <Page>
         <img className={'bmw'} src={mainimage} alt={'bmw'}/>
         <div className={'title'}>
-          Nem találtam a képet a <br/> gogglén xd bhhhasszameg
+          Vehicle Portal <br/>...find your vehicle
         </div>
       </Page>
     );

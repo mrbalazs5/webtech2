@@ -22,6 +22,9 @@ class SignUpForm extends React.Component{
     };
 
     this.validator = new SimpleReactValidator({
+      messages: {
+        avatar: 'You must upload an avatar!'
+      },
       validators: {
         passwordMatch: {
           message: 'Password does not match!',
@@ -100,6 +103,7 @@ class SignUpForm extends React.Component{
   }
 
   render(){
+
     return(
       <form className={'form twocol'} onSubmit={this.handleSubmit}>
 
@@ -187,14 +191,10 @@ class SignUpForm extends React.Component{
           />
         </div>
 
-        <div className={'validator'}>
-          {this.validator.message('avatarSet', this.state.avatarSrc, 'avatarSet')}
-        </div>
-
         <div className={'form-item onesize left fullborder'}>
           <div className={classNames('avatar-upload', this.state.cropping ? 'cropping' : '')} onClick={this.setCropping}>
             <SVG name={'UPLOAD_ICON'} className={'upload-label'}/>
-            <img id={'avatarSet'} className={'avatar-preview'} src={this.state.avatarSrc ? this.state.avatarSrc : defaultAvatar} alt={'Avatar preview'}/>
+            <img id={'avatar'} className={'avatar-preview'} src={this.state.avatarSrc ? this.state.avatarSrc : defaultAvatar} alt={'Avatar preview'}/>
           </div>
           <label className={'form-label'}>Avatar</label>
         </div>

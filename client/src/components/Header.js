@@ -5,7 +5,9 @@ class Header extends React.Component{
   render(){
     return(
       <header>
-        <Menu/>
+        <div className={'header-content'}>
+          <Menu/>
+        </div>
       </header>
     );
   }

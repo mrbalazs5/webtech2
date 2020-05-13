@@ -189,14 +189,14 @@
           line-height: 60px;
 
           .navlink {
-            width: 130px;
+            padding: 0 20px 0 20px;
             text-align: center;
           }
   
           .admin-items {
             position: absolute;
             top: 60px;
-            width: 130px;
+            width: 160px;
             box-sizing: border-box;
 
             .admin-items-wrapper {
@@ -214,7 +214,7 @@
             position: absolute;
             top: 60px;
             right: 0;
-            width: 130px;
+            width: 160px;
             box-sizing: border-box;
 
             .profile-items-wrapper {

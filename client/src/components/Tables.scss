@@ -1,0 +1,23 @@
+@import '../scss/variables';
+
+.table {
+  display: block;
+  max-width: 1000px;
+  margin: auto;
+
+  .row {
+    display: block;
+    float: left;
+    width: 100%;
+
+    .row-cell {
+      width: 100px;
+      display: inline-block;
+      background: red;
+
+      .cell-item {
+        display: inline-block;
+      }
+    }
+  }
+}
