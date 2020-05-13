@@ -1,11 +1,12 @@
 @import '../../scss/variables';
 
 .models {
-  display: block;
-  margin: auto;
-  
   .models-title {
     display: block;
+    margin: auto;
+    font-size: 40px;
+    padding: 20px 0 20px 0;
+    width: 1054px;
   }
 
   

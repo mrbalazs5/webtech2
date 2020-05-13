@@ -32,9 +32,8 @@ class ModelsPage extends React.Component{
     return(
       <Page>
         <div className={'models'}>
-          <div className={'models-title'}>
-            <ModelsTable models={this.state.models}/>
-          </div>
+          <div className={'models-title'}>Models list</div>
+          <ModelsTable models={this.state.models}/>
         </div>
       </Page>
     );

@@ -3,35 +3,56 @@
 .table {
   display: flex;
   flex-direction: column;
-  background: yellow;
+  max-width: 1054px;
+  border: $border-default;
+  overflow-y: auto;
+
+  .row:nth-child(2n+1) {
+    background: $background-secundary;
+    color: white;
+  }
 
   .item {
-    padding: 5px;
-    width: 100px;
+    min-width: 120px;
+    padding: 0 5px 0 5px;
+
+    &.left {
+      text-align: left;
+    }
+
+    &.center {
+      text-align: center;
+    }
+
+    &.right {
+      text-align: right;
+    }
   }
 
   .row {
     display: flex;
     align-items: flex-start;
+    padding: 5px;
 
     .cell {
       display: flex;
       flex-direction: column;
-      margin: 2px;
-      background: red;
+
+      &.left {
+        align-items: left;
+      }
+  
+      &.center {
+        align-items: center;
+      }
+  
+      &.right {
+        align-items: right;
+      }
 
       .cell-row {
         display: flex;
         flex-direction: row;
-        margin: 2px;
-        background: white;
-
-        .cell-cell-row {
-          display: flex;
-          flex-direction: column;
-          margin: 2px;
-          background: green;
-        }
       }
     }
   }
