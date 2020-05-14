@@ -1,22 +1,58 @@
 @import '../scss/variables';
 
 .table {
-  display: block;
-  max-width: 1000px;
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 1054px;
+  border: $border-default;
+  overflow-y: auto;
+
+  .row:nth-child(2n+1) {
+    background: $background-secundary;
+    color: white;
+  }
+
+  .item {
+    min-width: 120px;
+    padding: 0 5px 0 5px;
+
+    &.left {
+      text-align: left;
+    }
+
+    &.center {
+      text-align: center;
+    }
+
+    &.right {
+      text-align: right;
+    }
+  }
 
   .row {
-    display: block;
-    float: left;
-    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    padding: 5px;
 
-    .row-cell {
-      width: 100px;
-      display: inline-block;
-      background: red;
+    .cell {
+      display: flex;
+      flex-direction: column;
 
-      .cell-item {
-        display: inline-block;
+      &.left {
+        align-items: left;
+      }
+  
+      &.center {
+        align-items: center;
+      }
+  
+      &.right {
+        align-items: right;
+      }
+
+      .cell-row {
+        display: flex;
+        flex-direction: row;
       }
     }
   }
