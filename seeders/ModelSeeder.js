@@ -129,6 +129,12 @@ class ModelSeeder{
                     return modelObject.save()
                         .then((modelDB) => {
 
+                            Make.findById(makes[0]._id)
+                                .then((makeDB) =>{
+                                    makeDB.models.push(modelDB._id.toString());
+                                    makeDB.save();
+                                });
+
                             let generationPromises = model.generations.map((generation) => {
 
                                 let generationObject = new Generation({
