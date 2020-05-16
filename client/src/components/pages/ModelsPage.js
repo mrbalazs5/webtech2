@@ -30,7 +30,7 @@ class ModelsPage extends React.Component{
 
   render(){
     return(
-      <Page>
+      <Page location={this.props.location}>
         <div className={'models'}>
           <div className={'models-title'}>Models list</div>
           <ModelsTable models={this.state.models}/>

@@ -6,7 +6,7 @@ import SignUpForm from '../SignUpForm';
 class SignUnPage extends React.Component{
   render(){
     return(
-      <Page>
+      <Page location={this.props.location}>
         <Forms>
           <SignUpForm history={this.props.history}/>
         </Forms>

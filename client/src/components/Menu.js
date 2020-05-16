@@ -81,6 +81,11 @@ class Menu extends React.Component{
     this.setState({
       hamburgerMenu: !this.state.hamburgerMenu
     });
+    if(!this.state.hamburgerMenu){
+      document.getElementsByTagName('body')[0].style.overflow='hidden';
+    }else{
+      document.getElementsByTagName('body')[0].style.overflow='auto';
+    }
   }
 
   handleProfileMenu(){

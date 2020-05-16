@@ -5,13 +5,13 @@ body, html {
   height: 100%;
   font-family: $lato-normal;
   font-size: $font-size-medium;
+  scroll-behavior: smooth;
 }
 
 header {
   height: 60px;
   background: $background-default;
-  border-bottom: $border-default;
-  
+  border-bottom: $border-default;  
 
   .header-content {
     max-width: 1920px;

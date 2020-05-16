@@ -1,5 +1,6 @@
 import React from 'react';
 import './Forms.scss';
+import AnimateLoad from './AnimateLoad';
 
 class Forms extends React.Component {
   render(){
@@ -8,10 +9,11 @@ class Forms extends React.Component {
 
         <div className={'forms-bg'}/>
 
-        <div className={'forms-content'}>
-          {this.props.children}
-        </div>
-
+        <AnimateLoad>
+          <div className={'forms-content'}>
+            {this.props.children}
+          </div>
+        </AnimateLoad>
       </div>
     );
   }

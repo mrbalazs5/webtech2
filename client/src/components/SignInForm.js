@@ -40,10 +40,16 @@ class SignInForm extends React.Component{
       })
       .then((response) => {
         if(response.type === 'success'){
-          this.props.history.push('/my-profile');
+          this.props.history.push({
+            pathname: '/',
+            state: {message: response}
+          });
           window.location.reload();
-        }else{
-          console.log(response);
+        }else if(response.type === 'alert'){
+          this.props.history.push({
+            pathname: '/sign-in',
+            state: {message: response}
+          });
         }
       })
       .catch((error) => {

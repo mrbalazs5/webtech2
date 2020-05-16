@@ -4,7 +4,7 @@ import Page from '../Page';
 class ErrorPage extends React.Component{
   render(){
     return(
-      <Page>
+      <Page location={this.props.location}>
         errorpage
       </Page>
     );

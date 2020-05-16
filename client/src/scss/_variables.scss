@@ -42,8 +42,11 @@ $border-default: 2px solid rgba(235, 235, 235, 1.0);
 $shadow-default: 0px 0px 3px 0px rgba(0, 0, 0, 0.4);
 $shadow-forms: 15px 15px 10px 0px rgba(0, 0, 0, 0.4);
 
-
 //font size(s)
 $font-size-large: 24px;
 $font-size-medium: 20px;
 $font-size-small: 14px;
+
+//messages
+$success: rgba(3, 173, 43, 1.0);
+$alert: rgba(237, 64, 73, 1.0);

@@ -4,7 +4,7 @@ import Page from '../Page';
 class MakesPage extends React.Component{
   render(){
     return(
-      <Page>
+      <Page location={this.props.location}>
         MakesPage
       </Page>
     );

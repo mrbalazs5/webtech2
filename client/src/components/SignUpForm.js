@@ -87,9 +87,15 @@ class SignUpForm extends React.Component{
       })
       .then((response) => {
         if(response.type === 'success'){
-          this.props.history.push('/sign-in');
-        }else{
-          console.log(response);
+          this.props.history.push({
+            pathname: '/sign-in',
+            state: {message: response}
+          });
+        }else if(response.type === 'alert'){
+          this.props.history.push({
+            pathname: '/sign-up',
+            state: {message: response}
+          });
         }
       })
       .catch((error) => {

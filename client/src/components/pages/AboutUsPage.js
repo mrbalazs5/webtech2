@@ -4,7 +4,7 @@ import Page from '../Page';
 class AboutUsPage extends React.Component{
   render(){
     return(
-      <Page>
+      <Page location={this.props.location}>
         AboutUsPage
       </Page>
     );
