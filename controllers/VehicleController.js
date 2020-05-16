@@ -91,6 +91,18 @@ const VehicleController = {
                     return res.status(422).json(new Message([err.toString()]).error());
                 });
 
+        }
+    },
+    deleteMake: {
+        controller: (req, res) => {
+
+            const { id } = req.params;
+
+            Make.deleteOne({_id: id})
+                .then(() => {
+
+                    return res.status(422).json(new Message(['Make deleted']).success());
+                });
 
         }
     },

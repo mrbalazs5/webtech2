@@ -40,6 +40,8 @@ app.post('/api/create-make', VehicleController.createMake.controller);
 
 app.get('/api/get-makes', VehicleController.getMakes.controller);
 
+app.delete('/api/delete-make/:id', VehicleController.deleteMake.controller);
+
 app.post('/api/create-model', VehicleController.createModel.controller);
 
 app.get('/api/get-models', VehicleController.getModels.controller);
