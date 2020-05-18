@@ -351,6 +351,19 @@ const VehicleController = {
 
         }
     },
+    deleteModel: {
+        controller: (req, res) => {
+
+            const { id } = req.params;
+
+            Model.deleteOne({_id: id})
+                .then(() => {
+
+                    return res.status(422).json(new Message(['Model deleted']).success());
+                });
+
+        }
+    },
     createDealership: {
         controller: (req, res) => {
 
