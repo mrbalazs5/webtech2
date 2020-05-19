@@ -10,9 +10,7 @@ class Forms extends React.Component {
         <div className={'forms-bg'}/>
 
         <AnimateLoad>
-          <div className={'forms-content'}>
-            {this.props.children}
-          </div>
+          {this.props.children}
         </AnimateLoad>
       </div>
     );

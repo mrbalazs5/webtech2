@@ -3,10 +3,9 @@ import Messages from './Messages';
 import AnimateLoad from './AnimateLoad';
 
 class Page extends React.Component{
-
   render(){
 
-    const message = this.props.location.state ? this.props.location.state.message : null;
+    let message = this.props.location.state ? this.props.location.state.message : null;
 
     return(
       <div className={'page'}>
@@ -14,7 +13,7 @@ class Page extends React.Component{
           message && message.type === 'success' ?
           (
             <AnimateLoad>
-              <Messages message={message} className={'success'}/>
+              <Messages message={message} className={'success'} onClean={this.handleClean}/>
             </AnimateLoad>
           ) : ''
         }
@@ -22,7 +21,7 @@ class Page extends React.Component{
           message && message.type === 'alert' ?
           (
             <AnimateLoad>
-              <Messages message={message} className={'alert'}/>
+              <Messages message={message} className={'alert'} onClean={this.handleClean}/>
             </AnimateLoad>
           ) : ''
         }

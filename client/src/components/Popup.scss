@@ -24,5 +24,20 @@
     z-index: 999;
     background: $background-default;
     padding: 15px;
+    position: relative;
+
+    .popup-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      cursor: pointer;
+
+      .popup-close-icon {
+        svg {
+          height: 20px;
+          fill: red;
+        }
+      }
+    }
   }
 }

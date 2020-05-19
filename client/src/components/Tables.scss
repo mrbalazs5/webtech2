@@ -5,7 +5,6 @@
   flex-direction: column;
   max-width: 1054px;
   border: $border-default;
-  overflow-y: auto;
 
   .row:nth-child(2n+1) {
     background: $background-secundary;
@@ -26,6 +25,11 @@
 
     &.right {
       text-align: right;
+    }
+
+    &.clickable {
+      cursor: pointer;
+      text-decoration: underline;
     }
   }
 

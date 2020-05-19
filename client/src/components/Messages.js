@@ -24,7 +24,7 @@ class Messages extends React.Component {
     setTimeout(() => {
       this.setState({
         isShow: false
-      })
+      });
     }, 3000);
   }
 
@@ -36,13 +36,12 @@ class Messages extends React.Component {
     const {messages} = this.props.message;
 
     return(
-      <div className={classNames('messages', this.state.isShow ? 'show' : 'hide')} onClick={this.handleClick}>
+      <div className={classNames('messages', this.state.isShow ? 'show' : 'hide')} onClick={this.props.onClean}>
         {
           messages.map((message, index) => {
             return(
               <div key={index} className={this.props.className}>
                 {message}
-                {console.log(message)}
               </div>
             );
           })
