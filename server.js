@@ -36,6 +36,8 @@ app.post('/api/sign-up', UserController.signUp.controller);
 
 app.post('/api/sign-in', UserController.signIn.controller);
 
+app.delete('/api/delete-user/:id', UserController.deleteUser.controller);
+
 app.post('/api/create-make', VehicleController.createMake.controller);
 
 app.get('/api/get-makes', VehicleController.getMakes.controller);
@@ -45,6 +47,8 @@ app.delete('/api/delete-make/:id', VehicleController.deleteMake.controller);
 app.post('/api/create-model', VehicleController.createModel.controller);
 
 app.get('/api/get-models', VehicleController.getModels.controller);
+
+app.delete('/api/delete-model/:id', VehicleController.deleteModel.controller);
 
 app.post('/api/create-dealership', VehicleController.createDealership.controller);
 

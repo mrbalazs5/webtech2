@@ -5,6 +5,7 @@ import FileHandler from '../utils/FileHandler';
 import {trim, escape, isEmail, normalizeEmail, isLength} from 'validator';
 import {isEmpty} from '../utils/customValidator';
 import jwt from 'jsonwebtoken';
+import Model from "../models/model.model";
 
 //Handles user requests
 const UserController = {
@@ -122,6 +123,19 @@ const UserController = {
                     console.log(err);
 
                     return res.json(new Message([err.toString()]).error());
+                });
+
+        }
+    },
+    deleteUser: {
+        controller: (req, res) => {
+
+            const { id } = req.params;
+
+            User.deleteOne({_id: id})
+                .then(() => {
+
+                    return res.status(422).json(new Message(['User deleted']).success());
                 });
 
         }

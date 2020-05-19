@@ -113,6 +113,75 @@ class ModelSeeder{
                         ]
                     }
                 ]
+            },
+            {
+                name: 'Test model 1',
+                generations: [{
+                    name: '1st',
+                    yearBegin: 2002,
+                    yearEnd: 2013,
+                    series: [
+                        {
+                            name: 'Test series 1',
+                            specification: {
+                                engine: "1.9 L I4 8v",
+                                enginePower: 200,
+                                gearType: 1,
+                                numberOfGears: 6,
+                                numberOfWheels: 4,
+                                width: 1,
+                                length: 3,
+                                seatingCapacity: 5,
+                                maxSpeed: 250,
+                                fullWeight: 1105,
+                                fuelCapacity: 1505,
+                                fuelConsumption: 10
+                            }
+                        }
+                    ]
+                },
+                {
+                    name: '2nd',
+                    yearBegin: 2005,
+                    yearEnd: 2014,
+                    series: [
+                        {
+                            name: 'Test series 2',
+                            specification: {
+                                engine: "1.9 L I4 16v",
+                                enginePower: 260,
+                                gearType: 0,
+                                numberOfGears: 6,
+                                numberOfWheels: 4,
+                                width: 1,
+                                length: 3,
+                                seatingCapacity: 5,
+                                maxSpeed: 250,
+                                fullWeight: 1125,
+                                fuelCapacity: 1700,
+                                fuelConsumption: 10
+                            }
+                        },
+                        {
+                            name: 'Test series 6',
+                            specification: {
+                                engine: "1.9 L I4 16v",
+                                enginePower: 260,
+                                gearType: 0,
+                                numberOfGears: 6,
+                                numberOfWheels: 4,
+                                width: 1,
+                                length: 3,
+                                seatingCapacity: 5,
+                                maxSpeed: 250,
+                                fullWeight: 1125,
+                                fuelCapacity: 1700,
+                                fuelConsumption: 10
+                            }
+                        }
+                    ]
+                }
+                ]
             }
         ];
 
@@ -123,7 +192,7 @@ class ModelSeeder{
 
                     let modelObject = new Model({
                         name: model.name,
-                        make: makes[0]._id.toString()
+                        make: makes[Math.floor(Math.random() * makes.length)]._id.toString()
                     });
 
                     return modelObject.save()
