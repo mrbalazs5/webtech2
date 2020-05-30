@@ -22,6 +22,7 @@
   }
 }
 
+
 .form {
   background: $background-default;
   box-shadow: $shadow-forms;
@@ -29,6 +30,8 @@
   font-size: $font-size-medium;
   padding: 15px 15px 0 15px;
   border: $border-default;
+  display: flex;
+  flex-wrap: wrap;
 
   &.onecol {
     width: 330px;
@@ -36,6 +39,7 @@
 
   &.twocol {
     width: 645px;
+    justify-content: space-between;
   }
 
   .form-item {
@@ -69,27 +73,33 @@
 
     &.onesize {
       width: 300px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
     &.twosize {
       width: 615px;
     }
 
-    &.left {
-      float: left;
-    }
-
-    &.right {
-      float: right;
+    &.thirdsize {
+      width: 197px;
     }
 
     .form-label {
       color: $font-label;
-      display: block;
-      width: 60%;
+      display: inline-block;
       margin-bottom: 10px;
+      white-space: nowrap;
+
+      .plus-icon {
+        display: inline-block;
+        margin-left: 5px;
+        cursor: pointer;
+
+        .plus-icon-svg {
+          svg {
+            height: 14px;
+          }
+        }
+      }
     }
 
     .form-input {
@@ -147,7 +157,7 @@
     }
 
     .submit-button {
-      width: 100%;
+      width: 300px;
       font-size: $font-size-medium;
       border: none;
       line-height: 30px;
@@ -156,6 +166,12 @@
       background: $background-secundary;
       transition: $transition-default;
       cursor: pointer;
+      
+      &.centered {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+      }
 
       &:hover {
         background: $background-button-hover;
@@ -184,6 +200,10 @@
 
     .form-item {
       &.twosize {
+        width: 300px;
+      }
+
+      &.thirdsize {
         width: 300px;
       }
     }

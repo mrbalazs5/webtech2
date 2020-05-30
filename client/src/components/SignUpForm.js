@@ -117,7 +117,7 @@ class SignUpForm extends React.Component{
           Sign Up
         </div>
 
-        <div className={'form-item onesize left fullborder'}>
+        <div className={'form-item onesize fullborder'}>
 
           <div className={'validator'}>
             <div className={'validator-text'}>
@@ -137,7 +137,7 @@ class SignUpForm extends React.Component{
           />
         </div>
 
-        <div className={'form-item onesize right fullborder'}>
+        <div className={'form-item onesize fullborder'}>
 
           <div className={'validator'}>
             <div className={'validator-text'}>
@@ -157,7 +157,7 @@ class SignUpForm extends React.Component{
           />
         </div>
 
-        <div className={'form-item onesize left fullborder'}>
+        <div className={'form-item onesize fullborder'}>
 
           <div className={'validator'}>
             <div className={'validator-text'}>
@@ -177,7 +177,7 @@ class SignUpForm extends React.Component{
           />
         </div>
 
-        <div className={'form-item onesize right fullborder'}>
+        <div className={'form-item onesize fullborder'}>
 
           <div className={'validator'}>
             <div className={'validator-text'}>
@@ -197,7 +197,7 @@ class SignUpForm extends React.Component{
           />
         </div>
 
-        <div className={'form-item onesize left fullborder'}>
+        <div className={'form-item onesize fullborder'}>
           <div className={classNames('avatar-upload', this.state.cropping ? 'cropping' : '')} onClick={this.setCropping}>
             <SVG name={'UPLOAD_ICON'} className={'upload-label'}/>
             <img id={'avatar'} className={'avatar-preview'} src={this.state.avatarSrc ? this.state.avatarSrc : defaultAvatar} alt={'Avatar preview'}/>
@@ -209,11 +209,11 @@ class SignUpForm extends React.Component{
           <CropImage onCancel={this.setCropping} onSave={this.onSaveImage}/>
         )}
 
-        <div className={'form-item onesize'}>
-          <button className={'submit-button'} type={'submit'}>Sign Up</button>
+        <div className={'form-item twosize'}>
+          <button className={'submit-button centered'} type={'submit'}>Sign Up</button>
         </div>
 
-        <div className={'form-item onesize'}>
+        <div className={'form-item twosize'}>
           <div className={'href-text'}>
             Already have an account?
             <NavLink className={'href-link'} exact to={'/sign-in'}> Click here!</NavLink>

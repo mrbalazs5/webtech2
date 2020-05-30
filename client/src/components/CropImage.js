@@ -122,7 +122,7 @@ class CropImage extends React.Component {
     const {src, crop, croppedImageUrl, file} = this.state;
 
     return(
-      <Popup>
+      <Popup onClose={this.props.onCancel}>
         <div className={'crop'}>
           <div className={'crop-title'}>
             Select your file
@@ -154,7 +154,6 @@ class CropImage extends React.Component {
           )}
 
           <div className={'crop-buttons'}>
-            <button onClick={this.props.onCancel} className={'crop-button'} type={'button'}>Cancel</button>
             {src && (
               <button onClick={() => this.props.onSave(file, croppedImageUrl)} className={'crop-button'} type={'button'}>Save</button>
             )}
