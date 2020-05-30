@@ -34,7 +34,11 @@ class AddModelForm extends React.Component{
         <div className={'form-item twosize bottomborder'}>
           Add model
         </div>
-        
+          {
+            this.state.makes.map(make => (
+                <div key={make._id}>{make.name}</div>
+            ))
+          }
       </form>
     );
   }
