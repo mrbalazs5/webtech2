@@ -39,6 +39,7 @@ class AddModelForm extends React.Component{
         <div className={'form-item twosize bottomborder'}>
           Add model
         </div>
+<<<<<<< HEAD
 
         <div className={'form-item onesize fullborder'}>
           <label className={'form-label'} htmlFor={'name'}>Name</label>
@@ -72,6 +73,13 @@ class AddModelForm extends React.Component{
           )}
         </div>
         
+=======
+          {
+            this.state.makes.map(make => (
+                <div key={make._id}>{make.name}</div>
+            ))
+          }
+>>>>>>> 56c6721f9356278f8606d6bf754e1fef056ae91f
       </form>
     );
   }

@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 //connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
     .catch((err) => {
         console.log(err);
     });
@@ -75,3 +75,5 @@ app.post('/api/log-out', (req, res) => {
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+export default app;

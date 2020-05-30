@@ -7,10 +7,11 @@
     "build": "cd client && npm run build",
     "server": "nodemon --exec babel-node server.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "test": "mocha -r esm --timeout 0 --require @babel/register --require @babel/polyfill --exit",
     "install-dev": "npm install && cd client && npm install && cd ..",
     "resetDB": "babel-node app/commands/resetDB",
-    "seed": "babel-node app/commands/seed"
+    "seed": "babel-node app/commands/seed",
+    "test": "jest --forceExit",
+    "test:watch": "jest --watch --forceExit"
   },
   "author": "Megyeri Balázs, Pankotai Márk Sándor, Vass Dávid",
   "license": "ISC",
@@ -18,14 +19,16 @@
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.7",
     "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-function-bind": "^7.8.3",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/polyfill": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
+    "@babel/preset-react": "^7.9.4",
     "@babel/register": "^7.8.6",
+    "babel-polyfill": "^6.26.0",
     "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
-    "chai": "^4.2.0",
-    "chai-http": "^4.3.0",
     "classnames": "^2.2.6",
     "concurrently": "^5.1.0",
     "cookie-parser": "^1.4.5",
@@ -34,7 +37,6 @@
     "jquery": "^3.4.1",
     "jsonwebtoken": "^8.5.1",
     "mkdirp": "^1.0.3",
-    "mocha": "^7.1.1",
     "mongoose": "^5.9.5",
     "multer": "^1.4.2",
     "nodemon": "^2.0.2",
@@ -43,5 +45,9 @@
     "swagger-ui-express": "^4.1.4",
     "validator": "^13.0.0",
     "xlsx": "^0.15.6"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1",
+    "supertest": "^4.0.2"
   }
 }
