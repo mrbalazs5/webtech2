@@ -195,14 +195,14 @@ class Menu extends React.Component{
                       </NavLink>
                     </div>
                   : ''}
-                  {this.state.user ?
-                    <div className={'item profile'}>
-                      <NavLink className={'navlink'} activeClassName={'active'} exact to={'/settings'}>
-                        <SVG name={'SETTINGS_ICON'} className={'menu-icon left'}></SVG>
-                        Settings
-                      </NavLink>
-                    </div>
-                  : ''}
+                  {/*{this.state.user ?*/}
+                    {/*<div className={'item profile'}>*/}
+                      {/*<NavLink className={'navlink'} activeClassName={'active'} exact to={'/settings'}>*/}
+                        {/*<SVG name={'SETTINGS_ICON'} className={'menu-icon left'}></SVG>*/}
+                        {/*Settings*/}
+                      {/*</NavLink>*/}
+                    {/*</div>*/}
+                  {/*: ''}*/}
                   {this.state.user ?
                     <div className={'item profile'}>
                       <div className={'navlink'} onClick={this.logout}>

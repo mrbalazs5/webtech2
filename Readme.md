@@ -5,15 +5,16 @@ and manage them from the UI.
 
 Created by Megyeri Balázs, Pankotai Márk Sándor, Vass Dávid
 
+## Configuration
+
+Rename the `.env.example` file to `.env` and fill the variables with your config data.
+
 ## Installation
 
 Install client and server dependencies: `npm run install-dev`
 
 Fill the database with some initial data: `npm run seed`
 
-## Configuration
-
-Rename the `.env.example` file to `.env` and fill the variables with your config data.
 
 ## Run the application
 
@@ -23,8 +24,10 @@ It will run both server(NodeJS) and client(ReactJS) in `dev` mode.
 
 `npm run resetDB`
 
-Resets database 
+Resets database(optional)
 
 ## Tests
 
 `npm run test`
+
+It will run all tests in the \__tests\__ directory
