@@ -14,10 +14,14 @@ class AddModelForm extends React.Component{
     };
 
     this.handleAddMakePopup = this.handleAddMakePopup.bind(this);
-    this.handleMakeChange = this.handleMakeChange.bind(this);
+    this.fetchMakes = this.fetchMakes.bind(this);
   }
 
   componentDidMount(){
+    this.fetchMakes();
+  }
+
+  fetchMakes(){
     fetch('/api/get-makes')
     .then((response) => {
       if(response.status === 200){
@@ -26,10 +30,6 @@ class AddModelForm extends React.Component{
       console.log(typeof response);
     })
     .then((makes) => {
-      makes.forEach((make) => {
-        make['active'] = false;
-      });
-
       this.setState({
         makes: makes
       });
@@ -45,16 +45,12 @@ class AddModelForm extends React.Component{
     });
   }
 
-  handleMakeChange(index){
-
-  }
-
   render(){
     return(
       <form className={'form twocol withbg'}>
 
         {this.state.addMakePopup ? 
-          <AddMakePopup onClose={this.handleAddMakePopup}/>
+          <AddMakePopup onClose={this.handleAddMakePopup} updateMakes={this.fetchMakes}/>
         : ''}
 
         <div className={'form-item twosize bottomborder'}>

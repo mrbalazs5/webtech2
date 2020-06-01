@@ -37,9 +37,11 @@ class AddMakePopup extends React.Component {
       })
       .then((response) => {
         if(response){
-          window.location.reload();
           this.props.history.push({
             state: {message: response}
+          });
+          this.setState({
+            name: ''
           });
         }
       })
@@ -83,7 +85,7 @@ class AddMakePopup extends React.Component {
           </div>
 
           <div className={'form-item onesize'}>
-            <button className={'submit-button'} type={'submit'}>Add Make</button>
+            <button className={'submit-button'} type={'submit'} onClick={this.props.updateMakes()}>Add Make</button>
           </div>
 
         </form>
