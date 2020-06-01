@@ -2,10 +2,10 @@ import React from 'react';
 import Page from '../Page';
 import './ModelsPage.scss';
 import ModelsTable from '../ModelsTable';
-import SVG from '../SVG';
-import {NavLink} from 'react-router-dom';
+import AdminPage from '../admin/AdminPage';
+import AdminTitle from '../admin/AdminTitle';
 
-class ModelsPage extends React.Component{
+class ModelsPage extends React.PureComponent{
   constructor(props){
     super(props);
 
@@ -32,20 +32,12 @@ class ModelsPage extends React.Component{
   render(){
     return(
       <Page location={this.props.location}>
-        <div className={'models'}>
+        <AdminPage>
 
-          <div className={'models-title'}>
-            <div className={'models-text'}>Models list</div>
-            <div className={'models-add'}>
-              <NavLink className={'models-add-btn'} exact to={'/admin/add-model'}>
-                <SVG name={'ADD_PLUS_ICON'} className={'models-add-icon'}/>
-                Add model
-              </NavLink>
-            </div>
-          </div>
+            <AdminTitle text={'Models list'} />
           
           <ModelsTable models={this.state.models}/>
-        </div>
+        </AdminPage>
       </Page>
     );
   }

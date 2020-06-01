@@ -36,6 +36,8 @@ app.post('/api/sign-up', UserController.signUp.controller);
 
 app.post('/api/sign-in', UserController.signIn.controller);
 
+app.get('/api/get-users', UserController.getUsers.controller);
+
 app.delete('/api/delete-user/:id', UserController.deleteUser.controller);
 
 app.post('/api/create-make', VehicleController.createMake.controller);

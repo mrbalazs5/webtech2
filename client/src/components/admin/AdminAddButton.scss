@@ -1,0 +1,32 @@
+@import '../../scss/variables';
+
+.admin-add-btn {
+  width: fit-content;
+  margin-left: auto;
+
+  .admin-add-link {
+    display: flex;
+    align-items: row;
+    text-decoration: none;
+    color: $font-default;
+    transition: $transition-default;
+
+    .admin-add-icon {
+      svg {
+        transition: $transition-default;
+        height: 15px;
+        margin-right: 5px;
+      }
+    }
+
+    &:hover {
+      color: $font-hover;
+
+      .admin-add-icon {
+        svg {
+          fill: $svg-hover;
+        }
+      }
+    }
+  }
+}

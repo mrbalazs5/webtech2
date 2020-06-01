@@ -1,5 +1,10 @@
 @import '../scss/variables';
 
+.table-wrapper{
+  display: flex;
+  flex-direction: column;
+}
+
 .table {
   display: flex;
   flex-direction: column;
@@ -59,5 +64,11 @@
         flex-direction: row;
       }
     }
+  }
+
+  .email{
+    width: min-content;
+    word-break: break-all;
+    white-space: normal;
   }
 }

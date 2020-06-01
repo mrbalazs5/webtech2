@@ -6,6 +6,9 @@ import {trim, escape, isEmail, normalizeEmail, isLength} from 'validator';
 import {isEmpty} from '../utils/customValidator';
 import jwt from 'jsonwebtoken';
 import Model from "../models/model.model";
+import Make from "../models/make.model";
+import Generation from "../models/generation.model";
+import Series from "../models/series.model";
 
 //Handles user requests
 const UserController = {
@@ -123,6 +126,27 @@ const UserController = {
                     console.log(err);
 
                     return res.json(new Message([err.toString()]).error());
+                });
+
+        }
+    },
+    getUsers: {
+        controller: (req, res) => {
+
+            User.find()
+                .then((users) => {
+
+                    if(users.length < 1){
+                        throw new Error('There are no users in the database');
+                    }
+
+                    return res.status(200).json(users);
+
+                })
+                .catch((err) =>{
+                    console.log(err);
+
+                    return res.status(422).json(new Message([err.toString()]).error());
                 });
 
         }
