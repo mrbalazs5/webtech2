@@ -10,19 +10,23 @@ class AddModelForm extends React.Component{
       name: '',
       makes: []
     };
+
+    this.handleMakeChange = this.handleMakeChange.bind(this);
   }
 
   componentDidMount(){
     fetch('/api/get-makes')
     .then((response) => {
-      console.log(typeof response);
       if(response.status === 200){
         return response.json();
       }
       console.log(typeof response);
     })
     .then((makes) => {
-      console.log(typeof makes);
+      makes.forEach((make) => {
+        make['active'] = false;
+      });
+
       this.setState({
         makes: makes
       });
@@ -30,6 +34,10 @@ class AddModelForm extends React.Component{
     .catch((error) => {
       console.log(error);
     })
+  }
+
+  handleMakeChange(index){
+
   }
 
   render(){
@@ -59,23 +67,15 @@ class AddModelForm extends React.Component{
               <SVG name={'ADD_PLUS_ICON'} className={'label-svg'}/>
             </div>
           </label>
-          {!this.state.makes ? '' : (
-            <div>
-              {Object.keys(this.state.makes).map((make, id) => {
-                return(
-                  <div key={id}>
-                    {this.state.makes[make].name}
-                  </div>
-                );
-              })}
-            </div>
-          )}
+          <select className={'form-select'}>
+            {this.state.makes.map((make, id) => {
+              return(
+                <option key={id}>{make.name}</option>
+              );
+            })}
+          </select>
+          
         </div>
-          {
-            this.state.makes.map(make => (
-                <div key={make._id}>{make.name}</div>
-            ))
-          }
       </form>
     );
   }

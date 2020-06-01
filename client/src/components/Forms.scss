@@ -112,6 +112,13 @@
       }
     }
 
+    .form-select {
+      display: block;
+      width: 100%;
+      outline: none;
+      border: $border-default;
+    }
+
     .avatar-upload {
       position: relative;
       float: right;
