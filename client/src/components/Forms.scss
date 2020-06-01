@@ -23,16 +23,19 @@
   }
 }
 
-
 .form {
-  background: $background-default;
-  box-shadow: $shadow-forms;
+  
   box-sizing: border-box;
   font-size: $font-size-medium;
-  padding: 15px 15px 0 15px;
-  border: $border-default;
   display: flex;
   flex-wrap: wrap;
+
+  &.withbg {
+    background: $background-default;
+    box-shadow: $shadow-forms;
+    padding: 15px 15px 0 15px;
+    border: $border-default;
+  }
 
   &.onecol {
     width: 330px;

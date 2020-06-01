@@ -1,16 +1,19 @@
 import React from 'react';
 import './Forms.scss';
 import SVG from './SVG';
+import AddMakePopup from './admin/AddMakePopup';
 
 class AddModelForm extends React.Component{
   constructor(props){
     super(props);
 
     this.state = {
+      addMakePopup: false,
       name: '',
       makes: []
     };
 
+    this.handleAddMakePopup = this.handleAddMakePopup.bind(this);
     this.handleMakeChange = this.handleMakeChange.bind(this);
   }
 
@@ -36,13 +39,23 @@ class AddModelForm extends React.Component{
     })
   }
 
+  handleAddMakePopup() {
+    this.setState({
+      addMakePopup: !this.state.addMakePopup
+    });
+  }
+
   handleMakeChange(index){
 
   }
 
   render(){
     return(
-      <form className={'form twocol'}>
+      <form className={'form twocol withbg'}>
+
+        {this.state.addMakePopup ? 
+          <AddMakePopup onClose={this.handleAddMakePopup}/>
+        : ''}
 
         <div className={'form-item twosize bottomborder'}>
           Add model
@@ -63,7 +76,7 @@ class AddModelForm extends React.Component{
 
         <div className={'form-item onesize fullborder'}>
           <label className={'form-label'}>Make
-            <div className={'label-icon'}>
+            <div className={'label-icon'} onClick={this.handleAddMakePopup}>
               <SVG name={'ADD_PLUS_ICON'} className={'label-svg'}/>
             </div>
           </label>

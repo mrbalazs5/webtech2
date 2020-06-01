@@ -63,7 +63,7 @@ class SignInForm extends React.Component{
 
   render(){
     return(
-      <form className={'form onecol'} onSubmit={this.handleSubmit}>
+      <form className={'form onecol withbg'} onSubmit={this.handleSubmit}>
 
         <div className={'form-item onesize bottomborder'}>
           Sign In

@@ -111,7 +111,7 @@ class SignUpForm extends React.Component{
   render(){
 
     return(
-      <form className={'form twocol'} onSubmit={this.handleSubmit}>
+      <form className={'form twocol withbg'} onSubmit={this.handleSubmit}>
 
         <div className={'form-item twosize bottomborder'}>
           Sign Up
