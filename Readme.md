@@ -22,6 +22,12 @@ Fill the database with some initial data: `npm run seed`
 
 It will run both server(NodeJS) and client(ReactJS) in `dev` mode.
 
+You can login into the example admin user with the following credentials:
+
+Email: _admin@admin.com_
+
+Password: _admin123_
+
 `npm run resetDB`
 
 Resets database(optional)

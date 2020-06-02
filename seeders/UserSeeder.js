@@ -9,6 +9,7 @@ class UserSeeder{
             email: 'admin@admin.com',
             password: 'admin123',
             name: 'Admin',
+            birthDate: new Date(),
             role: roles.admin
         }];
 

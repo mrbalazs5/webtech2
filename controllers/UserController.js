@@ -115,7 +115,9 @@ const UserController = {
                     const id = user._id;
                     const role = user.role;
                     const avatar = user.avatar;
-                    const payload = { id, email, avatar, role};
+                    const name = user.name;
+                    const birthDate = user.birthDate;
+                    const payload = { id, email, avatar, name, birthDate, role};
                     const token = jwt.sign(payload, process.env.JWT_SECRET);
 
                     return res.cookie('authToken', token, { httpOnly: true, maxAge: 900000})
