@@ -11,7 +11,7 @@ class UsersTable extends React.PureComponent {
     render(){
         return(
             <div className={'table-wrapper'}>
-                <AdminAddButton text={'Add user'} />
+                {/*<AdminAddButton text={'Add user'} />*/}
                 <div className={'table'}>
                     <div className={'row'}>
                         <div className={'cell left'}><div className={'item left'}>Email</div></div>

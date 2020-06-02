@@ -1,0 +1,19 @@
+@import '../../scss/variables';
+
+.my-profile{
+  background: $background-default;
+  box-shadow: $shadow-forms;
+  padding: 15px 15px 0 15px;
+  border: $border-default;
+  text-align: center;
+  width: 100%;
+
+  h2, h3{
+    margin: 5px 0;
+  }
+
+  .avatar{
+    width: 150px;
+  }
+
+}
