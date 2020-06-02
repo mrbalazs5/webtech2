@@ -27,6 +27,7 @@ class AddModelForm extends React.Component{
         numberOfGears: '',
         numberOfWheels: '',
         width: '',
+        length: '',
         seatingCapacity: '',
         maxSpeed: '',
         fullWeight: '',
@@ -35,7 +36,11 @@ class AddModelForm extends React.Component{
       }
     };
 
-    this.validator = new SimpleReactValidator();
+    this.validator = new SimpleReactValidator({
+      messages: {
+        required: 'This field is required!'
+      }
+    });
     this.handleAddMakePopup = this.handleAddMakePopup.bind(this);
     this.fetchMakes = this.fetchMakes.bind(this);
     this.handlesubmit = this.handlesubmit.bind(this);
@@ -43,10 +48,13 @@ class AddModelForm extends React.Component{
     this.handleAddGeneration = this.handleAddGeneration.bind(this);
     this.resetGeneration = this.resetGeneration.bind(this);
     this.handleSeriaChange = this.handleSeriaChange.bind(this);
+    this.handleAddSeria = this.handleAddSeria.bind(this);
+    this.resetSeria = this.resetSeria.bind(this);
   }
 
   componentDidMount(){
     this.fetchMakes();
+    console.log(this.state.generation);
   }
 
   fetchMakes(){
@@ -81,9 +89,9 @@ class AddModelForm extends React.Component{
 
   handleAddGeneration(){
     if(
-      this.validator.fieldValid('name') &&
-      this.validator.fieldValid('yearBegin') &&
-      this.validator.fieldValid('yearEnd')
+      this.validator.fieldValid('generationName') &&
+      this.validator.fieldValid('generationYearBegin') &&
+      this.validator.fieldValid('generationYearEnd')
     ){
       this.setState({
         generations: [...this.state.generations, this.state.generation]
@@ -99,7 +107,9 @@ class AddModelForm extends React.Component{
 
       });
     }else{
-      this.validator.showMessages();
+      this.validator.showMessageFor('generationName');
+      this.validator.showMessageFor('generationYearBegin');
+      this.validator.showMessageFor('generationYearEnd');
       this.forceUpdate();
     }
   }
@@ -126,7 +136,82 @@ class AddModelForm extends React.Component{
     this.setState({
       seria: seria
     });
+  }
 
+  handleAddSeria(){
+    if(
+      this.validator.fieldValid('seriaName') &&
+      this.validator.fieldValid('seriaEngine') &&
+      this.validator.fieldValid('seriaEnginePower') &&
+      this.validator.fieldValid('seriaGearType') &&
+      this.validator.fieldValid('seriaNumberOfGears') &&
+      this.validator.fieldValid('seriaNumberOfWheels') &&
+      this.validator.fieldValid('seriaWidth') &&
+      this.validator.fieldValid('seriaLength') &&
+      this.validator.fieldValid('seriaSeatingCapacity') &&
+      this.validator.fieldValid('seriaMaxSpeed') &&
+      this.validator.fieldValid('seriaFullWeight') &&
+      this.validator.fieldValid('seriaFuelCapacity') &&
+      this.validator.fieldValid('seriaFuelConsumption')
+    ){
+      let generation = Object.assign({}, this.state.generation);
+      let seria = Object.assign({}, this.state.seria)
+      generation.series = [...generation.series, seria];
+
+      this.setState({
+        generation: generation
+      });
+      this.resetSeria(seria);
+
+      console.log(this.state.generation);
+    }else{
+      this.validator.showMessageFor('seriaName');
+      this.validator.showMessageFor('seriaEngine');
+      this.validator.showMessageFor('seriaEnginePower');
+      this.validator.showMessageFor('seriaGearType');
+      this.validator.showMessageFor('seriaNumberOfGears');
+      this.validator.showMessageFor('seriaNumberOfWheels');
+      this.validator.showMessageFor('seriaWidth');
+      this.validator.showMessageFor('seriaLength');
+      this.validator.showMessageFor('seriaSeatingCapacity');
+      this.validator.showMessageFor('seriaMaxSpeed');
+      this.validator.showMessageFor('seriaFullWeight');
+      this.validator.showMessageFor('seriaFuelCapacity');
+      this.validator.showMessageFor('seriaFuelConsumption');
+      this.forceUpdate();
+    }
+  }
+
+  resetSeria(seria){
+    seria['name'] = '';
+    seria['engine'] = '';
+    seria['enginePower'] = '';
+    seria['gearType'] = 'Manual Transmission';
+    seria['numberOfGears'] = '';
+    seria['numberOfWheels'] = '';
+    seria['width'] = '';
+    seria['length'] = '';
+    seria['seatingCapacity'] = '';
+    seria['maxSpeed'] = '';
+    seria['fullWeight'] = '';
+    seria['fuelCapacity'] = '';
+    seria['fuelConsumption'] = '';
+
+    document.getElementById('seriaName').value = '';
+    document.getElementById('seriaEngine').value = '';
+    document.getElementById('seriaEnginePower').value = '';
+    document.getElementById('seriaGearType').value = 'Manual Transition';
+    document.getElementById('seriaNumberOfGears').value = '';
+    document.getElementById('seriaNumberOfWheels').value = '';
+    document.getElementById('seriaLength').value = '';
+    document.getElementById('seriaWidth').value = '';
+    document.getElementById('seriaSeatingCapacity').value = '';
+    document.getElementById('seriaMaxSpeed').value = '';
+    document.getElementById('seriaFullWeight').value = '';
+    document.getElementById('seriaFuelCapacity').value = '';
+    document.getElementById('seriaFuelConsumption').value = '';
+
+    return seria;
   }
 
   handleAddMakePopup() {
@@ -188,7 +273,7 @@ class AddModelForm extends React.Component{
           <div className={'form-item thirdsize fullborder'}>
             <div className={'validator'}>
               <div className={'validator-text'}>
-                {this.validator.message('name', this.state.generation.name, 'required')}
+                {this.validator.message('generationName', this.state.generation.name, 'required')}
               </div>
             </div>
             <label className={'form-label'} htmlFor={'generationName'}>Name</label>
@@ -206,7 +291,7 @@ class AddModelForm extends React.Component{
           <div className={'form-item thirdsize fullborder'}>
             <div className={'validator'}>
               <div className={'validator-text'}>
-                {this.validator.message('yearBegin', this.state.generation.yearBegin, 'required')}
+                {this.validator.message('generationYearBegin', this.state.generation.yearBegin, 'required')}
               </div>
             </div>
             <label className={'form-label'} htmlFor={'generationYearBegin'}>Year begin</label>
@@ -224,7 +309,7 @@ class AddModelForm extends React.Component{
           <div className={'form-item thirdsize fullborder'}>
             <div className={'validator'}>
               <div className={'validator-text'}>
-                {this.validator.message('yearEnd', this.state.generation.yearEnd, 'required')}
+                {this.validator.message('generationYearEnd', this.state.generation.yearEnd, 'required')}
               </div>
             </div>
             <label className={'form-label'} htmlFor={'generationYearEnd'}>Year end</label>
@@ -483,7 +568,7 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item twosize'}>
-            <button className={'submit-button'} type={'button'} >Add Series</button>
+            <button className={'submit-button'} type={'button'} onClick={this.handleAddSeria}>Add Series</button>
           </div>
 
           <div className={'form-item twosize'}>
