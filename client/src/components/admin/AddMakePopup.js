@@ -8,11 +8,13 @@ class AddMakePopup extends React.Component {
     super(props);
 
     this.state = {
-      name: ''
+      name: '',
+      messages: ''
     }
 
     this.validator = new SimpleReactValidator();
     this.handleChange = this.handleChange.bind(this);
+    this.clearMessages = this.clearMessages.bind(this);
   }
 
   handleChange = (e) => {
@@ -21,8 +23,15 @@ class AddMakePopup extends React.Component {
     });
   }
 
+  clearMessages(){
+    this.setState({
+      messages: ''
+    });
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
+    this.clearMessages();
 
     if (this.validator.allValid()) {
       fetch('/api/create-make', {
@@ -37,11 +46,8 @@ class AddMakePopup extends React.Component {
       })
       .then((response) => {
         if(response){
-          this.props.history.push({
-            state: {message: response}
-          });
           this.setState({
-            name: ''
+            messages: response
           });
         }
       })
@@ -58,7 +64,17 @@ class AddMakePopup extends React.Component {
     return(
       <Popup onClose={this.props.onClose}>
 
-        <form className={'form onecol'} onSubmit={this.handleSubmit}>
+        {this.state.messages &&
+          this.state.messages.messages.map((message, id) => {
+            return(
+              <div key={id} onClick={this.clearMessages} className={'form-message'}>
+                {message}
+              </div>
+            );
+          })
+        }
+
+        <form id={'add-make-form'} className={'form onecol'} onSubmit={this.handleSubmit}>
 
           <div className={'form-item onesize bottomborder'}>
             Add Make

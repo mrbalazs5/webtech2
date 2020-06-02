@@ -10,7 +10,7 @@ class MakesTable extends React.PureComponent{
   render(){
     return(
         <div className={'table-wrapper'}>
-            <AdminAddButton text={'Add make'} />
+            <AdminAddButton text={'Add make'} popup={this.props.showPopup}/>
             <div className={'table'}>
                 <div className={'row'}>
                     <div className={'cell left'}><div className={'item left'}>Name</div></div>

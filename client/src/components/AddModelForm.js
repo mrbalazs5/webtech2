@@ -47,45 +47,47 @@ class AddModelForm extends React.Component{
 
   render(){
     return(
-      <form className={'form twocol withbg'}>
-
+      <div>
         {this.state.addMakePopup ? 
           <AddMakePopup onClose={this.handleAddMakePopup} updateMakes={this.fetchMakes}/>
         : ''}
-
-        <div className={'form-item twosize bottomborder'}>
-          Add model
-        </div>
-
-        <div className={'form-item onesize fullborder'}>
-          <label className={'form-label'} htmlFor={'name'}>Name</label>
-          <input
-            type={'text'}
-            id={'name'}
-            value={this.state.name}
-            onChange={this.handleChange}
-            autoComplete={'off'}
-            placeholder={'Model`s name..'}
-            className={'form-input'}
-          />
-        </div>
-
-        <div className={'form-item onesize fullborder'}>
-          <label className={'form-label'}>Make
-            <div className={'label-icon'} onClick={this.handleAddMakePopup}>
-              <SVG name={'ADD_PLUS_ICON'} className={'label-svg'}/>
-            </div>
-          </label>
-          <select className={'form-select'}>
-            {this.state.makes.map((make, id) => {
-              return(
-                <option key={id}>{make.name}</option>
-              );
-            })}
-          </select>
           
-        </div>
-      </form>
+        <form id={'add-model-form'} className={'form twocol withbg'}>
+
+          <div className={'form-item twosize bottomborder'}>
+            Add model
+          </div>
+
+          <div className={'form-item onesize fullborder'}>
+            <label className={'form-label'} htmlFor={'name'}>Name</label>
+            <input
+              type={'text'}
+              id={'name'}
+              value={this.state.name}
+              onChange={this.handleChange}
+              autoComplete={'off'}
+              placeholder={'Model`s name..'}
+              className={'form-input'}
+            />
+          </div>
+
+          <div className={'form-item onesize fullborder'}>
+            <label className={'form-label'}>Make
+              <div className={'label-icon'} onClick={this.handleAddMakePopup}>
+                <SVG name={'ADD_PLUS_ICON'} className={'label-svg'}/>
+              </div>
+            </label>
+            <select className={'form-select'}>
+              {this.state.makes.map((make, id) => {
+                return(
+                  <option key={id}>{make.name}</option>
+                );
+              })}
+            </select>
+            
+          </div>
+        </form>
+      </div>
     );
   }
 }
