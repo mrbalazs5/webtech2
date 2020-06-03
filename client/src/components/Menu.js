@@ -1,7 +1,7 @@
 import React from 'react';
 import './Menu.scss';
 import classNames from 'classnames';
-import {NavLink, Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import defaultAvatar from '../images/defaultAvatar.png';
 import SVG from './SVG';
 
@@ -33,7 +33,7 @@ class Menu extends React.Component{
       }
     })
     .then((res) => {
-      if(res.user){
+      if(res && res.user){
         this.setState({
           user: res.user
         });
@@ -43,9 +43,6 @@ class Menu extends React.Component{
           });
         }
       }
-    })
-    .catch((error) => {
-      console.log(error);
     });
   }
 

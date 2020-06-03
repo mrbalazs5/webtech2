@@ -13,6 +13,7 @@ class AddModelForm extends React.Component{
       name: '',
       makes: [],
       generations: [],
+      series: [],
       generation: {
         name: '',
         yearBegin: '',
@@ -93,11 +94,16 @@ class AddModelForm extends React.Component{
       this.validator.fieldValid('generationYearBegin') &&
       this.validator.fieldValid('generationYearEnd')
     ){
+      let generation = {...this.state.generation};
+
+      generation.series = this.state.series;
+
+      console.log(generation);
+
       this.setState({
-        generations: [...this.state.generations, this.state.generation]
+        generations: [...this.state.generations, generation]
       }, () => {
 
-        let generation = Object.assign({}, this.state.generation);
         this.resetGeneration(generation);
 
         this.setState({
@@ -154,16 +160,23 @@ class AddModelForm extends React.Component{
       this.validator.fieldValid('seriaFuelCapacity') &&
       this.validator.fieldValid('seriaFuelConsumption')
     ){
-      let generation = Object.assign({}, this.state.generation);
-      let seria = Object.assign({}, this.state.seria)
-      generation.series = [...generation.series, seria];
 
-      this.setState({
-        generation: generation
-      });
-      this.resetSeria(seria);
+        this.setState({
+            series: [...this.state.series, this.state.seria]
+        }, () => {
 
-      console.log(this.state.generation);
+            let seria = Object.assign({}, this.state.seria);
+
+            this.resetSeria(seria);
+
+            this.setState({
+                seria: seria
+            });
+
+            console.log(this.state.series);
+
+        });
+
     }else{
       this.validator.showMessageFor('seriaName');
       this.validator.showMessageFor('seriaEngine');
@@ -242,7 +255,7 @@ class AddModelForm extends React.Component{
             <input
               type={'text'}
               id={'name'}
-              value={this.state.name}
+              defaultValue={this.state.name}
               onChange={this.handleChange}
               autoComplete={'off'}
               placeholder={'Model`s name..'}
@@ -257,7 +270,7 @@ class AddModelForm extends React.Component{
               </div>
             </label>
             <select className={'form-select'}>
-              {this.state.makes.map((make, id) => {
+              {this.state.makes && this.state.makes.map((make, id) => {
                 return(
                   <option key={id}>{make.name}</option>
                 );
