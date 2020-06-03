@@ -1,12 +1,8 @@
 import React from 'react';
 import './tables.scss';
-import AdminAddButton from './admin/AdminAddButton';
 import roles from '../utils/roles';
 
 class UsersTable extends React.PureComponent {
-    constructor(props) {
-        super(props);
-    }
 
     render(){
         return(

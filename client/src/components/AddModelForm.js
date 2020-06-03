@@ -13,6 +13,7 @@ class AddModelForm extends React.Component{
       name: '',
       makes: [],
       generations: [],
+      series: [],
       generation: {
         name: '',
         yearBegin: '',
@@ -95,8 +96,8 @@ class AddModelForm extends React.Component{
       series: series
     });
 
-    let generation = Object.assign({}, this.state.generation);
-    generation['series'] = [...generation['series'], series];
+    let generation = this.state.generation;
+    generation.series = series
 
     this.setState({
       generation: generation
@@ -161,7 +162,7 @@ class AddModelForm extends React.Component{
             <input
               type={'text'}
               id={'name'}
-              value={this.state.name}
+              defaultValue={this.state.name}
               onChange={this.handleChange}
               autoComplete={'off'}
               placeholder={'Model`s name..'}
@@ -176,7 +177,7 @@ class AddModelForm extends React.Component{
               </div>
             </label>
             <select className={'form-select'}>
-              {this.state.makes.map((make, id) => {
+              {this.state.makes && this.state.makes.map((make, id) => {
                 return(
                   <option key={id}>{make.name}</option>
                 );

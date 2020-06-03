@@ -3,9 +3,6 @@ import './tables.scss';
 import AdminAddButton from './admin/AdminAddButton';
 
 class MakesTable extends React.PureComponent{
-  constructor(props){
-    super(props);
-  }
 
   render(){
     return(

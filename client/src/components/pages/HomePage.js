@@ -1,7 +1,6 @@
 import React from 'react';
 import Page from '../Page';
 import './HomePage.scss';
-import mainimage from '../../images/bmw.jpg';
 import SVG from '../SVG';
 
 class HomePage extends React.Component{
