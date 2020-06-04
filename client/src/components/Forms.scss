@@ -95,6 +95,19 @@
       width: 197px;
     }
 
+    .form-subtext {
+      font-size: $font-size-small;
+
+      .subtext-holder {
+        display: inline-block;
+
+        .subtext {
+          display: inline-block;
+          margin: 0 5px 0 5px;
+        }
+      }
+    }
+
     .form-label {
       color: $font-label;
       display: inline-block;

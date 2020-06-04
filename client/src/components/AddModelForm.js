@@ -12,6 +12,7 @@ class AddModelForm extends React.Component{
       addMakePopup: false,
       name: '',
       makes: [],
+      selectedMake: 'Select Make..',
       generations: [],
       series: [],
       generation: {
@@ -40,14 +41,41 @@ class AddModelForm extends React.Component{
       }
     };
 
+    this.validator = new SimpleReactValidator({
+      messages: {
+        required: 'This field is required!'
+      },
+    })
     this.handleAddMakePopup = this.handleAddMakePopup.bind(this);
     this.fetchMakes = this.fetchMakes.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleMakeChange = this.handleMakeChange.bind(this);
+    this.handleModelChange = this.handleModelChange.bind(this);
     this.handleSeriesChange = this.handleSeriesChange.bind(this);
     this.handleSpecificationChange = this.handleSpecificationChange.bind(this);
     this.handleGenerationChange = this.handleGenerationChange.bind(this);
     this.handleAddSeries = this.handleAddSeries.bind(this);
     this.handleAddGeneration = this.handleAddGeneration.bind(this);
+    this.resetSeries = this.resetSeries.bind(this);
+    this.resetSpecification = this.resetSpecification.bind(this);
+    this.resetGeneration = this.resetGeneration.bind(this);
+  }
+
+  handleMakeChange(e){
+    let selectedMake = e.target.value;
+
+    this.setState({
+      selectedMake: selectedMake
+    });
+  }
+
+  handleModelChange(e) {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    this.setState({
+      name: value
+    });
   }
 
   handleSeriesChange(e){
@@ -87,28 +115,126 @@ class AddModelForm extends React.Component{
   }
 
   handleAddSeries(){
-    let specification = Object.assign({}, this.state.specification);
-    let series = Object.assign({}, this.state.series);
-    series['specification'] = [...series['specification'], specification];
-    console.log(series);
+    if(
+      this.validator.fieldValid('specName') &&
+      this.validator.fieldValid('specEngine') &&
+      this.validator.fieldValid('specEnginePower') &&
+      this.validator.fieldValid('specNumberOfGears') &&
+      this.validator.fieldValid('specWidth') &&
+      this.validator.fieldValid('specNumberOfWheels') &&
+      this.validator.fieldValid('specLength') &&
+      this.validator.fieldValid('specSeatingCapacity') &&
+      this.validator.fieldValid('specMaxSpeed') &&
+      this.validator.fieldValid('specFullWeight') &&
+      this.validator.fieldValid('specFuelCapacity') &&
+      this.validator.fieldValid('specFuelConsumption')
+    ){
+      let generation = this.state.generation;
+      let series = Object.assign({}, this.state.series);
+      let specification = Object.assign({}, this.state.specification);
 
-    this.setState({
-      series: series
-    });
+      series.specification = specification;
+      generation.series = [...generation.series, series];
 
-    let generation = this.state.generation;
-    generation.series = series
+      this.setState({
+        generation: generation
+      });
 
-    this.setState({
-      generation: generation
-    });
-    console.log(this.state.generation);
+    }else {
+      this.validator.showMessageFor('specName');
+      this.validator.showMessageFor('specEngine');
+      this.validator.showMessageFor('specEnginePower');
+      this.validator.showMessageFor('specNumberOfGears');
+      this.validator.showMessageFor('specWidth');
+      this.validator.showMessageFor('specNumberOfWheels');
+      this.validator.showMessageFor('specLength');
+      this.validator.showMessageFor('specSeatingCapacity');
+      this.validator.showMessageFor('specMaxSpeed');
+      this.validator.showMessageFor('specFullWeight');
+      this.validator.showMessageFor('specFuelCapacity');
+      this.validator.showMessageFor('specFuelConsumption');
+      this.forceUpdate();
+    }
+  }
+
+  resetSeries(series){
+    series.name = '';
+    series.specification = [];
+
+    document.getElementById('specName').value = '';
+
+    return series;
+  }
+
+  resetSpecification(specification){
+    specification.engine = '';
+    specification.enginePower = '';
+    specification.gearType = 'Manual Transmission';
+    specification.numberOfGears = '';
+    specification.numberOfWheels = '';
+    specification.width = '';
+    specification.length = '';
+    specification.seatingCapacity = '';
+    specification.maxSpeed = '';
+    specification.fullWeight = '';
+    specification.fuelCapacity = '';
+    specification.fuelConsumption = '';
+
+    document.getElementById('specEngine').value = '';
+    document.getElementById('specEnginePower').value = '';
+    document.getElementById('specGearType').value = 'Manual Transmission';
+    document.getElementById('specNumberOfGears').value = '';
+    document.getElementById('specNumberOfWheels').value = '';
+    document.getElementById('specWidth').value = '';
+    document.getElementById('specLength').value = '';
+    document.getElementById('specSeatingCapacity').value = '';
+    document.getElementById('specMaxSpeed').value = '';
+    document.getElementById('specFullWeight').value = '';
+    document.getElementById('specFuelCapacity').value = '';
+    document.getElementById('specFuelConsumption').value = '';
+
+    return specification;
   }
 
   handleAddGeneration(){
-    this.setState({
-      generations: [...this.state.generations, this.state.generation]
-    });
+    if(
+      this.validator.fieldValid('generationName') &&
+      this.validator.fieldValid('generationYearBegin') &&
+      this.validator.fieldValid('generationYearEnd')
+    ){
+      this.setState({
+        generations: [...this.state.generations, this.state.generation]
+      });
+
+      let generation = Object.assign({}, this.state.generation);
+      let series = Object.assign({}, this.state.series);
+      let specification = Object.assign({}, this.state.specification);
+
+      this.setState({
+        generation: generation,
+        specification: specification,
+        series: series
+      });
+
+    }else {
+      this.validator.showMessageFor('generationName');
+      this.validator.showMessageFor('generationYearBegin');
+      this.validator.showMessageFor('generationYearEnd');
+      this.forceUpdate();
+    }
+  }
+
+  resetGeneration(generation){
+    generation.name = '';
+    generation.yearBegin = '';
+    generation.yearEnd = '';
+    generation.series = [];
+
+    document.getElementById('generationName').value = '';
+    document.getElementById('generationYearBegin').value = '';
+    document.getElementById('generationYearEnd').value = '';
+
+    return generation;
   }
 
   componentDidMount(){
@@ -122,12 +248,12 @@ class AddModelForm extends React.Component{
       if(response.status === 200){
         return response.json();
       }
-      console.log(typeof response);
     })
     .then((makes) => {
       this.setState({
         makes: makes
       });
+      console.log(this.state.makes);
     })
     .catch((error) => {
       console.log(error);
@@ -142,6 +268,51 @@ class AddModelForm extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
+    console.log('submit pressed');
+
+    if(this.validator.fieldValid('modelName')){
+      console.log('more than 0');
+      if(this.state.generations.length > 0){
+        let formData = new FormData();
+        formData.append('name', this.state.name);
+        formData.append('make', this.state.selectedMake);
+        formData.append('generations', this.state.generations);
+    
+        fetch('/api/create-model', {
+          method: 'POST',
+          body: formData
+        })
+        .then((response) => {
+          return response.json();
+        })
+        .then((response) => {
+          if(response.type === 'success'){
+            this.props.history.push({
+              pathName: '/admin/add-model',
+              state: {message: response}
+            });
+            window.location.reload();
+          }else{
+            return this.props.history.push({
+              pathName: '/admin/add-model',
+              state: {message: response}
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }else {
+        this.props.history.push({
+          pathName: '/admin/add-model',
+          state: {message: 'You must need to add at least one generation!'}
+        });
+        console.log('less than 0');
+      }
+    }else {
+      this.validator.showMessageFor('modelName');
+      this.forceUpdate();
+    }
   }
 
   render(){
@@ -158,12 +329,18 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item onesize fullborder'}>
-            <label className={'form-label'} htmlFor={'name'}>Name</label>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('modelName', this.state.name, 'required')}
+              </div>
+            </div>
+            <label className={'form-label'} htmlFor={'modelName'}>Name</label>
             <input
               type={'text'}
-              id={'name'}
+              name={'name'}
+              id={'modelName'}
               defaultValue={this.state.name}
-              onChange={this.handleChange}
+              onChange={this.handleModelChange}
               autoComplete={'off'}
               placeholder={'Model`s name..'}
               className={'form-input'}
@@ -176,10 +353,11 @@ class AddModelForm extends React.Component{
                 <SVG name={'ADD_PLUS_ICON'} className={'label-svg'}/>
               </div>
             </label>
-            <select className={'form-select'}>
+            <select className={'form-select'} value={this.state.selectedMake} onChange={this.handleMakeChange}>
+              <option value={'Select Make..'}>Select Make..</option>
               {this.state.makes && this.state.makes.map((make, id) => {
                 return(
-                  <option key={id}>{make.name}</option>
+                  <option key={id} value={make.name}>{make.name}</option>
                 );
               })}
             </select>
@@ -188,9 +366,25 @@ class AddModelForm extends React.Component{
 
           <div className={'form-item twosize bottomborder'}>
             Add Generation
+            <div className={'form-subtext'}>Currently added:
+              {this.state.generations.length === 0 ? '' : (
+                <div className={'subtext-holder'}>
+                  {this.state.generations.map((g, id) => {
+                    return(
+                      <div key={id} className={'subtext'}>- {g.name} </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </div>
 
           <div className={'form-item thirdsize fullborder'}>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('generationName', this.state.generation.name, 'required')}
+              </div>
+            </div>
             <label className={'form-label'} htmlFor={'generationName'}>Name</label>
             <input
               type={'text'}
@@ -204,6 +398,11 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item thirdsize fullborder'}>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('generationYearBegin', this.state.generation.yearBegin, 'required')}
+              </div>
+            </div>
             <label className={'form-label'} htmlFor={'generationYearBegin'}>Year begin</label>
             <input
               type={'number'}
@@ -217,6 +416,11 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item thirdsize fullborder'}>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('generationYearEnd', this.state.generation.yearEnd, 'required')}
+              </div>
+            </div>
             <label className={'form-label'} htmlFor={'generationYearEnd'}>Year end</label>
             <input
               type={'number'}
@@ -231,14 +435,32 @@ class AddModelForm extends React.Component{
 
           <div className={'form-item twosize bottomborder'}>
             Add Series
+            <div className={'form-subtext'}>Currently added:
+              {this.state.generation.series.length === 0 ? '' : (
+                <div className={'subtext-holder'}>
+                  {this.state.generation.series.map((s, id) => {
+                    return(
+                      <div key={id} className={'subtext'}>- {s.name} </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </div>
 
+          
+
           <div className={'form-item thirdsize fullborder'}>
-            <label className={'form-label'} htmlFor={'seriaName'}>Name</label>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('specName', this.state.series.name, 'required')}
+              </div>
+            </div>
+            <label className={'form-label'} htmlFor={'specName'}>Name</label>
             <input
               type={'text'}
               name={'name'}
-              id={'seriaName'}
+              id={'specName'}
               onChange={this.handleSeriesChange}
               autoComplete={'off'}
               placeholder={'Name..'}
@@ -247,11 +469,16 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item thirdsize fullborder'}>
-            <label className={'form-label'} htmlFor={'seriaEngine'}>Engine</label>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('specEngine', this.state.specification.engine, 'required')}
+              </div>
+            </div>
+            <label className={'form-label'} htmlFor={'specEngine'}>Engine</label>
             <input
               type={'text'}
               name={'engine'}
-              id={'seriaEngine'}
+              id={'specEngine'}
               onChange={this.handleSpecificationChange}
               autoComplete={'off'}
               placeholder={'Engine..'}
@@ -260,11 +487,16 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item thirdsize fullborder'}>
-            <label className={'form-label'} htmlFor={'seriaEnginePower'}>Engine power</label>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('specEnginePower', this.state.specification.enginePower, 'required')}
+              </div>
+            </div>
+            <label className={'form-label'} htmlFor={'specEnginePower'}>Engine power</label>
             <input
-              type={'text'}
+              type={'number'}
               name={'enginePower'}
-              id={'seriaEnginePower'}
+              id={'specEnginePower'}
               onChange={this.handleSpecificationChange}
               autoComplete={'off'}
               placeholder={'Engine power..'}
@@ -276,7 +508,7 @@ class AddModelForm extends React.Component{
             <label className={'form-label'}>Gear type</label>
             <select 
               name={'gearType'}
-              id={'seriaGearType'}
+              id={'specGearType'}
               className={'form-select'}
               onChange={this.handleSpecificationChange}
             >
@@ -291,11 +523,16 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item thirdsize fullborder'}>
-            <label className={'form-label'} htmlFor={'seriaNumberOfGears'}>Number of gears</label>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('specNumberOfGears', this.state.specification.numberOfGears, 'required')}
+              </div>
+            </div>
+            <label className={'form-label'} htmlFor={'specNumberOfGears'}>Number of gears</label>
             <input
-              type={'text'}
+              type={'number'}
               name={'numberOfGears'}
-              id={'seriaNumberOfGears'}
+              id={'specNumberOfGears'}
               onChange={this.handleSpecificationChange}
               autoComplete={'off'}
               placeholder={'Number of gears..'}
@@ -304,11 +541,16 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item thirdsize fullborder'}>
-            <label className={'form-label'} htmlFor={'seriaNumberOfWheels'}>Number of wheels</label>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('specNumberOfWheels', this.state.specification.numberOfWheels, 'required')}
+              </div>
+            </div>
+            <label className={'form-label'} htmlFor={'specNumberOfWheels'}>Number of wheels</label>
             <input
-              type={'text'}
+              type={'number'}
               name={'numberOfWheels'}
-              id={'seriaNumberOfWheels'}
+              id={'specNumberOfWheels'}
               onChange={this.handleSpecificationChange}
               autoComplete={'off'}
               placeholder={'Number of wheels..'}
@@ -317,11 +559,16 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item thirdsize fullborder'}>
-            <label className={'form-label'} htmlFor={'seriaWidth'}>Width</label>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('specWidth', this.state.specification.width, 'required')}
+              </div>
+            </div>
+            <label className={'form-label'} htmlFor={'specWidth'}>Width</label>
             <input
               type={'text'}
               name={'width'}
-              id={'seriaWidth'}
+              id={'specWidth'}
               onChange={this.handleSpecificationChange}
               autoComplete={'off'}
               placeholder={'Width..'}
@@ -330,11 +577,16 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item thirdsize fullborder'}>
-            <label className={'form-label'} htmlFor={'seriaLength'}>Length</label>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('specLength', this.state.specification.length, 'required')}
+              </div>
+            </div>
+            <label className={'form-label'} htmlFor={'specLength'}>Length</label>
             <input
               type={'text'}
               name={'length'}
-              id={'seriaLength'}
+              id={'specLength'}
               onChange={this.handleSpecificationChange}
               autoComplete={'off'}
               placeholder={'Length..'}
@@ -343,11 +595,16 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item thirdsize fullborder'}>
-            <label className={'form-label'} htmlFor={'seriaSeatingCapacity'}>Seating capacity</label>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('specSeatingCapacity', this.state.specification.seatingCapacity, 'required')}
+              </div>
+            </div>
+            <label className={'form-label'} htmlFor={'specSeatingCapacity'}>Seating capacity</label>
             <input
-              type={'text'}
+              type={'number'}
               name={'seatingCapacity'}
-              id={'seriaSeatingCapacity'}
+              id={'specSeatingCapacity'}
               onChange={this.handleSpecificationChange}
               autoComplete={'off'}
               placeholder={'Seating capacity..'}
@@ -356,11 +613,16 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item thirdsize fullborder'}>
-            <label className={'form-label'} htmlFor={'seriaMaxSpeed'}>Max speed</label>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('specMaxSpeed', this.state.specification.maxSpeed, 'required')}
+              </div>
+            </div>
+            <label className={'form-label'} htmlFor={'specMaxSpeed'}>Max speed</label>
             <input
               type={'text'}
               name={'maxSpeed'}
-              id={'seriaMaxSpeed'}
+              id={'specMaxSpeed'}
               onChange={this.handleSpecificationChange}
               autoComplete={'off'}
               placeholder={'Max speed..'}
@@ -369,11 +631,16 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item thirdsize fullborder'}>
-            <label className={'form-label'} htmlFor={'seriaFullWeight'}>Full weight</label>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('specFullWeight', this.state.specification.fullWeight, 'required')}
+              </div>
+            </div>
+            <label className={'form-label'} htmlFor={'specFullWeight'}>Full weight</label>
             <input
               type={'text'}
               name={'fullWeight'}
-              id={'seriaFullWeight'}
+              id={'specFullWeight'}
               onChange={this.handleSpecificationChange}
               autoComplete={'off'}
               placeholder={'Full weight..'}
@@ -382,11 +649,16 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item thirdsize fullborder'}>
-            <label className={'form-label'} htmlFor={'seriaFuelCapacity'}>Fuel capacity</label>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('specFuelCapacity', this.state.specification.fuelCapacity, 'required')}
+              </div>
+            </div>
+            <label className={'form-label'} htmlFor={'specFuelCapacity'}>Fuel capacity</label>
             <input
               type={'text'}
               name={'fuelCapacity'}
-              id={'seriaFuelCapacity'}
+              id={'specFuelCapacity'}
               onChange={this.handleSpecificationChange}
               autoComplete={'off'}
               placeholder={'Fuel capacity..'}
@@ -395,11 +667,16 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item thirdsize fullborder'}>
-            <label className={'form-label'} htmlFor={'seriaFuelConsumption'}>Fuel consumption</label>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('specFuelConsumption', this.state.specification.fuelConsumption, 'required')}
+              </div>
+            </div>
+            <label className={'form-label'} htmlFor={'specFuelConsumption'}>Fuel consumption</label>
             <input
               type={'text'}
               name={'fuelConsumption'}
-              id={'seriaFuelConsumption'}
+              id={'specFuelConsumption'}
               onChange={this.handleSpecificationChange}
               autoComplete={'off'}
               placeholder={'Fuel consumption..'}
@@ -408,11 +685,11 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item twosize'}>
-            <button className={'submit-button'} type={'button'} onClick={this.handleAddSeries}>Add Series</button>
+            <button className={'submit-button half'} type={'button'} onClick={this.handleAddSeries}>Add Series</button>
           </div>
 
           <div className={'form-item twosize'}>
-            <button className={'submit-button centered'} type={'button'} onClick={this.handleAddGeneration}>Add Generation</button>
+            <button className={'submit-button'} type={'button'} onClick={this.handleAddGeneration}>Add Generation</button>
           </div>
 
           <div className={'form-item twosize'}>
