@@ -341,6 +341,12 @@
             "in": "query",
             "description": "The dealership's name",
             "type": "string"
+          },
+          {
+            "name": "user",
+            "in": "query",
+            "description": "The id of the dealership's dealer/user",
+            "type": "integer"
           }
         ],
         "responses": {
@@ -387,6 +393,14 @@
           "Vehicles"
         ],
         "summary": "Get all vehicles in the system",
+        "parameters": [
+          {
+            "name": "dealership",
+            "in": "query",
+            "description": "The id of the vehicle's dealership",
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",

@@ -52,7 +52,7 @@ app.get('/api/get-models', VehicleController.getModels.controller);
 
 app.delete('/api/delete-model/:id', VehicleController.deleteModel.controller);
 
-app.post('/api/create-dealership', VehicleController.createDealership.controller);
+app.post('/api/create-dealership', authenticateUser('dealer'), VehicleController.createDealership.controller);
 
 app.get('/api/get-dealerships', VehicleController.getDealerships.controller);
 

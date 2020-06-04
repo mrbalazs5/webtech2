@@ -396,7 +396,7 @@ const VehicleController = {
                         throw new Error('Dealership already exists in the database');
                     }
 
-                    let dealershipObj = new Dealership({name: dealershipBody.name, user: '5eb1c911bd337c3b4080938a'});
+                    let dealershipObj = new Dealership({name: dealershipBody.name, user: req.user._id.toString()});
 
                     return dealershipObj.save();
                 })
@@ -427,12 +427,16 @@ const VehicleController = {
     getDealerships: {
         controller: (req, res) => {
 
-            const { name } = req.query;
+            const { name, user } = req.query;
 
             let query = {};
 
             if(name){
-                query  = {name: { $regex: `.*${name}.*`, $options: 'i' } };
+                query  = {...query, name: { $regex: `.*${name}.*`, $options: 'i' } };
+            }
+
+            if(user){
+                query  = {...query, user: user }
             }
 
             Dealership.find(query).populate('user').populate('vehicles').populate({
@@ -517,7 +521,15 @@ const VehicleController = {
     getVehicles: {
         controller: (req, res) => {
 
-            Vehicle.find()
+            const { dealership } = req.query;
+
+            let query = {};
+
+            if(dealership){
+                query  = {...query, dealership: dealership }
+            }
+
+            Vehicle.find(query)
                 .populate('model')
                 .populate('dealership')
                 .populate('generation')
