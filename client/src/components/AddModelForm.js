@@ -277,10 +277,18 @@ class AddModelForm extends React.Component{
         formData.append('name', this.state.name);
         formData.append('make', this.state.selectedMake);
         formData.append('generations', this.state.generations);
-    
+
+        console.log(formData);
+        console.log(this.state.name);
+
         fetch('/api/create-model', {
           method: 'POST',
-          body: formData
+          body: JSON.stringify({
+              name: this.state.name,
+              make: this.state.selectedMake,
+              generations: this.state.generations
+          }),
+          headers: {"Content-Type": "application/json"}
         })
         .then((response) => {
           return response.json();

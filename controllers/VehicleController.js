@@ -112,10 +112,12 @@ const VehicleController = {
 
             let bodyModel = req.body;
 
+            console.log(bodyModel);
+
             if(
                 isEmpty(bodyModel.name)
             ){
-                return res.status(422).json(new Message(['Model name field constraint violation']).error());
+                throw new Error('Model name field constraint violation');
             }
 
             let make = bodyModel.make;
