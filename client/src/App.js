@@ -16,9 +16,10 @@ import VehiclesPage from './components/pages/VehiclesPage';
 import MyProfilePage from './components/pages/MyProfilePage';
 import SettingsPage from './components/pages/SettingsPage';
 import MyVehiclesPage from './components/pages/MyVehiclesPage';
-import MyDealershipsPage from './components/pages/MyDealershipsPage';
+import MyDealershipsPage from './components/dealer/MyDealershipsPage';
 import ErrorPage from './components/pages/ErrorPage';
 import AddModelPage from './components/pages/AddModelPage';
+import AddDealershipPage from './components/dealer/AddDealershipPage';
 
 class App extends React.Component {
   render(){
@@ -44,9 +45,10 @@ class App extends React.Component {
           <Route exact path={'/sign-up'} component={SignUpPage}/>
           <Route exact path={'/vehicles'} component={VehiclesPage}/>
           <Route exact path={'/dealer/my-profile'} component={withAuth(MyProfilePage, roles.dealer)}/>
-          {/*<Route exact path={'/dealer/settings'} component={withAuth(SettingsPage, roles.dealer)}/>
+          <Route exact path={'/dealer/settings'} component={withAuth(SettingsPage, roles.dealer)}/>
           <Route exact path={'/dealer/my-vehicles'} component={withAuth(MyVehiclesPage, roles.dealer)}/>
-          <Route exact path={'/dealer/my-dealerships'} component={withAuth(MyDealershipsPage, roles.dealer)}/>*/}
+          <Route exact path={'/dealer/my-dealerships'} component={withAuth(MyDealershipsPage, roles.dealer)}/>
+          <Route exact path={'/dealer/add-dealership'} component={withAuth(AddDealershipPage, roles.dealer)}/>
           <Route exact path={'/admin/users'} component={withAuth(UsersPage, roles.admin)}/>
           <Route exact path={'/admin/models'} component={withAuth(ModelsPage, roles.admin)}/>
           <Route exact path={'/admin/add-model'} component={withAuth(AddModelPage, roles.admin)}/>

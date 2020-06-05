@@ -142,11 +142,11 @@ class Menu extends React.Component{
           <div className={'item-holder'}>
             <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/'}>Home</NavLink></div>
             <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/about-us'}>About Us</NavLink></div>
-            {/*<div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/vehicles'}>Vehicles</NavLink></div>
-            *{ !this.state.user ? 
+            {/*<div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/vehicles'}>Vehicles</NavLink></div>*/}
+            {this.state.user && this.state.user.role === roles.dealer ? 
               <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/dealer/my-dealerships'}>My dealerships</NavLink></div>
             : ''}
-            { !this.state.user ? 
+            {/*{ !this.state.user ? 
             <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/dealer/my-vehicles'}>My vehicles</NavLink></div>
             : ''}*/}
 
