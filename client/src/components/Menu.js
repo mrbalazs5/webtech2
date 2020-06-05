@@ -142,11 +142,11 @@ class Menu extends React.Component{
             <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/'}>Home</NavLink></div>
             <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/about-us'}>About Us</NavLink></div>
             <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/vehicles'}>Vehicles</NavLink></div>
-            { this.state.user ? 
-              <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/my-dealerships'}>My dealerships</NavLink></div>
+            { !this.state.user ? 
+              <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/dealer/my-dealerships'}>My dealerships</NavLink></div>
             : ''}
-            { this.state.user ? 
-            <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/my-vehicles'}>My vehicles</NavLink></div>
+            { !this.state.user ? 
+            <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/dealer/my-vehicles'}>My vehicles</NavLink></div>
             : ''}
 
             
@@ -184,9 +184,9 @@ class Menu extends React.Component{
                       </NavLink>
                     </div>
                   : ''}
-                  {this.state.user ?
+                  {!this.state.user ?
                     <div className={'item profile'}>
-                      <NavLink className={'navlink'} activeClassName={'active'} exact to={'/my-profile'}>
+                      <NavLink className={'navlink'} activeClassName={'active'} exact to={'/dealer/my-profile'}>
                         <SVG name={'PROFILE_ICON'} className={'menu-icon left'}></SVG>
                         My profile
                       </NavLink>
