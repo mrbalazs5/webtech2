@@ -22,9 +22,14 @@ export default function withAuth(ComponentToProtect, role) {
         }
       })
       .then(res => {
-        if(!res.user || (role && res.user.role !== roles[role])){
+        if(!res.user){
           throw new Error('Invalid user');
         }
+
+        if(role && res.user.role !== role){
+            throw new Error('Invalid permissions');
+        }
+
         this.setState({ loading: false });
       })
       .catch(err => {

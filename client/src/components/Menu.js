@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import {NavLink} from 'react-router-dom';
 import defaultAvatar from '../images/defaultAvatar.png';
 import SVG from './SVG';
+import roles from "../utils/roles";
 
 class Menu extends React.Component{
   constructor(props){
@@ -149,7 +150,7 @@ class Menu extends React.Component{
             <div className={'item'}><NavLink className={'navlink'} activeClassName={'active'} exact to={'/dealer/my-vehicles'}>My vehicles</NavLink></div>
             : ''}*/}
 
-            {this.state.user ? (
+            {this.state.user && this.state.user.role === roles.admin ? (
               <div className={'item'}>
               <div className={'navlink'} onClick={this.handleAdminMenu}>
                 Admin
