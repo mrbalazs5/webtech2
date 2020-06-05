@@ -12,7 +12,7 @@ class AddModelForm extends React.Component{
       addMakePopup: false,
       name: '',
       makes: [],
-      selectedMake: 'Select Make..',
+      selectedMake: '',
       generations: [],
       series: [],
       generation: {
@@ -28,7 +28,7 @@ class AddModelForm extends React.Component{
       specification: {
         engine: '',
         enginePower: '',
-        gearType: 'Manual Transmission',
+        gearType: '',
         numberOfGears: '',
         numberOfWheels: '',
         width: '',
@@ -119,6 +119,7 @@ class AddModelForm extends React.Component{
       this.validator.fieldValid('specName') &&
       this.validator.fieldValid('specEngine') &&
       this.validator.fieldValid('specEnginePower') &&
+      this.validator.fieldValid('specGearType') &&
       this.validator.fieldValid('specNumberOfGears') &&
       this.validator.fieldValid('specWidth') &&
       this.validator.fieldValid('specNumberOfWheels') &&
@@ -143,6 +144,7 @@ class AddModelForm extends React.Component{
     }else {
       this.validator.showMessageFor('specName');
       this.validator.showMessageFor('specEngine');
+      this.validator.showMessageFor('specGearType');
       this.validator.showMessageFor('specEnginePower');
       this.validator.showMessageFor('specNumberOfGears');
       this.validator.showMessageFor('specWidth');
@@ -169,7 +171,7 @@ class AddModelForm extends React.Component{
   resetSpecification(specification){
     specification.engine = '';
     specification.enginePower = '';
-    specification.gearType = 'Manual Transmission';
+    specification.gearType = '';
     specification.numberOfGears = '';
     specification.numberOfWheels = '';
     specification.width = '';
@@ -182,7 +184,7 @@ class AddModelForm extends React.Component{
 
     document.getElementById('specEngine').value = '';
     document.getElementById('specEnginePower').value = '';
-    document.getElementById('specGearType').value = 'Manual Transmission';
+    document.getElementById('specGearType').value = '';
     document.getElementById('specNumberOfGears').value = '';
     document.getElementById('specNumberOfWheels').value = '';
     document.getElementById('specWidth').value = '';
@@ -239,7 +241,6 @@ class AddModelForm extends React.Component{
 
   componentDidMount(){
     this.fetchMakes();
-    console.log(this.state.generation);
   }
 
   fetchMakes(){
@@ -253,7 +254,6 @@ class AddModelForm extends React.Component{
       this.setState({
         makes: makes
       });
-      console.log(this.state.makes);
     })
     .catch((error) => {
       console.log(error);
@@ -268,10 +268,11 @@ class AddModelForm extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
-    console.log('submit pressed');
 
-    if(this.validator.fieldValid('modelName')){
-      console.log('more than 0');
+    if(
+      this.validator.fieldValid('modelName') &&
+      this.validator.fieldValid('selectedMake')
+    ){
       if(this.state.generations.length > 0){
         let formData = new FormData();
         formData.append('name', this.state.name);
@@ -315,10 +316,10 @@ class AddModelForm extends React.Component{
           pathName: '/admin/add-model',
           state: {message: 'You must need to add at least one generation!'}
         });
-        console.log('less than 0');
       }
     }else {
       this.validator.showMessageFor('modelName');
+      this.validator.showMessageFor('selectedMake');
       this.forceUpdate();
     }
   }
@@ -356,16 +357,23 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item onesize fullborder'}>
+            <div className={'validator'}>
+                <div className={'validator-text'}>
+                  {this.validator.message('selectedMake', this.state.selectedMake, 'required')}
+                </div>
+              </div>
             <label className={'form-label'}>Make
               <div className={'label-icon'} onClick={this.handleAddMakePopup}>
                 <SVG name={'ADD_PLUS_ICON'} className={'label-svg'}/>
               </div>
             </label>
-            <select className={'form-select'} value={this.state.selectedMake} onChange={this.handleMakeChange}>
-              <option value={'Select Make..'}>Select Make..</option>
+            <select id={'selectedMake'} className={'form-select'} value={this.state.selectedMake} onChange={this.handleMakeChange}>
+              {this.state.selectedMake ? '' :
+                <option value={'Select Make..'}>Select Make..</option>
+              }
               {this.state.makes && this.state.makes.map((make, id) => {
                 return(
-                  <option key={id} value={make.name}>{make.name}</option>
+                <option key={id} value={make._id}>{make.name}</option>
                 );
               })}
             </select>
@@ -513,6 +521,11 @@ class AddModelForm extends React.Component{
           </div>
 
           <div className={'form-item thirdsize fullborder'}>
+            <div className={'validator'}>
+              <div className={'validator-text'}>
+                {this.validator.message('specGearType', this.state.specification.gearType, 'required')}
+              </div>
+            </div>
             <label className={'form-label'}>Gear type</label>
             <select 
               name={'gearType'}
@@ -520,13 +533,11 @@ class AddModelForm extends React.Component{
               className={'form-select'}
               onChange={this.handleSpecificationChange}
             >
-              <option>Manual Transmission</option>
-              <option>Automated-Manual Transmission</option>
-              <option>Traditional Automatic Transmission</option>
-              <option>Continuously Variable Transmission</option>
-              <option>Dual-Clutch Transmission</option>
-              <option>Direct Shift Gearbox</option>
-              <option>Tiptronic Transmission</option>
+              {this.state.specification.gearType ? '' :
+                <option value={'0'}>Select gear type..</option>
+              }
+              <option value={'0'}>Manual</option>
+              <option value={'1'}>Automatic</option>
             </select>
           </div>
 
@@ -574,7 +585,7 @@ class AddModelForm extends React.Component{
             </div>
             <label className={'form-label'} htmlFor={'specWidth'}>Width</label>
             <input
-              type={'text'}
+              type={'number'}
               name={'width'}
               id={'specWidth'}
               onChange={this.handleSpecificationChange}
@@ -592,7 +603,7 @@ class AddModelForm extends React.Component{
             </div>
             <label className={'form-label'} htmlFor={'specLength'}>Length</label>
             <input
-              type={'text'}
+              type={'number'}
               name={'length'}
               id={'specLength'}
               onChange={this.handleSpecificationChange}
@@ -628,7 +639,7 @@ class AddModelForm extends React.Component{
             </div>
             <label className={'form-label'} htmlFor={'specMaxSpeed'}>Max speed</label>
             <input
-              type={'text'}
+              type={'number'}
               name={'maxSpeed'}
               id={'specMaxSpeed'}
               onChange={this.handleSpecificationChange}
@@ -646,7 +657,7 @@ class AddModelForm extends React.Component{
             </div>
             <label className={'form-label'} htmlFor={'specFullWeight'}>Full weight</label>
             <input
-              type={'text'}
+              type={'number'}
               name={'fullWeight'}
               id={'specFullWeight'}
               onChange={this.handleSpecificationChange}
@@ -664,7 +675,7 @@ class AddModelForm extends React.Component{
             </div>
             <label className={'form-label'} htmlFor={'specFuelCapacity'}>Fuel capacity</label>
             <input
-              type={'text'}
+              type={'number'}
               name={'fuelCapacity'}
               id={'specFuelCapacity'}
               onChange={this.handleSpecificationChange}
@@ -682,7 +693,7 @@ class AddModelForm extends React.Component{
             </div>
             <label className={'form-label'} htmlFor={'specFuelConsumption'}>Fuel consumption</label>
             <input
-              type={'text'}
+              type={'number'}
               name={'fuelConsumption'}
               id={'specFuelConsumption'}
               onChange={this.handleSpecificationChange}
