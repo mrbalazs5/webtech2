@@ -31,13 +31,7 @@ class HomePage extends React.Component{
             </div>
           </div>
           <div className={'home-content'} ref={this.vehiclesRef}>
-            HERE WILL BE THE CARS<br/>HERE WILL BE THE CARS<br/>HERE WILL BE THE CARS<br/>
-            HERE WILL BE THE CARS<br/>HERE WILL BE THE CARS<br/>HERE WILL BE THE CARS<br/>
-            HERE WILL BE THE CARS<br/>HERE WILL BE THE CARS<br/>HERE WILL BE THE CARS<br/>
-            HERE WILL BE THE CARS<br/>HERE WILL BE THE CARS<br/>HERE WILL BE THE CARS<br/>
-            HERE WILL BE THE CARS<br/>HERE WILL BE THE CARS<br/>HERE WILL BE THE CARS<br/>
-            HERE WILL BE THE CARS<br/>HERE WILL BE THE CARS<br/>HERE WILL BE THE CARS<br/>
-            HERE WILL BE THE CARS<br/>
+           
           </div>
         </div>
       </Page>

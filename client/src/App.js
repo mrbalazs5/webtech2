@@ -46,21 +46,11 @@ class App extends React.Component {
           {/*<Route exact path={'/dealer/my-profile'} component={withAuth(MyProfilePage, roles.dealer)}/>
           <Route exact path={'/dealer/settings'} component={withAuth(SettingsPage, roles.dealer)}/>
           <Route exact path={'/dealer/my-vehicles'} component={withAuth(MyVehiclesPage, roles.dealer)}/>
-          <Route exact path={'/dealer/my-dealerships'} component={withAuth(MyDealershipsPage, roles.dealer)}/>
-          <Route exact path={'/admin/users'} component={withAuth(UsersPage, roles.admin)}/>
-          <Route exact path={'/admin/models'} component={withAuth(ModelsPage, roles.admin)}/>
-          <Route exact path={'/admin/add-model'} component={withAuth(AddModelPage, roles.admin)}/>
-          <Route exact path={'/admin/makes'} component={withAuth(MakesPage, roles.admin)}/>*/}
-
-          <Route exact path={'/dealer/my-profile'} component={MyProfilePage}/>
-          <Route exact path={'/dealer/settings'} component={SettingsPage}/>
-          <Route exact path={'/dealer/my-vehicles'} component={MyVehiclesPage}/>
-          <Route exact path={'/dealer/my-dealerships'} component={MyDealershipsPage}/>
-          <Route exact path={'/admin/add-model'} component={AddModelPage}/>
-          <Route exact path={'/admin/users'} component={UsersPage}/>
-          <Route exact path={'/admin/models'} component={ModelsPage}/>
-          <Route exact path={'/admin/makes'} component={MakesPage}/>
-
+          <Route exact path={'/dealer/my-dealerships'} component={withAuth(MyDealershipsPage, roles.dealer)}/>*/}
+          <Route exact path={'/admin/users'} component={withAuth(UsersPage, roles.dealer)}/>
+          <Route exact path={'/admin/models'} component={withAuth(ModelsPage, roles.dealer)}/>
+          <Route exact path={'/admin/add-model'} component={withAuth(AddModelPage, roles.dealer)}/>
+          <Route exact path={'/admin/makes'} component={withAuth(MakesPage, roles.dealer)}/>
           <Route component={ErrorPage}/>
         </Switch>
 

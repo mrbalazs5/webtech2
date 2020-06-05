@@ -76,7 +76,7 @@ class ModelTable extends React.PureComponent{
                                       })
                                   }
                               </div>
-                              <div className={'cell right'}><div className={'item right'}>Delete</div></div>
+                              {/*<div className={'cell right'}><div className={'item right'}>Delete</div></div>*/}
                           </div>
                       );
                   })
