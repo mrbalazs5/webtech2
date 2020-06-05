@@ -16,6 +16,7 @@ class SignUpForm extends React.Component{
       email: '',
       password: '',
       passwordVerify: '',
+      birthDate: '',
       avatar: null,
       avatarSrc: null,
       cropping: false
@@ -77,6 +78,7 @@ class SignUpForm extends React.Component{
       formData.append('name', this.state.name);
       formData.append('password', this.state.password);
       formData.append('email', this.state.email);
+      formData.append('birthDate', this.state.birthDate);
 
       fetch('/api/sign-up', {
         method: 'POST',
@@ -203,6 +205,24 @@ class SignUpForm extends React.Component{
             <img id={'avatar'} className={'avatar-preview'} src={this.state.avatarSrc ? this.state.avatarSrc : defaultAvatar} alt={'Avatar preview'}/>
           </div>
           <label className={'form-label'}>Avatar</label>
+        </div>
+
+        <div className={'form-item onesize fullborder'}>
+
+          <div className={'validator'}>
+            <div className={'validator-text'}>
+              {this.validator.message('birthDate', this.state.birthDate, 'required')}
+            </div>
+          </div>
+          {this.state.birthDate}
+          <label className={'form-label'} htmlFor={'passwordVerify'}>Birth date</label>
+          <input
+            type={'date'}
+            id={'birthDate'}
+            value={this.state.birthDate}
+            onChange={this.handleChange}
+            className={'form-input'}
+          />
         </div>
 
         {this.state.cropping && (
