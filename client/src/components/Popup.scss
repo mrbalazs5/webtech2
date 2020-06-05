@@ -35,7 +35,17 @@
       cursor: pointer;
 
       .popup-close-icon {
+
+        &:hover{
+
+          svg{
+            transform: rotate(90deg);
+          }
+
+        }
+
         svg {
+          transition: 0.5s;
           height: 20px;
           fill: red;
         }
