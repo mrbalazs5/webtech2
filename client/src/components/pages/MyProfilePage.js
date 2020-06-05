@@ -58,8 +58,14 @@ class MyProfilePage extends React.PureComponent{
                       <h2>{user.name}</h2>
                       <h3>Email</h3>
                       <div>{user.email}</div>
-                      <h3>Birth Date</h3>
-                      <div>{formatDate(new Date(user.birthDate))}</div>
+                      {
+                          user.birthDate &&
+                              <React.Fragment>
+                                  <h3>Birth Date</h3>
+                                  <div>{formatDate(new Date(user.birthDate))}</div>
+                              </React.Fragment>
+                      }
+
                       <h3>Role</h3>
                       <div>{Object.keys(roles).find(key => roles[key] === user.role)}</div>
                   </div>
