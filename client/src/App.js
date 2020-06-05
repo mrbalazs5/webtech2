@@ -43,8 +43,8 @@ class App extends React.Component {
           <Route exact path={'/sign-in'} component={SignInPage}/>
           <Route exact path={'/sign-up'} component={SignUpPage}/>
           <Route exact path={'/vehicles'} component={VehiclesPage}/>
-          {/*<Route exact path={'/dealer/my-profile'} component={withAuth(MyProfilePage, roles.dealer)}/>
-          <Route exact path={'/dealer/settings'} component={withAuth(SettingsPage, roles.dealer)}/>
+          <Route exact path={'/dealer/my-profile'} component={withAuth(MyProfilePage, roles.dealer)}/>
+          {/*<Route exact path={'/dealer/settings'} component={withAuth(SettingsPage, roles.dealer)}/>
           <Route exact path={'/dealer/my-vehicles'} component={withAuth(MyVehiclesPage, roles.dealer)}/>
           <Route exact path={'/dealer/my-dealerships'} component={withAuth(MyDealershipsPage, roles.dealer)}/>*/}
           <Route exact path={'/admin/users'} component={withAuth(UsersPage, roles.admin)}/>

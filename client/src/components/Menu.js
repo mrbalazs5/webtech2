@@ -187,14 +187,14 @@ class Menu extends React.Component{
                       </NavLink>
                     </div>
                   : ''}
-                  {/*{!this.state.user ?
+                  {this.state.user ?
                     <div className={'item profile'}>
                       <NavLink className={'navlink'} activeClassName={'active'} exact to={'/dealer/my-profile'}>
                         <SVG name={'PROFILE_ICON'} className={'menu-icon left'}></SVG>
                         My profile
                       </NavLink>
                     </div>
-                  : ''}*/}
+                  : ''}
                   {/*{this.state.user ?*/}
                     {/*<div className={'item profile'}>*/}
                       {/*<NavLink className={'navlink'} activeClassName={'active'} exact to={'/settings'}>*/}
