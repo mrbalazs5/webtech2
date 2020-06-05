@@ -112,10 +112,12 @@ const VehicleController = {
 
             let bodyModel = req.body;
 
+            console.log(bodyModel);
+
             if(
                 isEmpty(bodyModel.name)
             ){
-                return res.status(422).json(new Message(['Model name field constraint violation']).error());
+                throw new Error('Model name field constraint violation');
             }
 
             let make = bodyModel.make;
@@ -396,7 +398,7 @@ const VehicleController = {
                         throw new Error('Dealership already exists in the database');
                     }
 
-                    let dealershipObj = new Dealership({name: dealershipBody.name, user: '5eb1c911bd337c3b4080938a'});
+                    let dealershipObj = new Dealership({name: dealershipBody.name, user: req.user._id.toString()});
 
                     return dealershipObj.save();
                 })
@@ -427,12 +429,16 @@ const VehicleController = {
     getDealerships: {
         controller: (req, res) => {
 
-            const { name } = req.query;
+            const { name, user } = req.query;
 
             let query = {};
 
             if(name){
-                query  = {name: { $regex: `.*${name}.*`, $options: 'i' } };
+                query  = {...query, name: { $regex: `.*${name}.*`, $options: 'i' } };
+            }
+
+            if(user){
+                query  = {...query, user: user }
             }
 
             Dealership.find(query).populate('user').populate('vehicles').populate({
@@ -517,7 +523,15 @@ const VehicleController = {
     getVehicles: {
         controller: (req, res) => {
 
-            Vehicle.find()
+            const { dealership } = req.query;
+
+            let query = {};
+
+            if(dealership){
+                query  = {...query, dealership: dealership }
+            }
+
+            Vehicle.find(query)
                 .populate('model')
                 .populate('dealership')
                 .populate('generation')
